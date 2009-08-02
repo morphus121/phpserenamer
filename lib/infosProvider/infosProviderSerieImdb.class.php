@@ -9,27 +9,109 @@ class infosProviderSerieImdb extends infosProviderSerieBase
   public function getSeries($serie)
   {
     $liste = array();
-    $this->browser->get($this->rechercheParTitre($serie));
+    $this->get($this->rechercheParTitre($serie));
+    //TODO faire seulement dans le deuxième cas ?
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
-    //TODO directement passer par xpath pour avoir les td qui nous intéressent ?
-    $query = '//table[2]';
-    $oDomNodeList = $xpath->query($query);
-    if($oDomNodeList->length == 0)
+
+    //Ici on peut faire face à deux situations :
+    // - soit la recherche à donné plusieurs résulats : liste donc les résultats
+    //suivits par 'TV series' entre parenthèses
+    // - soit la recherche n'a renvoyé qu'un résultat et l'on est donc renvoyé
+    //sur la page de la série, on recherche alors le titre et le met dans un tableau
+    //TODO troisème cas : plus de 500 résultats ?
+
+    //1er cas : plusieurs résultats
+    if(!preg_match('/Cast/',$this->browser->getResponseText()))
     {
-      throw new sfException('Pas de résultat trouvé');
-    }
-    $oDomNode = $oDomNodeList->item(0);
-    foreach($oDomNode->childNodes as $tr)
-    {
-      $unResultat = $tr->childNodes->item(2)->nodeValue;
-      $matches = array();
-      if(preg_match('/(.*)\(TV series\)/',$unResultat,$matches))
+
+      //TODO ne pas faire quelques tableaux mais les compter tous et tous les
+      //parcourir à la recherche de séries ?
+
+      //TODO factoriser ?
+
+      //On recherche quel est la position du tableau voulu
+      if($pos = strpos($this->browser->getResponseText(),'Popular Titles'))
       {
-        $liste[] = trim($matches[1]);
+        $tab = explode ('<table>',substr($this->browser->getResponseText(),0,$pos));
+        $posTable = count($tab) + 1;
+        $liste = array_merge($liste,$this->rechercheDansUnTableau($posTable));
+      }
+
+      if($pos = strpos($this->browser->getResponseText(),'<b>Titles ('))
+      {
+        $tab = explode ('<table>',substr($this->browser->getResponseText(),0,$pos));
+        $posTable = count($tab) + 1;
+        $liste = array_merge($liste,$this->rechercheDansUnTableau($posTable));
+      }
+
+      //TODO pourquoi on fait plus un ?
+      if($pos = strpos($this->browser->getResponseText(),'Titles (Partial Matches)'))
+      {
+        $tab = explode ('<table>',substr($this->browser->getResponseText(),0,$pos));
+        $posTable = count($tab);
+        $liste = array_merge($liste,$this->rechercheDansUnTableau($posTable));
       }
     }
+    //2ème cas : un résultat
+    else
+    {
+      $query = '//h1';
+      $oDomNodeList = $xpath->query($query);
+      if($oDomNodeList->length == 0)
+      {
+        throw new SerieNonFoundException();
+      }
+      $oDomNode = $oDomNodeList->item(0);
+      $titre = $oDomNode->childNodes->item(0)->wholeText;
+      $liste[] = substr(trim($titre),1,-1);
+    }
+
+    if(!count($liste))
+    {
+      throw new SerieNonFoundException();
+    }
+
     return $liste;
+  }
+
+  /**
+   * Permet de pouvoir effectuer plusieurs recherches dans un tableau,
+   * tels que popular titles, exact titles....
+   *
+   * @param $positionTableau
+   * @return array[int]=>string liste des series du tableau
+   */
+  private function rechercheDansUnTableau($positionTableau)
+  {
+        $oDomDocument = $this->browser->getResponseDom();
+        //ON fait un DOMXpath 2 fois ??
+    $xpath = new DOMXPath($oDomDocument);
+    $liste = array();
+     $query = sprintf('//table[%s]', $positionTableau);
+      //TODO directement passer par xpath pour avoir les td qui nous intéressent ?
+      $oDomNodeList = $xpath->query($query);
+      if($oDomNodeList->length == 0)
+      {
+        throw new SerieNonFoundException();
+      }
+      $oDomNode = $oDomNodeList->item(0);
+      foreach($oDomNode->childNodes as $tr)
+      {
+        $unResultat = $tr->childNodes->item(2)->nodeValue;
+        $matches = array();
+        if(preg_match('/(.*)\(TV series\)/',$unResultat,$matches))
+        {
+          $liste[] = trim($matches[1]);
+        }
+        //TODO un seul preg_match (ex mini-series : impact)
+        if(preg_match('/(.*)\(TV mini-series\)/',$unResultat,$matches))
+        {
+          $liste[] = trim($matches[1]);
+        }
+      }
+        return $liste;
+
   }
 
   /**
@@ -38,14 +120,16 @@ class infosProviderSerieImdb extends infosProviderSerieBase
    */
   public function getEpisode($serie, $saison, $episode)
   {
-    $this->browser->get($this->rechercheParTitre(urlencode($serie)));
+    $this->get($this->rechercheParTitre($serie));
+
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
     $query = '//a[@class="tn15more inline"]';
     $oDomNodeList = $xpath->query($query);
     if($oDomNodeList->length == 0)
     {
-      throw new sfException('Pas de résultat trouvé');
+      //TODO Lancer vraiement cette exception ?
+      throw new SerieNonFoundException();
     }
 
     //On recherche le lien pour la liste des épisodes
@@ -61,7 +145,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
     }
     //TODO exception si lien NULL
 
-    $this->browser->get('http://www.imdb.com' . $lien);
+    $this->get('http://www.imdb.com' . $lien);
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
     $query = '//h3';
@@ -81,11 +165,23 @@ class infosProviderSerieImdb extends infosProviderSerieBase
     return trim($titre);
   }
 
+  public function nettoyerNomSerie($serie)
+  {
+    //TODO type numérique à 4 caractère pour le contenu des parenthèses
+    $matches = array();
+    //if(preg_match('/"(\s*)"\s*\(.*\)/',$serie, $matches))
+    if(preg_match('/"(.*)".*/',$serie,$matches))
+    {
+      $serie = $matches[1];
+    }
+    return parent::nettoyerNomSerie($serie);
+  }
+
   /**
    * Retourne l'url de recherche par titre
    */
   private function rechercheParTitre($titre)
   {
-    return sprintf('http://www.imdb.com/find?s=tt&q=%s&x=24&y=13', $titre);
+    return sprintf('http://www.imdb.com/find?s=tt&q=%s&x=24&y=13', urlencode($titre));
   }
 }

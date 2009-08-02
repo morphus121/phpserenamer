@@ -27,3 +27,10 @@ $t->is($oInfos->getEpisode('"Stargate SG-1" (1997)',1,4), 'The Broca Divide',
     '$oInfos->getEpisode() retourne le bon titre');
 $t->is($oInfos->getEpisode('"Stargate SG-1" (1997)',10,20), 'Unending',
     '$oInfos->getEpisode() retourne le bon titre');
+
+
+$t->diag('getSeries()');
+$t->isa_ok($oInfos->getSeries('royal.pains'), 'array',
+    'getSeries() retourne un tableau');
+$t->is($oInfos->getSeries('royal.pains'), array('Royal Pains'),
+    '$oInfos->getSeries() retourne les bons résultats');

@@ -1,6 +1,17 @@
 <?php
 class srWindow extends GtkWindow
 {
+  private static $instance = null;
+
+  public static function getInstance()
+  {
+    if(is_null(self::$instance))
+    {
+      self::$instance = new srWindow();
+    }
+    return self::$instance;
+  }
+
 	public function __construct()
 	{
 	  parent::__construct();
@@ -73,6 +84,7 @@ class srWindow extends GtkWindow
 
     $boutton1 = new GtkButton('Renommer');
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_APPLY, Gtk::ICON_SIZE_BUTTON));
+    $boutton1->connect_simple('released', array('srWindow', 'clicRenommer'));
     $box->pack_start($boutton1);
 
     return $box;
@@ -101,9 +113,53 @@ class srWindow extends GtkWindow
 	  srListeStore::getInstance()->clear();
 	}
 
+
+
+	//private static $seriesTrouves = array();
 	public function clicApercu()
 	{
+	 // srWindow::getInstance()->setup_app();
+	  //ON CHANGE TEMPORAIREMENT LA FONCTION DE L'APRECU
+	  //
+	  srListeStore::getInstance()->foreach(array('srWindow','toto'));
 	  srListeStore::getInstance()->chercherNouveauxTitres();
+	  //self::$seriesTrouves = array();
 	}
 
+	public function clicRenommer()
+	{
+	  srListeStore::getInstance()->renommer();
+	}
+
+	public function toto($store, $path, $iter)
+	{
+	  try
+    {
+      $serie = $store->get_value($iter, 0);
+      if(!correspondanceNoms::getInstance()->hasKey('imdb',$serie))
+      {
+        $oInfosProviderSerieImdb = new infosProviderSerieImdb();
+        $series = $oInfosProviderSerieImdb->getSeries($serie);
+        if(count($series) > 1)
+        {
+          srWindow::getInstance()->lancer_dialog($serie, $series);
+        }
+        else
+        {
+          correspondanceNoms::getInstance()->setSerie('imdb', $serie, $series[0]);
+        }
+      }
+    }
+    catch(SerieNonFoundException $ex)
+    {
+      //TODO colorer la ligne en cause
+    }
+	}
+
+  public function lancer_dialog($serie, $series)
+  {
+	  $dialog = new srDialog('toto', null, Gtk::DIALOG_MODAL);
+	  $dialog->setSerie($serie, $series);
+	  $dialog->run();
+  }
 }
