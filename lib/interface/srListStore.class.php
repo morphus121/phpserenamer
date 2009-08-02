@@ -28,18 +28,23 @@ class srListeStore extends GtkListStore
     $compteur = 0;
     foreach($fichiers as $fichier)
     {
-      $oFichierSerie = new fichierSerie($fichier);
-      $ligne = array(
-        $oFichierSerie->getSerie(),
-        $oFichierSerie->getSaison(),
-        $oFichierSerie->getEpisode(),
-        $fichier,
-        '',
-        $chemin
-      );
-      $this->append($ligne);
+    	$this->remplirFromFilePath($chemin . DIRECTORY_SEPARATOR . $fichier);
       $compteur++;
     }
+  }
+
+  public function remplirFromFilePath($filePath)
+  {
+    $oFichierSerie = new fichierSerie(pathinfo($filePath, PATHINFO_BASENAME));
+    $ligne = array(
+      $oFichierSerie->getSerie(),
+      $oFichierSerie->getSaison(),
+      $oFichierSerie->getEpisode(),
+      pathinfo($filePath, PATHINFO_BASENAME),
+      '',
+      $filePath
+    );
+    $this->append($ligne);
   }
 
   public function tempNouveauNom($store, $path, $iter)
