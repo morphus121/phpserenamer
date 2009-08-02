@@ -76,7 +76,15 @@ class srMenu
 	{
 	  $item = $menu_item->child->get_label();
 	  echo "menu selected: $item\n";
-	  if ($item=='_Quitter') Gtk::main_quit();
+	  switch($item)
+	  {
+	  	case '_Quitter':
+	  		Gtk::main_quit();
+	  		break;
+	  	case '_Ouvrir':
+	  		srWindow::clicOuvrirDossier();
+	  		break;
+	  }
 	}
 
 }

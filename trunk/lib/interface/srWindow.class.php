@@ -42,6 +42,7 @@ class srWindow extends GtkWindow
     $box->set_layout(Gtk::BUTTONBOX_START);
     $boutton1 = new GtkButton('Ajouter Dossier');
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_OPEN, Gtk::ICON_SIZE_BUTTON));
+    $boutton1->connect_simple('released', array('srWindow', 'clicOuvrirDossier'));
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton('Ajouter Fichier');
@@ -161,5 +162,19 @@ class srWindow extends GtkWindow
 	  $dialog = new srDialog('toto', null, Gtk::DIALOG_MODAL);
 	  $dialog->setSerie($serie, $series);
 	  $dialog->run();
+  }
+
+  public static function clicOuvrirDossier()
+  {
+    $dialog = new srFileChooserDialog("Choisir dossier", null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
+        array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
+
+    $dialog->show_all();
+    if ($dialog->run() == Gtk::RESPONSE_OK)
+    {
+      $selected_folder = $dialog->get_filename();
+      srListeStore::getInstance()->remplirFromChemin($selected_folder);
+    }
+    $dialog->destroy();
   }
 }
