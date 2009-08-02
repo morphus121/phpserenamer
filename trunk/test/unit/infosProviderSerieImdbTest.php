@@ -5,6 +5,10 @@ $t = new lime_test(null, new lime_output_color());
 
 $oInfos = new infosProviderSerieImdb();
 
+$t->diag('getSeries(\'24\')');
+$t->is($oInfos->getSeries('24'), array('"24" (2001)'),
+  '$oInfos->getSeries() retourne les bons résultats');
+
 $t->diag('getSeries()');
 $t->isa_ok($oInfos->getSeries('rommates'), 'array',
     'getSeries() retourne un tableau');

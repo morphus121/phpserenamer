@@ -22,7 +22,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
     //TODO troisème cas : plus de 500 résultats ?
 
     //1er cas : plusieurs résultats
-    if(!preg_match('/Cast/',$this->browser->getResponseText()))
+    if(preg_match('/Displaying/',$this->browser->getResponseText()))
     {
 
       //TODO ne pas faire quelques tableaux mais les compter tous et tous les
