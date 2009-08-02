@@ -1,10 +1,20 @@
 <?php
 class myFinder extends sfFinder
 {
+  //TODO dans un config symfony ?
+  private static $extensionsAcceptes = array(
+    'mkv',
+    'avi',
+    'ogm',
+    'srt'
+  );
+
   private static function initialize(myFinder $finder)
   {
-    $finder->name('*.mkv');
-    $finder->name('*.avi');
+    foreach(self::$extensionsAcceptes as $extension)
+    {
+      $finder->name(sprintf('*.%s', $extension));
+    }
     return $finder;
   }
 

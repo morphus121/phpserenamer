@@ -68,9 +68,11 @@ class srTreeView extends GtkTreeView
         $path_array = $view->get_path_at_pos($event->x, $event->y);
         $path = $path_array[0][0];
         $col = $path_array[1];
-        $col_title = $col->get_title();
-
-        self::popup_menu($path, $col_title, $event); // displays the popup menu
+        if(is_object($col)) //Seulement si l'on clique sur du texte
+        {
+          $col_title = $col->get_title();
+          self::popup_menu($path, $col_title, $event); // displays the popup menu
+        }
         return false;
     }
 }
@@ -125,6 +127,9 @@ class srTreeView extends GtkTreeView
         //var_dump(srTreeView::getInstance()->get_selection());
         //var_dump(srTreeView::getInstance()->get_dest_row_at_pos($path, 0));
         //srTreeView::getInstance()->get_column($path)->focus_cell(0);
+        //@see http://gtk.php.net/manual1/fr/html/gdk.enum.gdkeventtype.html (pour le -1)
+        //$renderers = srTreeView::getInstance()->get_column(0)->get_cell_renderers();
+        //$renderers[0]->activate(new GdkEvent(-1),$renderers[0], 0);
         //var_dump(srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 0));
         break;
 	    default:

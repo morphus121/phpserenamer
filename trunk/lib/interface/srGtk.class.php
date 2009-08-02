@@ -3,7 +3,7 @@ class srGtk extends Gtk
 {
   public static function main()
   {
-	  $w = new srWindow();
+	  $w = srWindow::getInstance();
 		$w->show_all();
     parent::main();
   }
