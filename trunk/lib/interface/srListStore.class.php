@@ -17,7 +17,8 @@ class srListeStore extends GtkListStore
       //@see http://gtk.php.net/manual/en/gtk.enum.type.php
       //Le cinquième élément ! (c'est un champ nom affiché utilisé pour conserver
       //le chemin complet du fichier)
-	    self::$model = new srListeStore(64, 64, 64, 64, 64, 64);
+      //Le sixième élément indique si la ligne est en erreur ou non
+	    self::$model = new srListeStore(64, 64, 64, 64, 64, 64, 64);
     }
     return self::$model;
   }
@@ -42,7 +43,8 @@ class srListeStore extends GtkListStore
       $oFichierSerie->getEpisode(),
       pathinfo($filePath, PATHINFO_BASENAME),
       '',
-      $filePath
+      $filePath,
+      false //pas en erreur
     );
     $this->append($ligne);
   }

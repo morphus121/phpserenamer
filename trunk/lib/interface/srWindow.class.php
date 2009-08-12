@@ -154,7 +154,7 @@ class srWindow extends GtkWindow
     }
     catch(SerieNonFoundException $ex)
     {
-      //TODO colorer la ligne en cause
+      $store->set($iter, 6, "erreur");
     }
 	}
 
