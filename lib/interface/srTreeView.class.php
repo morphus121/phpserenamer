@@ -45,6 +45,10 @@ class srTreeView extends GtkTreeView
     $path = $model->get_path($iter);
     $row_num = $path[0];
     $row_color = ($row_num%2==1) ? '#dddddd' : '#ffffff';
+    if($model->get_value($iter, 6) == 'erreur')
+    {
+    	$row_color = '#930000';
+    }
     $cell->set_property('cell-background', $row_color);
   }
 
