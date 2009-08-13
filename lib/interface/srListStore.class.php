@@ -54,17 +54,17 @@ class srListeStore extends GtkListStore
     try
     {
 	    $oFichierSerie = new fichierSerie($store->get_value($iter, 3));
-	    $oInfosProviderSerieImdb = new infosProviderSerieImdb();
-	    $nomSerie = correspondanceNoms::getInstance()->getNom('imdb', $store->get_value($iter, 0));
+	    $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie', srWindow::getInstance()->getSelectedProvider());
+	    $nomSerie = correspondanceNoms::getInstance()->getNom(srWindow::getInstance()->getSelectedProvider(), $store->get_value($iter, 0));
 	    $saison = $store->get_value($iter, 1);
 	    $episode = $store->get_value($iter, 2);
 	    //TODO pattern by user !!
 	    $nouveau = sprintf(
 	      '%s - [%sx%s] - %s.%s',
-	      $oInfosProviderSerieImdb->nettoyerNomSerie($nomSerie),
+	      $oInfosProviderSerie->nettoyerNomSerie($nomSerie),
 	      $saison,
 	      str_pad($episode,2,'0',STR_PAD_LEFT),
-	      $oInfosProviderSerieImdb->getEpisode($nomSerie, $saison, $episode),
+	      $oInfosProviderSerie->getEpisode($nomSerie, $saison, $episode),
 	      $oFichierSerie->getExtension()
 	    );
 	    $nouveau = srUtils::nameForFileSystem($nouveau);

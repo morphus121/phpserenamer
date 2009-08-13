@@ -64,8 +64,7 @@ class srDialog extends GtkDialog
 
   public function validerDialog($widget, $event)
   {
-    //TODO ne pas hardocder imdb
-    correspondanceNoms::getInstance()->setSerie('imdb',$this->serieee,$this->series[$this->combobox->get_active()]);
+    correspondanceNoms::getInstance()->setSerie(srWindow::getInstance()->getSelectedProvider(),$this->serieee,$this->series[$this->combobox->get_active()]);
     $this->destroy();
   }
 }

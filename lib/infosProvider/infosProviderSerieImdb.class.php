@@ -1,4 +1,9 @@
 <?php
+/**
+ *
+ * @author adriengallou
+ *
+ */
 class infosProviderSerieImdb extends infosProviderSerieBase
 {
 

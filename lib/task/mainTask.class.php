@@ -22,6 +22,8 @@ class mainTask extends sfBaseTask
 
   protected function execute($arguments = array(), $options = array())
   {
+  	$this->createConfiguration('frontend', 'prod');
+  	sfConfig::set('sr_providers', srUtils::getProvidersFromClassesNames());
   	if(isset($arguments['path']))
   	{
       srListeStore::getInstance()->remplirFromChemin($arguments['path']);

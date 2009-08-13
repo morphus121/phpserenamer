@@ -20,8 +20,7 @@ class correspondanceNoms
 
   public function __construct()
   {
-    //TODO récupérer liste des sites possibles
-    $sites = array('imdb');
+    $sites = sfConfig::get('sr_providers');
     foreach($sites as $site)
     {
       self::$tableau[$site] = array();
