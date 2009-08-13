@@ -3,6 +3,10 @@ class srWindow extends GtkWindow
 {
   private static $instance = null;
 
+  /**
+   *
+   * @return srWindow
+   */
   public static function getInstance()
   {
     if(is_null(self::$instance))
@@ -95,7 +99,7 @@ class srWindow extends GtkWindow
 	private function getComboBoxProviders()
 	{
 	  //TODO get_active_iter() pour récupération ensuite
-    $list = array('imdb');
+    $list = sfConfig::get('sr_providers');
     $model = new GtkListStore(GObject::TYPE_STRING);
     $combobox = new GtkComboBox();
     $combobox->set_model($model);
@@ -138,17 +142,17 @@ class srWindow extends GtkWindow
 	  try
     {
       $serie = $store->get_value($iter, 0);
-      if(!correspondanceNoms::getInstance()->hasKey('imdb',$serie))
+      if(!correspondanceNoms::getInstance()->hasKey(self::getInstance()->getSelectedProvider(), $serie))
       {
-        $oInfosProviderSerieImdb = new infosProviderSerieImdb();
-        $series = $oInfosProviderSerieImdb->getSeries($serie);
+        $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie', self::getInstance()->getSelectedProvider());
+        $series = $oInfosProviderSerie->getSeries($serie);
         if(count($series) > 1)
         {
           srWindow::getInstance()->lancer_dialog($serie, $series);
         }
         else
         {
-          correspondanceNoms::getInstance()->setSerie('imdb', $serie, $series[0]);
+          correspondanceNoms::getInstance()->setSerie(self::getInstance()->getSelectedProvider(), $serie, $series[0]);
         }
       }
     }
@@ -191,5 +195,10 @@ class srWindow extends GtkWindow
       srListeStore::getInstance()->remplirFromFilePath($selected_file);
     }
     $dialog->destroy();
+  }
+
+  public function getSelectedProvider()
+  {
+  	return 'imdb';
   }
 }

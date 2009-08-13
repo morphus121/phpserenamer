@@ -1,31 +1,42 @@
 <?php
+/**
+ *
+ * @author adriengallou
+ *
+ */
 class infosProviderFactory
 {
 
-  private static $acceptedSources = array(
-    'serie' => array(
-      'imdb'     => 'infosProviderSerieImdb',
-    ),
-  );
-
   /**
+   * Crée un objet infoProvider*
    *
-   * @param $type serie ou film
-   * @param $id
-   * @return infosProviderSerieImdb|infosProviderFilmImdb
+   * @param  string              $type    serie ou film
+   * @param  string              $provider
+   * @return infosProvider*
    */
-  public static function createInfosProvider($type, $source, $id)
+  public static function createInfosProvider($type, $provider)
   {
-    if(!array_key_exists($type,self::$acceptedSources))
+    if(!in_array($type, array('serie', 'film')))
     {
-      throw new sfException(sprintf('Le type %s n\'est pas un type acceptable',$type));
+      throw new sfException(sprintf('Le type %s n\'est pas un type acceptable', $type));
     }
 
-    if(!array_key_exists($source,self::$acceptedSources[$type]))
+    //TODO adapter le sr_providers aux types ?
+    if(!in_array($provider, sfConfig::get('sr_providers')))
     {
-      throw new sfException(sprintf('La source %s n\'est pas une source acceptable',$source));
+      throw new sfException(sprintf('Le provider %s n\'est pas un provider acceptable', $provider));
     }
 
-    return new self::$acceptedSources[$type][$source]($id);
+    $classe = sprintf('infosProvider%s%s', ucfirst($type), ucfirst($provider));
+    if(!class_exists($classe))
+    {
+    	throw new sfException('La classe n\'existe pas.');
+    }
+    return new $classe;
+
   }
+
+  //TODO getConst pour récupérer les constantes des classes,
+  //pour permettre d'indiquer le nom affiché
+
 }
