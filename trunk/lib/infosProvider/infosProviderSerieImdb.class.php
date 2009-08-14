@@ -13,7 +13,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
    */
   public function getSeries($serie)
   {
-    $liste = array();
+
     $this->get($this->rechercheParTitre($serie));
     //TODO faire seulement dans le deuxième cas ?
     $oDomDocument = $this->browser->getResponseDom();
@@ -32,31 +32,31 @@ class infosProviderSerieImdb extends infosProviderSerieBase
 
       //TODO ne pas faire quelques tableaux mais les compter tous et tous les
       //parcourir à la recherche de séries ?
-
-      //TODO factoriser ?
+    	$posTable = array();
 
       //On recherche quel est la position du tableau voulu
       if($pos = strpos($this->browser->getResponseText(),'Popular Titles'))
       {
-        $tab = explode ('<table>',substr($this->browser->getResponseText(),0,$pos));
-        $posTable = count($tab) + 1;
-        $liste = array_merge($liste,$this->rechercheDansUnTableau($posTable));
+        $posTable[] = count(explode('<table>',substr($this->browser->getResponseText(),0,$pos))) + 1;
       }
 
       if($pos = strpos($this->browser->getResponseText(),'<b>Titles ('))
       {
-        $tab = explode ('<table>',substr($this->browser->getResponseText(),0,$pos));
-        $posTable = count($tab) + 1;
-        $liste = array_merge($liste,$this->rechercheDansUnTableau($posTable));
+        $posTable[] = count(explode('<table>',substr($this->browser->getResponseText(),0,$pos))) + 1;
       }
 
-      //TODO pourquoi on fait plus un ?
       if($pos = strpos($this->browser->getResponseText(),'Titles (Partial Matches)'))
       {
-        $tab = explode ('<table>',substr($this->browser->getResponseText(),0,$pos));
-        $posTable = count($tab);
-        $liste = array_merge($liste,$this->rechercheDansUnTableau($posTable));
+        $posTable[] = count(explode('<table>',substr($this->browser->getResponseText(),0,$pos)));
       }
+
+      $posTable = array_unique($posTable);
+      $liste    = array();
+      foreach($posTable as $pos)
+      {
+        $liste = array_merge($liste,$this->rechercheDansUnTableau($pos));
+      }
+
     }
     //2ème cas : un résultat
     else
