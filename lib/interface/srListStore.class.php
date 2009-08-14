@@ -53,27 +53,37 @@ class srListeStore extends GtkListStore
   {
     try
     {
-	    $oFichierSerie = new fichierSerie($store->get_value($iter, 3));
+	    $oFichierSerie       = new fichierSerie($store->get_value($iter, 3));
 	    $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie', srWindow::getInstance()->getSelectedProvider());
-	    $nomSerie = correspondanceNoms::getInstance()->getNom(srWindow::getInstance()->getSelectedProvider(), $store->get_value($iter, 0));
-	    $saison = $store->get_value($iter, 1);
-	    $episode = $store->get_value($iter, 2);
-	    //TODO pattern by user !!
-	    $nouveau = sprintf(
-	      '%s - [%sx%s] - %s.%s',
-	      $oInfosProviderSerie->nettoyerNomSerie($nomSerie),
-	      $saison,
-	      str_pad($episode,2,'0',STR_PAD_LEFT),
-	      $oInfosProviderSerie->getEpisode($nomSerie, $saison, $episode),
-	      $oFichierSerie->getExtension()
-	    );
-	    $nouveau = srUtils::nameForFileSystem($nouveau);
-	    $this->set($iter, 4, $nouveau);
+	    $nomSerie            = correspondanceNoms::getInstance()->getNom(srWindow::getInstance()->getSelectedProvider(), $store->get_value($iter, 0));
+	    $saison              = $store->get_value($iter, 1);
+	    $episode             = $store->get_value($iter, 2);
+	    $userPattern         = srWindow::getUserPattern();
+
+	    $nouveau = str_replace(array(
+	     '%n',
+	     '%s',
+	     '%j',
+	     '%e',
+	     '%k',
+	     '%t'
+	    ), array(
+	     $oInfosProviderSerie->nettoyerNomSerie($nomSerie),
+	     (string)$saison,
+	     str_pad($saison, 2, '0', STR_PAD_LEFT),
+	     (string)$episode,
+	     str_pad($episode, 2, '0', STR_PAD_LEFT),
+	     $oInfosProviderSerie->getEpisode($nomSerie, $saison, $episode)
+	    ), $userPattern);
+
+	    $nouveau = srUtils::nameForFileSystem(sprintf('%s.%s', $nouveau, $oFichierSerie->getExtension()));
     }
     catch(SerieNonFoundException $ex)
     {
-      $this->set($iter, 4, '');
+    	$nouveau = '';
     }
+
+    $this->set($iter, 4, $nouveau);
   }
 
   public function chercherNouveauxTitres()

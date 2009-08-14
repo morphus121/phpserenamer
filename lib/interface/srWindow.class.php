@@ -21,6 +21,12 @@ class srWindow extends GtkWindow
 
   /**
    *
+   * @var GtkEntry
+   */
+  protected $userFormat;
+
+  /**
+   *
    * @return srWindow
    */
   public static function getInstance()
@@ -77,8 +83,9 @@ class srWindow extends GtkWindow
     //format
     $lblFormat = new GtkLabel('Format : ');
     $box->pack_start($lblFormat);
-    $format = new GtkEntry();
-    $box->pack_start($format);
+    $this->userFormat = new GtkEntry();
+    $this->userFormat->set_text('%n - [%sx%k] - %t');
+    $box->pack_start($this->userFormat);
 
     //site
     $lblFormat = new GtkLabel('Site : ');
@@ -198,4 +205,10 @@ class srWindow extends GtkWindow
   {
     return self::getInstance()->comboboxProviders->getSelectedProvider();
   }
+
+  public static function getUserPattern()
+  {
+  	return self::getInstance()->userFormat->get_text();
+  }
+
 }
