@@ -7,6 +7,10 @@
 class srWindow extends GtkWindow
 {
 
+	const WIDTH  = 800;
+	const HEIGHT = 600;
+	const TITRE  = 'SeRenamer PHP';
+
   /**
    *
    * @var srWindow
@@ -42,14 +46,14 @@ class srWindow extends GtkWindow
 	{
 	  parent::__construct();
 
-	  $this->set_title('SeRenamer PHP');
+	  $this->set_title(self::TITRE);
 	  $this->connect_simple('destroy', array('gtk', 'main_quit'));
-	  $this->set_default_size(800,600);
+	  $this->set_default_size(self::WIDTH, self::HEIGHT);
 	  $this->set_border_width(0);
 	  $this->set_position(GTK::WIN_POS_CENTER);
 
 	  $box = new GtkVBox();
-    $box->pack_start(srMenu::getInstance(),0,0);
+    $box->pack_start(srMenu::getInstance(), 0, 0);
     $box->pack_start($this->getBouttons(), 0);
 	  $box->pack_start(srListeEpisodes::getInstance());
     $box->pack_start($this->getBouttonsBas(), 0);
