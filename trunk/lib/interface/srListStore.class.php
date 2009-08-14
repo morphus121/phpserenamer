@@ -43,7 +43,7 @@ class srListeStore extends GtkListStore
       $oFichierSerie->getEpisode(),
       pathinfo($filePath, PATHINFO_BASENAME),
       '',
-      $filePath,
+      pathinfo($filePath, PATHINFO_DIRNAME),
       false //pas en erreur
     );
     $this->append($ligne);
@@ -91,7 +91,9 @@ class srListeStore extends GtkListStore
   {
     $origin = $store->get_value($iter, 5) . DIRECTORY_SEPARATOR . $store->get_value($iter, 3);
     $new    = $store->get_value($iter, 5) . DIRECTORY_SEPARATOR . $store->get_value($iter, 4);
-    if($origin != $new)
+    $etat   = $store->get_value($iter, 7);
+
+    if($origin != $new && $etat != 'erreur')
     {
 	    if(!rename($origin, $new))
 	    {
