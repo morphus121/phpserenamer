@@ -1,7 +1,23 @@
 <?php
+/**
+ *
+ * @author adriengallou
+ *
+ */
 class srWindow extends GtkWindow
 {
+
+  /**
+   *
+   * @var srWindow
+   */
   private static $instance = null;
+
+  /**
+   * (ne peut pas être en private)
+   * @var srComboBoxProviders
+   */
+  protected $comboboxProviders;
 
   /**
    *
@@ -67,7 +83,8 @@ class srWindow extends GtkWindow
     //site
     $lblFormat = new GtkLabel('Site : ');
     $box->pack_start($lblFormat);
-    $box->pack_start($this->getComboBoxProviders());
+    $this->comboboxProviders = new srComboBoxProviders();
+    $box->pack_start($this->comboboxProviders);
 
     return $box;
 	}
@@ -96,30 +113,10 @@ class srWindow extends GtkWindow
     return $box;
 	}
 
-	private function getComboBoxProviders()
-	{
-	  //TODO get_active_iter() pour récupération ensuite
-    $list = sfConfig::get('sr_providers');
-    $model = new GtkListStore(GObject::TYPE_STRING);
-    $combobox = new GtkComboBox();
-    $combobox->set_model($model);
-    $cellRenderer = new GtkCellRendererText();
-    $combobox->pack_start($cellRenderer);
-    $combobox->set_attributes($cellRenderer, 'text', 0);
-    $model->clear();
-    foreach($list as $choice) {
-      $model->append(array($choice));
-    }
-    $combobox->set_active_iter($model->get_iter(0));
-    return $combobox;
-	}
-
 	public function clicVider()
 	{
 	  srListeStore::getInstance()->clear();
 	}
-
-
 
 	//private static $seriesTrouves = array();
 	public function clicApercu()
@@ -197,8 +194,8 @@ class srWindow extends GtkWindow
     $dialog->destroy();
   }
 
-  public function getSelectedProvider()
+  public static function getSelectedProvider()
   {
-  	return 'imdb';
+    return self::getInstance()->comboboxProviders->getSelectedProvider();
   }
 }
