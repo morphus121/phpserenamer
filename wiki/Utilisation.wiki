@@ -1,0 +1,9 @@
+#summary Utilisation
+
+= Caractères pour créer le format  =
+
+ * Numéro de la saison : *%s*
+ * Numéro de la saison avec ajout d\'un zero devant si < 10 : *%j*
+ * Numéro de l\'episode : *%e*
+ * Numéro de l\'episode avec ajout d\'un zero devant si < 10 : *%k*
+ * Nom de l\'episode : *%t*
