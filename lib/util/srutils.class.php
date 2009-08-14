@@ -14,7 +14,11 @@ class srUtils
 	 */
   public static function nameForFileSystem($nom)
   {
-    return str_replace(array(':'), '', $nom);
+    return str_replace(
+      array("/"),
+      array("-"),
+      str_replace(array(':'), '', $nom)
+    );
   }
 
   /**
