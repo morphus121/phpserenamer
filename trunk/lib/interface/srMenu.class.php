@@ -84,6 +84,22 @@ class srMenu
 	  	case '_Ouvrir':
 	  		srWindow::clicOuvrirDossier();
 	  		break;
+	  	case 'A propos':
+	  		$dlg = new GtkAboutDialog();
+	  		$dlg->set_name('phpserenamer');
+				$dlg->set_version('0.1.0');
+				$dlg->set_comments('Nom de la série : %n
+ Numéro de la saison : %s
+ Numéro de la saison avec ajout d\'un zero devant si < 10 : %j
+ Numéro de l\'episode : %e
+ Numéro de l\'episode avec ajout d\'un zero devant si < 10 : %k
+ Nom de l\'episode : %t"');
+				$dlg->set_license("GPL v2");//Button
+				$dlg->set_website('http://code.google.com/p/phpserenamer/');
+
+				$dlg->run();
+				$dlg->destroy();
+	  		break;
 	  }
 	}
 
