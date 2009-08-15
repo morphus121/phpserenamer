@@ -127,6 +127,12 @@ class srTreeView extends GtkTreeView
       case 'Supprimer':
         srListeStore::getInstance()->remove(srListeStore::getInstance()->get_iter($path));
         break;
+      case 'Ajouter dossier':
+      	srWindow::clicOuvrirDossier();
+      	break;
+      case 'Ajouter fichier':
+      	srWindow::clicOuvrirFichier();
+      	break;
       case 'Definir Serie':
         //var_dump(srTreeView::getInstance()->get_selection());
         //var_dump(srTreeView::getInstance()->get_dest_row_at_pos($path, 0));
