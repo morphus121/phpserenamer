@@ -163,10 +163,11 @@ class srWindow extends GtkWindow
           correspondanceNoms::getInstance()->setSerie(self::getInstance()->getSelectedProvider(), $serie, $series[0]);
         }
       }
+      $store->set($iter, 6, srListeStore::STATUS_OK);
     }
     catch(SerieNonFoundException $ex)
     {
-      $store->set($iter, 6, "erreur");
+      $store->set($iter, 6, srListeStore::STATUS_ERROR);
     }
 	}
 

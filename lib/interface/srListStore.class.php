@@ -4,6 +4,10 @@
  */
 class srListeStore extends GtkListStore
 {
+
+	const STATUS_OK    = 'ok';
+	const STATUS_ERROR = 'error';
+
   private static $model = null;
 
   /**
@@ -103,7 +107,7 @@ class srListeStore extends GtkListStore
     $new    = $store->get_value($iter, 5) . DIRECTORY_SEPARATOR . $store->get_value($iter, 4);
     $etat   = $store->get_value($iter, 7);
 
-    if($origin != $new && $etat != 'erreur')
+    if($origin != $new && $etat != self::STATUS_ERROR)
     {
 	    if(!rename($origin, $new))
 	    {
