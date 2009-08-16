@@ -7,14 +7,14 @@
 class srComboBoxProviders extends GtkComboBox
 {
 
-	/**
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct(new GtkListStore());
-		$list  = sfConfig::get('sr_providers');
+  /**
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    parent::__construct(new GtkListStore());
+    $list  = sfConfig::get('sr_providers');
     $model = new GtkListStore(GObject::TYPE_STRING);
     $this->set_model($model);
     $cellRenderer = new GtkCellRendererText();
@@ -26,16 +26,16 @@ class srComboBoxProviders extends GtkComboBox
     }
     $this->set_active_iter($model->get_iter(0));
 
-	}
+  }
 
-	/**
-	 * Retourne le provider sélectionné
-	 *
-	 * @return string
-	 */
+  /**
+   * Retourne le provider sélectionné
+   *
+   * @return string
+   */
   public function getSelectedProvider()
   {
-  	return $this->get_active_text();
+    return $this->get_active_text();
   }
 
 }

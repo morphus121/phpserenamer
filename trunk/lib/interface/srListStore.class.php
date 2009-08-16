@@ -5,8 +5,8 @@
 class srListeStore extends GtkListStore
 {
 
-	const STATUS_OK    = 'ok';
-	const STATUS_ERROR = 'error';
+  const STATUS_OK    = 'ok';
+  const STATUS_ERROR = 'error';
 
   private static $model = null;
 
@@ -21,8 +21,8 @@ class srListeStore extends GtkListStore
       //@see http://gtk.php.net/manual/en/gtk.enum.type.php
       //Le cinquième élément ! (c'est un champ nom affiché utilisé pour conserver
       //le chemin complet du fichier)
-      //Le sixième élément indique si la ligne est en erreur ou non
-	    self::$model = new srListeStore(64, 64, 64, 64, 64, 64, 64);
+      //Le sixième élément indique si la ligne est en erreur ou no
+      self::$model = new srListeStore(64, 64, 64, 64, 64, 64, 64);
     }
     return self::$model;
   }
@@ -33,7 +33,7 @@ class srListeStore extends GtkListStore
     $compteur = 0;
     foreach($fichiers as $fichier)
     {
-    	$this->remplirFromFilePath($chemin . DIRECTORY_SEPARATOR . $fichier);
+      $this->remplirFromFilePath($chemin . DIRECTORY_SEPARATOR . $fichier);
       $compteur++;
     }
   }
@@ -42,13 +42,13 @@ class srListeStore extends GtkListStore
   {
     $oFichierSerie = new fichierSerie(pathinfo($filePath, PATHINFO_BASENAME));
     $ligne = array(
-      $oFichierSerie->getSerie(),
-      $oFichierSerie->getSaison(),
-      $oFichierSerie->getEpisode(),
-      pathinfo($filePath, PATHINFO_BASENAME),
+    $oFichierSerie->getSerie(),
+    $oFichierSerie->getSaison(),
+    $oFichierSerie->getEpisode(),
+    pathinfo($filePath, PATHINFO_BASENAME),
       '',
-      pathinfo($filePath, PATHINFO_DIRNAME),
-      false //pas en erreur
+    pathinfo($filePath, PATHINFO_DIRNAME),
+    false //pas en erreur
     );
     $this->append($ligne);
   }
@@ -57,34 +57,34 @@ class srListeStore extends GtkListStore
   {
     try
     {
-	    $oFichierSerie       = new fichierSerie($store->get_value($iter, 3));
-	    $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie', srWindow::getInstance()->getSelectedProvider());
-	    $nomSerie            = correspondanceNoms::getInstance()->getNom(srWindow::getInstance()->getSelectedProvider(), $store->get_value($iter, 0));
-	    $saison              = $store->get_value($iter, 1);
-	    $episode             = $store->get_value($iter, 2);
-	    $userPattern         = srWindow::getUserPattern();
+      $oFichierSerie       = new fichierSerie($store->get_value($iter, 3));
+      $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie', srWindow::getInstance()->getSelectedProvider());
+      $nomSerie            = correspondanceNoms::getInstance()->getNom(srWindow::getInstance()->getSelectedProvider(), $store->get_value($iter, 0));
+      $saison              = $store->get_value($iter, 1);
+      $episode             = $store->get_value($iter, 2);
+      $userPattern         = srWindow::getUserPattern();
 
-	    $nouveau = str_replace(array(
+      $nouveau = str_replace(array(
 	     '%n',
 	     '%s',
 	     '%j',
 	     '%e',
 	     '%k',
 	     '%t'
-	    ), array(
+	     ), array(
 	     $oInfosProviderSerie->nettoyerNomSerie($nomSerie),
 	     (string)$saison,
 	     str_pad($saison, 2, '0', STR_PAD_LEFT),
 	     (string)$episode,
 	     str_pad($episode, 2, '0', STR_PAD_LEFT),
 	     $oInfosProviderSerie->getEpisode($nomSerie, $saison, $episode)
-	    ), $userPattern);
+	     ), $userPattern);
 
-	    $nouveau = srUtils::nameForFileSystem(sprintf('%s.%s', $nouveau, $oFichierSerie->getExtension()));
+	     $nouveau = srUtils::nameForFileSystem(sprintf('%s.%s', $nouveau, $oFichierSerie->getExtension()));
     }
     catch(SerieNonFoundException $ex)
     {
-    	$nouveau = '';
+      $nouveau = '';
     }
 
     $this->set($iter, 4, $nouveau);
@@ -109,10 +109,10 @@ class srListeStore extends GtkListStore
 
     if($origin != $new && $etat != self::STATUS_ERROR)
     {
-	    if(!rename($origin, $new))
-	    {
-	      srLog::add(sprintf('Erreur lors du rennomage de "%s" en "%s"', $origin, $new));
-	    }
+      if(!rename($origin, $new))
+      {
+        srLog::add(sprintf('Erreur lors du rennomage de "%s" en "%s"', $origin, $new));
+      }
     }
   }
 

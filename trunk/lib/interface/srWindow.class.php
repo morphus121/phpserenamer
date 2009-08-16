@@ -7,9 +7,9 @@
 class srWindow extends GtkWindow
 {
 
-	const WIDTH  = 800;
-	const HEIGHT = 600;
-	const TITRE  = 'SeRenamer PHP';
+  const WIDTH  = 800;
+  const HEIGHT = 600;
+  const TITRE  = 'SeRenamer PHP';
 
   /**
    *
@@ -42,31 +42,31 @@ class srWindow extends GtkWindow
     return self::$instance;
   }
 
-	public function __construct()
-	{
-	  parent::__construct();
+  public function __construct()
+  {
+    parent::__construct();
 
-	  $this->set_title(self::TITRE);
-	  $this->connect_simple('destroy', array('gtk', 'main_quit'));
-	  $this->set_default_size(self::WIDTH, self::HEIGHT);
-	  $this->set_border_width(0);
-	  $this->set_position(GTK::WIN_POS_CENTER);
+    $this->set_title(self::TITRE);
+    $this->connect_simple('destroy', array('gtk', 'main_quit'));
+    $this->set_default_size(self::WIDTH, self::HEIGHT);
+    $this->set_border_width(0);
+    $this->set_position(GTK::WIN_POS_CENTER);
 
-	  $box = new GtkVBox();
+    $box = new GtkVBox();
     $box->pack_start(srMenu::getInstance(), 0, 0);
     $box->pack_start($this->getBouttons(), 0);
-	  $box->pack_start(srListeEpisodes::getInstance());
+    $box->pack_start(srListeEpisodes::getInstance());
     $box->pack_start($this->getBouttonsBas(), 0);
 
-	  $this->add($box);
-	}
+    $this->add($box);
+  }
 
-	/**
-	 *
-	 * @return GtkHbox
-	 */
-	private function getBouttons()
-	{
+  /**
+   *
+   * @return GtkHbox
+   */
+  private function getBouttons()
+  {
     $box = new GtkHButtonBox();
     //@see http://gtk.php.net/manual/en/gtk.enum.buttonboxstyle.php
     $box->set_layout(Gtk::BUTTONBOX_START);
@@ -98,10 +98,10 @@ class srWindow extends GtkWindow
     $box->pack_start($this->comboboxProviders);
 
     return $box;
-	}
+  }
 
-	private function getBouttonsBas()
-	{
+  private function getBouttonsBas()
+  {
     $box = new myHButtonBox();
     //@see http://gtk.php.net/manual/en/gtk.enum.buttonboxstyle.php
     $box->set_layout(Gtk::BUTTONBOX_SPREAD);
@@ -122,32 +122,32 @@ class srWindow extends GtkWindow
     $box->pack_start($boutton1);
 
     return $box;
-	}
+  }
 
-	public function clicVider()
-	{
-	  srListeStore::getInstance()->clear();
-	}
+  public function clicVider()
+  {
+    srListeStore::getInstance()->clear();
+  }
 
-	//private static $seriesTrouves = array();
-	public function clicApercu()
-	{
-	 // srWindow::getInstance()->setup_app();
-	  //ON CHANGE TEMPORAIREMENT LA FONCTION DE L'APRECU
-	  //
-	  srListeStore::getInstance()->foreach(array('srWindow','toto'));
-	  srListeStore::getInstance()->chercherNouveauxTitres();
-	  //self::$seriesTrouves = array();
-	}
+  //private static $seriesTrouves = array();
+  public function clicApercu()
+  {
+    // srWindow::getInstance()->setup_app();
+    //ON CHANGE TEMPORAIREMENT LA FONCTION DE L'APRECU
+    //
+    srListeStore::getInstance()->foreach(array('srWindow','toto'));
+    srListeStore::getInstance()->chercherNouveauxTitres();
+    //self::$seriesTrouves = array();
+  }
 
-	public function clicRenommer()
-	{
-	  srListeStore::getInstance()->renommer();
-	}
+  public function clicRenommer()
+  {
+    srListeStore::getInstance()->renommer();
+  }
 
-	public function toto($store, $path, $iter)
-	{
-	  try
+  public function toto($store, $path, $iter)
+  {
+    try
     {
       $serie = $store->get_value($iter, 0);
       if(!correspondanceNoms::getInstance()->hasKey(self::getInstance()->getSelectedProvider(), $serie))
@@ -169,19 +169,19 @@ class srWindow extends GtkWindow
     {
       $store->set($iter, 6, srListeStore::STATUS_ERROR);
     }
-	}
+  }
 
   public function lancer_dialog($serie, $series)
   {
-	  $dialog = new srDialog('toto', null, Gtk::DIALOG_MODAL);
-	  $dialog->setSerie($serie, $series);
-	  $dialog->run();
+    $dialog = new srDialog('toto', null, Gtk::DIALOG_MODAL);
+    $dialog->setSerie($serie, $series);
+    $dialog->run();
   }
 
   public static function clicOuvrirDossier()
   {
     $dialog = new srFileChooserDialog("Choisir dossier", null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
-        array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
+    array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
 
     $dialog->show_all();
     if ($dialog->run() == Gtk::RESPONSE_OK)
@@ -195,7 +195,7 @@ class srWindow extends GtkWindow
   public static function clicOuvrirFichier()
   {
     $dialog = new srFileChooserDialog("Choisir fichier", null, Gtk::FILE_CHOOSER_ACTION_OPEN,
-        array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
+    array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
 
     $dialog->show_all();
     if ($dialog->run() == Gtk::RESPONSE_OK)
@@ -213,7 +213,7 @@ class srWindow extends GtkWindow
 
   public static function getUserPattern()
   {
-  	return self::getInstance()->userFormat->get_text();
+    return self::getInstance()->userFormat->get_text();
   }
 
 }

@@ -15,11 +15,11 @@ class infosProviderSerieImdb extends infosProviderSerieBase
   {
 
     $this->get($this->rechercheParTitre($serie));
-    //TODO faire seulement dans le deuxième cas ?
+    //TODO faire seulement dans le deuxième cas
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
 
-    //Ici on peut faire face à deux situations :
+    //Ici on peut faire face à deux situations
     // - soit la recherche à donné plusieurs résulats : liste donc les résultats
     //suivits par 'TV series' entre parenthèses
     // - soit la recherche n'a renvoyé qu'un résultat et l'on est donc renvoyé
@@ -32,7 +32,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
 
       //TODO ne pas faire quelques tableaux mais les compter tous et tous les
       //parcourir à la recherche de séries ?
-    	$posTable = array();
+      $posTable = array();
 
       //On recherche quel est la position du tableau voulu
       if($pos = strpos($this->browser->getResponseText(),'Popular Titles'))
@@ -89,33 +89,33 @@ class infosProviderSerieImdb extends infosProviderSerieBase
    */
   private function rechercheDansUnTableau($positionTableau)
   {
-        $oDomDocument = $this->browser->getResponseDom();
-        //ON fait un DOMXpath 2 fois ??
+    $oDomDocument = $this->browser->getResponseDom();
+    //ON fait un DOMXpath 2 fois ??
     $xpath = new DOMXPath($oDomDocument);
     $liste = array();
-     $query = sprintf('//table[%s]', $positionTableau);
-      //TODO directement passer par xpath pour avoir les td qui nous intéressent ?
-      $oDomNodeList = $xpath->query($query);
-      if($oDomNodeList->length == 0)
+    $query = sprintf('//table[%s]', $positionTableau);
+    //TODO directement passer par xpath pour avoir les td qui nous intéressent
+    $oDomNodeList = $xpath->query($query);
+    if($oDomNodeList->length == 0)
+    {
+      throw new SerieNonFoundException();
+    }
+    $oDomNode = $oDomNodeList->item(0);
+    foreach($oDomNode->childNodes as $tr)
+    {
+      $unResultat = $tr->childNodes->item(2)->nodeValue;
+      $matches = array();
+      if(preg_match('/(.*)\(TV series\)/',$unResultat,$matches))
       {
-        throw new SerieNonFoundException();
+        $liste[] = trim($matches[1]);
       }
-      $oDomNode = $oDomNodeList->item(0);
-      foreach($oDomNode->childNodes as $tr)
+      //TODO un seul preg_match (ex mini-series : impact)
+      if(preg_match('/(.*)\(TV mini-series\)/',$unResultat,$matches))
       {
-        $unResultat = $tr->childNodes->item(2)->nodeValue;
-        $matches = array();
-        if(preg_match('/(.*)\(TV series\)/',$unResultat,$matches))
-        {
-          $liste[] = trim($matches[1]);
-        }
-        //TODO un seul preg_match (ex mini-series : impact)
-        if(preg_match('/(.*)\(TV mini-series\)/',$unResultat,$matches))
-        {
-          $liste[] = trim($matches[1]);
-        }
+        $liste[] = trim($matches[1]);
       }
-        return $liste;
+    }
+    return $liste;
 
   }
 
