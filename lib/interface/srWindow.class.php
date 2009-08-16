@@ -180,7 +180,7 @@ class srWindow extends GtkWindow
 
   public static function clicOuvrirDossier()
   {
-    $dialog = new srFileChooserDialog("Choisir dossier", null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
+    $dialog = new GtkFileChooserDialog("Choisir dossier", null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
     array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
 
     $dialog->show_all();
@@ -194,7 +194,7 @@ class srWindow extends GtkWindow
 
   public static function clicOuvrirFichier()
   {
-    $dialog = new srFileChooserDialog("Choisir fichier", null, Gtk::FILE_CHOOSER_ACTION_OPEN,
+    $dialog = new GtkFileChooserDialog("Choisir fichier", null, Gtk::FILE_CHOOSER_ACTION_OPEN,
     array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
 
     $dialog->show_all();
