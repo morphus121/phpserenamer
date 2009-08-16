@@ -116,4 +116,17 @@ class srListeStore extends GtkListStore
     }
   }
 
+  public function renommerSerieSiMemeNom($oldText, $newText)
+  {
+    $this->foreach(array('srListeStore', 'rennomerUneSerieSiMemeNom'), $oldText, $newText);
+  }
+
+  public function rennomerUneSerieSiMemeNom($store, $path, $iter, $oldText, $newText)
+  {
+    if($store->get_value($iter, 0) == $oldText)
+    {
+      $store->set($iter, 0, $newText);
+    }
+  }
+
 }

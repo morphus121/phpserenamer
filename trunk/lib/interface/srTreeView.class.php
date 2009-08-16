@@ -60,7 +60,13 @@ class srTreeView extends GtkTreeView
   {
     $model = srListeStore::getInstance();
     $iter = $model->get_iter($path);
+    $old_text = $model->get($iter, $colonne);
+    $old_text = $old_text[0];
     $model->set($iter,$colonne,$new_text);
+    if($colonne == 0)
+    {
+      $model->renommerSerieSiMemeNom($old_text, $new_text);
+    }
   }
 
   function on_button($view, $event)
