@@ -30,7 +30,7 @@ class infosProviderFactory
     $classe = sprintf('infosProvider%s%s', ucfirst($type), ucfirst($provider));
     if(!class_exists($classe))
     {
-    	throw new sfException('La classe n\'existe pas.');
+      throw new sfException('La classe n\'existe pas.');
     }
     return new $classe;
 
