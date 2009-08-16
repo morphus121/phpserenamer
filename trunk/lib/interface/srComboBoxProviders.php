@@ -13,7 +13,7 @@ class srComboBoxProviders extends GtkComboBox
 	 */
 	public function __construct()
 	{
-		parent::__construct();
+		parent::__construct(new GtkListStore());
 		$list  = sfConfig::get('sr_providers');
     $model = new GtkListStore(GObject::TYPE_STRING);
     $this->set_model($model);
