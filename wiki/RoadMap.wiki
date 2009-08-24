@@ -1,4 +1,5 @@
 #summary La roadmap
+#labels Featured
 
 = 0.1.0 =
 _Première version fonctionnelle_
