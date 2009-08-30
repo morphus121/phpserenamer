@@ -6,7 +6,8 @@ class myFinder extends sfFinder
     'mkv',
     'avi',
     'ogm',
-    'srt'
+    'srt',
+    'mp4',
   );
 
   private static function initialize(myFinder $finder)
