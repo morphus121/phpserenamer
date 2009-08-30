@@ -1,14 +1,10 @@
-#summary One-sentence summary of this page.
+#summary Screenshots de l'application
 #labels Featured
 
-= Introduction =
+= Linux - Gnome =
 
-Add your content here.
+http://phpserenamer.googlecode.com/svn/wiki/screenshots/0.1.0/01_linux_gnome.png
 
+= Windows Vista =
 
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+http://phpserenamer.googlecode.com/svn/wiki/screenshots/0.1.0/02_windows.png
