@@ -9,7 +9,7 @@ class srWindow extends GtkWindow
 
   const WIDTH  = 800;
   const HEIGHT = 600;
-  const TITRE  = 'SeRenamer PHP';
+  const TITRE  = 'PhpSeRenamer';
 
   /**
    *
@@ -173,7 +173,7 @@ class srWindow extends GtkWindow
 
   public function lancer_dialog($serie, $series)
   {
-    $dialog = new srDialog('toto', null, Gtk::DIALOG_MODAL);
+    $dialog = new srDialog('Choix multiples de nom', null, Gtk::DIALOG_MODAL);
     $dialog->setSerie($serie, $series);
     $dialog->run();
   }
