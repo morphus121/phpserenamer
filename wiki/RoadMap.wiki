@@ -13,6 +13,7 @@ _ajout de provider et d'une interface de configuration_
   * Récupération des infos depuis allociné
   * Dossier par défaut réglable
   * Format de renommage enregistrable (propositions de plusieurs formats ?)
+----
 
 = 0.3.0 =
 _internationalisation_
