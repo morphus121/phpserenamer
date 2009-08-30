@@ -1,1 +1,12 @@
-#summary Installation
+#summary Instructions d'installation
+
+*Debian package pour Ubuntu 9.04*
+
+Fonctionnant sous php-gtk, et celui-ci ne se trouvant pas dans les dépots officiels, téléchargez puis installez [http://phpserenamer.googlecode.com/files/php5-gtk2_2.0.1-1_i386.deb ceci] tout d'abord.
+
+Téléchargez ensuite [http://phpserenamer.googlecode.com/files/phpserenamer_0.1.0-rc1_all.deb ceci] pour installer phpserenamer.
+
+
+*Installateur Windows*
+
+Téléchargez [http://phpserenamer.googlecode.com/files/phpserenamer-0.1.0-r37.exe ceci] puis suivez les instructions d'installation.
