@@ -19,5 +19,5 @@ _ajout de provider et d'une interface de configuration_
 _internationalisation_
   * système de gestion des langues
   * traduction en anglais
-
+  * Possibilité de remplacer les espaces par des points
   
