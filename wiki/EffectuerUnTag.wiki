@@ -1,0 +1,10 @@
+#summary Effectuer un tag
+
+  * Créer un ticket (dans la milestone actuelle) indiquant de faire le tag 
+
+  * Effectuer une commande semblable à celle-ci 
+{{{
+$ svn copy http://phpserenamer.googlecode.com/svn/trunk http://svnphpserenamer.googlecode.com/svn/branches/0/0.1.0 -m "Tag de la 0.1.0 (Fixes issue 000)"
+}}}
+
+  * Modifier la page du wiki changelog en reprenant la liste des modifications effecutées 
