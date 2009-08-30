@@ -9,6 +9,14 @@ _Première version fonctionnelle_
 ----
 
 = 0.2.0 =
-_ajout de provider_
+_ajout de provider et d'une interface de configuration_
   * Récupération des infos depuis allociné
+  * Dossier par défaut réglable
+  * Format de renommage enregistrable (propositions de plusieurs formats ?)
+
+= 0.3.0 =
+_internationalisation_
+  * système de gestion des langues
+  * traduction en anglais
+
   
