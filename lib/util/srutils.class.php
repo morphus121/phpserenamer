@@ -17,7 +17,7 @@ class srUtils
     return str_replace(
     array("/"),
     array("-"),
-    str_replace(array(':'), '', $nom)
+    str_replace(array(':', '?'), '', $nom)
     );
   }
 
