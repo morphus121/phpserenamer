@@ -7,4 +7,10 @@
 $ svn copy https://phpserenamer.googlecode.com/svn/trunk https://phpserenamer.googlecode.com/svn/tags/0/0.1.0 -m "Tag de la 0.1.0 (Fixes issue 000)"
 }}}
 
+ou si depuis branche
+
+{{{
+$ svn copy https://phpserenamer.googlecode.com/svn/branches/0.1 https://phpserenamer.googlecode.com/svn/tags/0/0.1.2 -m "Tag de la 0.1.2(Fixes issue 44)"
+}}}
+
   * Modifier la page du wiki changelog en reprenant la liste des modifications effecutées 
