@@ -21,6 +21,14 @@ class fichierSerie
       $this->setSaison((int)$matches[2]);
       $this->setEpisode((int)$matches[3]);
     }
+    //serie.annee.S01E04.nomepisode
+    elseif(preg_match('/^([\w|.]*)\.(\d{4})\.[S|s](\d*)[E|e](\d*)\..*$/', $fichier, $matches))
+    {
+    	$this->setSerie(strtolower($matches[1]));
+    	$this->setSaison((int)$matches[3]);
+    	$this->setEpisode((int)$matches[4]);
+    }
+
     //serie.103.hdtv-team
     elseif(preg_match('/^([\w|.]*)\.(\d*)\..*$/', $fichier, $matches))
     {
