@@ -1,5 +1,16 @@
-Utilisation
+== Le projet ==
+|| [http://groups.google.com/group/phpserenamer_annonces Annonces] || Google Group ||
 
-RoadMap
+== Documentation utilisateurs ==
+|| [http://code.google.com/phpserenamer/wiki/Instalation Installation] || Instructions d'installation ||
+|| [http://code.google.com/phpserenamer/wiki/Screenshots Screenshots] || Captures d'écran de l'application ||
+|| [http://code.google.com/phpserenamer/wiki/Utilisation Utilisation] || Utilisation de l'application ||
+|| [http://code.google.com/phpserenamer/wiki/RoadMap RoadMap] || Futurs développements ||
 
-DeployerPourWindows
+== Développement ==
+|| [http://code.google.com/phpserenamer/wiki/EffectuerUnTag Tag] || Comment effectuer un tag ||
+|| [http://code.google.com/phpserenamer/wiki/DeployerPourUbuntu Déploiement ubuntu] || Préparer le debian package ||
+|| [http://code.google.com/phpserenamer/wiki/DeployerPourWindows Déploiement windows] || Préparer installateur windows ||
+
+Autres pages :
+ * Developpements
