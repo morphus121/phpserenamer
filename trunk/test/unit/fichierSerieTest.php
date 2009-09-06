@@ -39,6 +39,11 @@ testerFichierSerie($t,
 );
 
 
+testerFichierSerie($t,
+  'Les Chemins de l\'étrange - [1x03] - Porte-bonheur.avi',
+  'les chemins de l\'étrange', 1, 3, 'avi'
+);
+
 function testerFichierSerie(lime_test $t, $fichier, $serie, $saison, $episode, $extension)
 {
 	$t->info($fichier);
