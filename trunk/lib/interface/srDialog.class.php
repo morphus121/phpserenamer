@@ -7,9 +7,9 @@ class srDialog extends GtkDialog
   private $series;
   private $combobox;
 
-  public function __construct($title = null)
+  public function __construct($title = null, $parent = null, $flags = null)
   {
-    parent::__construct($title);
+    parent::__construct($title, $parent, $flags);
     $this->set_position(Gtk::WIN_POS_CENTER_ALWAYS);
     $this->set_size_request(400, 200);
     $this->add_button(Gtk::STOCK_OK, Gtk::RESPONSE_OK);
@@ -43,12 +43,11 @@ class srDialog extends GtkDialog
     parent::run();
   }
 
-  private static function getComboBoxSeries(array $series)
+  public static function getComboBoxSeries(array $series)
   {
     //TODO get_active_iter() pour récupération ensuite
     $model = new GtkListStore(GObject::TYPE_STRING);
-    $combobox = new GtkComboBox();
-    $combobox->set_model($model);
+    $combobox = new GtkComboBox($model);
     $cellRenderer = new GtkCellRendererText();
     $combobox->pack_start($cellRenderer);
     $combobox->set_attributes($cellRenderer, 'text', 0);
