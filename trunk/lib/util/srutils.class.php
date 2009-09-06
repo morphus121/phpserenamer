@@ -15,8 +15,8 @@ class srUtils
   public static function nameForFileSystem($nom)
   {
     return str_replace(
-    array("/"),
-    array("-"),
+    array("/", 'ñ'),
+    array("-", 'n'),
     str_replace(array(':', '?'), '', $nom)
     );
   }
