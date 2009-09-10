@@ -52,4 +52,34 @@ class srUtils
     return $providers;
   }
 
+  public static function flattenArray(array $array, $keyBegin = '')
+  {
+    $flat = array();
+    foreach ($array as $key => $value)
+    {
+      $laClef = ($keyBegin == '') ? $key : $keyBegin . '_' . $key;
+      if (is_array($value)) $flat = array_merge($flat, self::flattenArray($value, $laClef));
+      else $flat[$laClef] = $value;
+    }
+    return $flat;
+  }
+
+  public static function unFlattenArray(array $array)
+  {
+    $tab = array();
+    foreach($array as $clef => $valeur)
+    {
+      $tabClef  = explode('_', $clef);
+      $firstKey = array_shift($tabClef);
+      $moinsUn  = count($tabClef) - 1;
+      $tempTab  = array($tabClef[$moinsUn] => $valeur);
+      for($i = $moinsUn-1; $i >= 0; $i--)
+      {
+        $tempTab = array($tabClef[$i] => $tempTab);
+      }
+      $tab[$firstKey] = (isset($tab[$firstKey])) ? array_merge_recursive($tab[$firstKey], $tempTab) : $tempTab;
+    }
+    return $tab;
+  }
+
 }

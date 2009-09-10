@@ -182,7 +182,7 @@ class srWindow extends GtkWindow
   {
     $dialog = new GtkFileChooserDialog("Choisir dossier", null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
     array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
-
+    if(is_dir($defaultFolder = srConfig::get('default_folder'))) $dialog->set_current_folder($defaultFolder);
     $dialog->show_all();
     if ($dialog->run() == Gtk::RESPONSE_OK)
     {
