@@ -4,7 +4,7 @@
 
   * Modifier le numéro de version dans le fichier `data/debianPackage/DEBIAN/control`
 
-  * Modifier le numéro de version du aboutdialog (pour l'instant dans le srMenu)
+  * Modifier le numéro de version la classe srutils `lib/util/srUtils.class.php`
 
   * Effectuer une commande semblable à celle-ci 
 {{{
