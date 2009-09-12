@@ -6,6 +6,19 @@
  */
 class srUtils
 {
+
+  const VERSION = '0.1.2';
+
+  /**
+   * Retourne le numéro de version de l'application
+   *
+   * @return string
+   */
+  public static function getVersion()
+  {
+    return self::VERSION;
+  }
+
   /**
    * Enlève d'une chaine tout les caractères interdits dans un nom de fichier
    *
