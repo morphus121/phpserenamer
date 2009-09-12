@@ -94,7 +94,7 @@ class srMenu
       case 'A propos':
         $dlg = new GtkAboutDialog();
         $dlg->set_name('phpserenamer');
-        $dlg->set_version('0.1.0');
+        $dlg->set_version(srUtils::getVersion());
         $dlg->set_comments('Nom de la série : %n
  Numéro de la saison : %s
  Numéro de la saison avec ajout d\'un zero devant si < 10 : %j
