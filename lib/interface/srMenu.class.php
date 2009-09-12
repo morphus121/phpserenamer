@@ -3,27 +3,30 @@ class srMenu
 {
   //@see http://gtk.php.net/manual/en/gtk.enum.stockitems.php
   private static $menu_definition = array(
-    'Aide' => array(
+    'Aide'    => array(
       'A propos',
-  ),
+    ),
+    'Edition' => array(
+      'Paramètres'
+    ),
     'Actions' => array(
       '' => array(
         'nom'   => '_Open',
         'image' => Gtk::STOCK_OPEN
-  ),
-  array(
+      ),
+      array(
         'nom'   => '_New',
         'image' => Gtk::STOCK_SAVE
-  ),
-  array(
+      ),
+      array(
         'nom'   => '_Close',
         'image' => Gtk::STOCK_CLOSE
-  ),
-  array(
+      ),
+      array(
         'nom'   => '_Quit',
         'image' => Gtk::STOCK_QUIT
-  )
-  ),
+      )
+    ),
   );
 
   public static function getInstance()
@@ -83,6 +86,10 @@ class srMenu
         break;
       case '_Ouvrir':
         srWindow::clicOuvrirDossier();
+        break;
+      case 'Paramètres':
+        $p = srParametres::getInstance();
+        $p->show_all();
         break;
       case 'A propos':
         $dlg = new GtkAboutDialog();
