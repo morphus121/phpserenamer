@@ -2,7 +2,7 @@
 || [http://groups.google.com/group/phpserenamer_annonces Annonces] || Google Group ||
 
 == Documentation utilisateurs ==
-|| [http://code.google.com/p/phpserenamer/wiki/Instalation Installation] || Instructions d'installation ||
+|| [http://code.google.com/p/phpserenamer/wiki/Installation Installation] || Instructions d'installation ||
 || [http://code.google.com/p/phpserenamer/wiki/Screenshots Screenshots] || Captures d'écran de l'application ||
 || [http://code.google.com/p/phpserenamer/wiki/Utilisation Utilisation] || Utilisation de l'application ||
 || [http://code.google.com/p/phpserenamer/wiki/changelog Changelog] || Historique des versions ||
