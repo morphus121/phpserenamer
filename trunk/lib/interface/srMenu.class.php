@@ -3,28 +3,34 @@ class srMenu
 {
   //@see http://gtk.php.net/manual/en/gtk.enum.stockitems.php
   private static $menu_definition = array(
-    'Aide'    => array(
-      'A propos',
-    ),
-    'Edition' => array(
-      'Paramètres'
-    ),
-    'Actions' => array(
-      '' => array(
-        'nom'   => '_Open',
+    '_Actions' => array(
+      array(
+        'nom'   => 'Ajouter _Dossier',
         'image' => Gtk::STOCK_OPEN
       ),
       array(
-        'nom'   => '_New',
-        'image' => Gtk::STOCK_SAVE
+        'nom'   => 'Ajouter _Fichier',
+        'image' => Gtk::STOCK_NEW
       ),
       array(
-        'nom'   => '_Close',
+        'nom'   => '_Supprimer Element',
         'image' => Gtk::STOCK_CLOSE
       ),
       array(
-        'nom'   => '_Quit',
+        'nom'   => '_Quitter',
         'image' => Gtk::STOCK_QUIT
+      )
+    ),
+    '_Edition' => array(
+      array(
+        'nom'   => '_Paramètres',
+        'image' => Gtk::STOCK_PROPERTIES
+      )
+    ),
+    'Aide'    => array(
+      array(
+        'nom'   => 'A propos',
+        'image' => Gtk::STOCK_DIALOG_QUESTION,
       )
     ),
   );
@@ -52,7 +58,8 @@ class srMenu
         {
           if(is_array($submenu))
           {
-            $menu_item = new GtkImageMenuItem($submenu['image']);
+            $menu_item = new GtkImageMenuItem($submenu['nom']);
+            $menu_item->set_image(GtkImage::new_from_stock($submenu['image'], Gtk::ICON_SIZE_MENU));
           }
           else
           {
@@ -78,16 +85,20 @@ class srMenu
   function on_menu_select($menu_item)
   {
     $item = $menu_item->child->get_label();
-    echo "menu selected: $item\n";
     switch($item)
     {
+      case 'Ajouter _Dossier':
+        srWindow::clicOuvrirDossier();
+        break;
+      case 'Ajouter _Fichier':
+        srWindow::clicOuvrirFichier();
+        break;
+      case '_Supprimer Element':
+        break;
       case '_Quitter':
         Gtk::main_quit();
         break;
-      case '_Ouvrir':
-        srWindow::clicOuvrirDossier();
-        break;
-      case 'Paramètres':
+      case '_Paramètres':
         $p = srParametres::getInstance();
         $p->show_all();
         break;
