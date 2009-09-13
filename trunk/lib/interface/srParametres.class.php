@@ -25,6 +25,12 @@ class srParametres extends GtkDialog
 
   /**
    *
+   * @var srComboBoxProviders
+   */
+  public $defaultProvider;
+
+  /**
+   *
    * @return void
    */
   public function __construct()
@@ -42,6 +48,7 @@ class srParametres extends GtkDialog
 
     $box = $this->vbox;
     $box->pack_start($this->getReglageDossierParDefaut(), 0, 0);
+    $box->pack_start($this->getReglageProviderParDefaut(), 0, 0);
 
     $this->connect_simple('destroy', array('srParametres', 'onDestroy'));
     $this->connect('close',array('srParametres','onDestroy'));
@@ -61,6 +68,25 @@ class srParametres extends GtkDialog
     if(is_dir(srConfig::get('default_folder'))) $this->defaultFolder->set_current_folder(srConfig::get('default_folder'));
     $this->defaultFolder->set_size_request(320, -1);
     $frame->add($this->defaultFolder);
+
+    $box->pack_start($frame);
+
+    return $box;
+  }
+
+  /**
+   *
+   * @return GtkVButtonBox
+   */
+  public function getReglageProviderParDefaut()
+  {
+    $box = new GtkVButtonBox();
+
+    $frame = new GtkFrame('Provider par défaut');
+    $this->defaultProvider = new srComboBoxProviders();
+    $this->defaultProvider->setSelectedProvider(srConfig::get('default_provider'));
+    $this->defaultProvider->set_size_request(320, -1);
+    $frame->add($this->defaultProvider);
 
     $box->pack_start($frame);
 
@@ -103,6 +129,7 @@ class srParametres extends GtkDialog
     if($event == Gtk::RESPONSE_OK)
     {
       srConfig::set('default_folder', self::getInstance()->defaultFolder->get_current_folder());
+      srConfig::set('default_provider', self::getInstance()->defaultProvider->getSelectedProvider());
     }
     self::getInstance()->destroy();
   }
