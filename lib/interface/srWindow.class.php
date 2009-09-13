@@ -95,6 +95,7 @@ class srWindow extends GtkWindow
     $lblFormat = new GtkLabel('Site : ');
     $box->pack_start($lblFormat);
     $this->comboboxProviders = new srComboBoxProviders();
+    $this->comboboxProviders->setSelectedProvider(srConfig::get('default_provider'));
     $box->pack_start($this->comboboxProviders);
 
     return $box;
