@@ -51,6 +51,7 @@ class srWindow extends GtkWindow
     $this->set_default_size(self::WIDTH, self::HEIGHT);
     $this->set_border_width(0);
     $this->set_position(GTK::WIN_POS_CENTER);
+    $this->set_icon_from_file(sfConfig::get('sr_logo'));
 
     $box = new GtkVBox();
     $box->pack_start(srMenu::getInstance(), 0, 0);

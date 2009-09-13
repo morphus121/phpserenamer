@@ -48,6 +48,7 @@ class srParametres extends GtkDialog
     $this->set_border_width(0);
     $this->set_position(GTK::WIN_POS_CENTER);
     $this->set_resizable(false);
+    $this->set_icon_from_file(sfConfig::get('sr_logo'));
 
     $this->add_button(Gtk::STOCK_CANCEL, Gtk::RESPONSE_CANCEL);
     $this->add_button(Gtk::STOCK_OK, Gtk::RESPONSE_OK);
