@@ -14,6 +14,7 @@ class srDialog extends GtkDialog
     $this->set_size_request(400, 200);
     $this->add_button(Gtk::STOCK_OK, Gtk::RESPONSE_OK);
     $this->connect('response',array('srDialog','validerDialog'));
+    $this->set_icon_from_file(sfConfig::get('sr_logo'));
 
   }
 

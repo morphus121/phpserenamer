@@ -24,6 +24,7 @@ class mainTask extends sfBaseTask
   {
   	$this->createConfiguration('frontend', 'prod');
   	sfConfig::set('sr_providers', srUtils::getProvidersFromClassesNames());
+  	sfConfig::set('sr_logo', 'data/logo/logo.png');
   	if(isset($arguments['path']))
   	{
       srListeStore::getInstance()->remplirFromChemin($arguments['path']);

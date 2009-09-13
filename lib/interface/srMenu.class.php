@@ -103,7 +103,7 @@ class srMenu
  Nom de l\'episode : %t"');
         $dlg->set_license("GPL v2");//Button
         $dlg->set_website('http://code.google.com/p/phpserenamer/');
-
+        $dlg->set_icon_from_file(sfConfig::get('sr_logo'));
         $dlg->run();
         $dlg->destroy();
         break;
