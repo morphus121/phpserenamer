@@ -31,6 +31,12 @@ class srParametres extends GtkDialog
 
   /**
    *
+   * @var GtkEntry
+   */
+  public $defaultPattern;
+
+  /**
+   *
    * @return void
    */
   public function __construct()
@@ -49,6 +55,7 @@ class srParametres extends GtkDialog
     $box = $this->vbox;
     $box->pack_start($this->getReglageDossierParDefaut(), 0, 0);
     $box->pack_start($this->getReglageProviderParDefaut(), 0, 0);
+    $box->pack_start($this->getReglagePatternParDefaut(), 0, 0);
 
     $this->connect_simple('destroy', array('srParametres', 'onDestroy'));
     $this->connect('close',array('srParametres','onDestroy'));
@@ -94,6 +101,25 @@ class srParametres extends GtkDialog
   }
 
   /**
+   * %n - [%sx%k] - %t
+   * @return GtkVButtonBox
+   */
+  public function getReglagePatternParDefaut()
+  {
+    $box = new GtkVButtonBox();
+
+    $frame = new GtkFrame('Pattern par défaut');
+
+    $this->defaultPattern = new GtkEntry();
+    $this->defaultPattern->set_text(srConfig::get('default_pattern'));
+    $this->defaultPattern->set_size_request(320, -1);
+    $frame->add($this->defaultPattern);
+    $box->pack_start($frame);
+
+    return $box;
+  }
+
+  /**
    *
    * @return srParametres
    */
@@ -130,6 +156,8 @@ class srParametres extends GtkDialog
     {
       srConfig::set('default_folder', self::getInstance()->defaultFolder->get_current_folder());
       srConfig::set('default_provider', self::getInstance()->defaultProvider->getSelectedProvider());
+      srConfig::set('default_pattern', self::getInstance()->defaultPattern->get_text());
+      srWindow::getInstance()->setUserPattern(srConfig::get('default_pattern'));
     }
     self::getInstance()->destroy();
   }

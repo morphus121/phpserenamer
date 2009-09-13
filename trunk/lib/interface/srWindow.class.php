@@ -88,7 +88,7 @@ class srWindow extends GtkWindow
     $lblFormat = new GtkLabel('Format : ');
     $box->pack_start($lblFormat);
     $this->userFormat = new GtkEntry();
-    $this->userFormat->set_text('%n - [%sx%k] - %t');
+    $this->userFormat->set_text(srConfig::get('default_pattern'));
     $box->pack_start($this->userFormat);
 
     //site
@@ -215,6 +215,11 @@ class srWindow extends GtkWindow
   public static function getUserPattern()
   {
     return self::getInstance()->userFormat->get_text();
+  }
+
+  public static function setUserPattern($pattern)
+  {
+    return self::getInstance()->userFormat->set_text($pattern);
   }
 
 }
