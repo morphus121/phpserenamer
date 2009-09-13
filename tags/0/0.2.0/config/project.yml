@@ -1,0 +1,5 @@
+all:
+  default:
+    folder: 
+    provider: 
+    pattern: '%n - [%sx%k] - %t'
