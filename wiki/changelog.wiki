@@ -13,6 +13,7 @@
  * Séries avec accents mal découpées
  * Modifications des items du menu action
 
+----
 = 0.1.3 = 
 
  * Correction d'une "segmentation fault" apparaissant sur certaines configurations
