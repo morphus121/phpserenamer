@@ -7,6 +7,13 @@ Utilisation de Inno Setup Compiler.
 
 Ajout de php-gtk dans le dossier lib/vendor/php-gtk2.
 
+= Pour afficher les images des boutons =
+
+Modifier le fichier gtkrc.(dans lib/vendor/php-gtk2/etc/gtk-2.0), 
+
+Modifier la ligne 5, gtk-button-images = 0. 
+
+Changer le 0 to 1et enregistrer.
 
 = Le code =
 
