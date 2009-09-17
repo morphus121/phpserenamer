@@ -40,6 +40,7 @@ class srListeStore extends GtkListStore
 
   public function remplirFromFilePath($filePath)
   {
+  	$filePath = utf8_encode($filePath);
     $oFichierSerie = new fichierSerie(pathinfo($filePath, PATHINFO_BASENAME));
     $ligne = array(
     $oFichierSerie->getSerie(),
