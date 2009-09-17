@@ -12,7 +12,8 @@ class myFinder extends sfFinder
 
   private static function initialize(myFinder $finder)
   {
-    foreach(self::$extensionsAcceptes as $extension)
+  	$extensions = array_merge(self::$extensionsAcceptes, array_map('strtoupper', self::$extensionsAcceptes));
+    foreach($extensions as $extension)
     {
       $finder->name(sprintf('*.%s', $extension));
     }
