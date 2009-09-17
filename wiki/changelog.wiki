@@ -1,6 +1,14 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.2.1 =
+
+ * Correction de la lenteur au démarrage
+ * Correction des images dans les boutons non affichées
+ * Correction des caractères accentués mal affichés dans les noms de fichiers
+ * Support des extensions en majuscule
+
+----
 = 0.2.0 =
 
  * Ajout d'une interface de préférences
