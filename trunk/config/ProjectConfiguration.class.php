@@ -10,7 +10,7 @@ class ProjectConfiguration extends sfProjectConfiguration
   public function setup()
   {
     // for compatibility / remove and enable only the plugins you want
-    $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin'));
+    $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin', 'sfPropelPlugin'));
     ini_set("php-gtk.codepage", "UTF-8");
     $this->loadProjectConfig();
   }

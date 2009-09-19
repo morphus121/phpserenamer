@@ -7,7 +7,7 @@ class srConfig
   public function get($clef)
   {
     $array = sfYaml::load(self::$fichier);
-    $array = srutils::flattenArray($array);
+    $array = srUtils::flattenArray($array);
     return $array['all_' . $clef];
   }
 
@@ -20,7 +20,7 @@ class srConfig
   public function set($clef, $valeur)
   {
     $array = sfYaml::load(self::$fichier);
-    $array = srutils::flattenArray($array);
+    $array = srUtils::flattenArray($array);
     $array['all_' . $clef] = $valeur;
     $array = srUtils::unFlattenArray($array);
     $fp = fopen(sfConfig::get('sr_root_dir') . self::$fichier, 'w');

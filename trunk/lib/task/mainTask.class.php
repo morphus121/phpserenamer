@@ -22,7 +22,9 @@ class mainTask extends sfBaseTask
 
   protected function execute($arguments = array(), $options = array())
   {
-  	$this->createConfiguration('frontend', 'prod');
+		sfContext::createInstance($this->createConfiguration('frontend', 'prod'));
+
+		sfContext::getInstance()->getUser()->setCulture(srConfig::get('default_language'));
   	sfConfig::set('sr_providers', srUtils::getProvidersFromClassesNames());
   	sfConfig::set('sr_logo', 'data/logo/logo.png');
   	if(isset($arguments['path']))

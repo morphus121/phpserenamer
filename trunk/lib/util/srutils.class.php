@@ -95,4 +95,8 @@ class srUtils
     return $tab;
   }
 
+  public static function getTranslation($var, $dictionary = 'messages')
+  {
+    return sfContext::getInstance()->getI18N()->__($var, array(), $dictionary);
+  }
 }

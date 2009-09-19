@@ -1,43 +1,55 @@
 <?php
+/**
+ *
+ * @author adriengallou
+ *
+ */
 class srMenu
 {
-  //@see http://gtk.php.net/manual/en/gtk.enum.stockitems.php
-  private static $menu_definition = array(
-    '_Actions' => array(
-      array(
-        'nom'   => 'Ajouter _Dossier',
-        'image' => Gtk::STOCK_OPEN
-      ),
-      array(
-        'nom'   => 'Ajouter _Fichier',
-        'image' => Gtk::STOCK_NEW
-      ),
-      array(
-        'nom'   => '_Supprimer Element',
-        'image' => Gtk::STOCK_CLOSE
-      ),
-      array(
-        'nom'   => '_Quitter',
-        'image' => Gtk::STOCK_QUIT
-      )
-    ),
-    '_Edition' => array(
-      array(
-        'nom'   => '_Paramètres',
-        'image' => Gtk::STOCK_PROPERTIES
-      )
-    ),
-    'Aide'    => array(
-      array(
-        'nom'   => 'A propos',
-        'image' => Gtk::STOCK_DIALOG_QUESTION,
-      )
-    ),
-  );
+
+  /**
+   * @see http://gtk.php.net/manual/en/gtk.enum.stockitems.php
+   * @return array
+   */
+  public static function getMenuDefinition()
+  {
+    return array(
+	    srUtils::getTranslation('_Actions', 'menu') => array(
+	      array(
+	        'nom'   => srUtils::getTranslation('Add _folder', 'menu'),
+	        'image' => Gtk::STOCK_OPEN
+	      ),
+	      array(
+	        'nom'   => srUtils::getTranslation('Add f_ile', 'menu'),
+	        'image' => Gtk::STOCK_NEW
+	      ),
+	      array(
+	        'nom'   => srUtils::getTranslation('_Delete Element', 'menu'),
+	        'image' => Gtk::STOCK_CLOSE
+	      ),
+	      array(
+	        'nom'   => srUtils::getTranslation('_Quit', 'menu'),
+	        'image' => Gtk::STOCK_QUIT
+	      )
+	    ),
+	    srUtils::getTranslation('_Edit', 'menu')    => array(
+	      array(
+	        'nom'   => srUtils::getTranslation('_Parameters', 'menu'),
+	        'image' => Gtk::STOCK_PROPERTIES
+	      )
+	    ),
+	    srUtils::getTranslation('_Help', 'menu')    => array(
+	      array(
+	        'nom'   => srUtils::getTranslation('_About', 'menu'),
+	        'image' => Gtk::STOCK_DIALOG_QUESTION,
+	      )
+	    ),
+	  );
+  }
 
   public static function getInstance()
   {
-    return self::setup_menu(self::$menu_definition);
+    return self::setup_menu(self::getMenuDefinition());
   }
 
   private function setup_menu($menus)
@@ -73,48 +85,44 @@ class srMenu
     return $menubar;
   }
 
-  // process radio menu selection
-  public function on_toggle($radio)
-  {
-    $label = $radio->child->get_label();
-    $active = $radio->get_active();
-    echo("radio menu selected: $label\n");
-  }
-
   // process menu item selection
   function on_menu_select($menu_item)
   {
     $item = $menu_item->child->get_label();
     switch($item)
     {
-      case 'Ajouter _Dossier':
+      case srUtils::getTranslation('Add _folder', 'menu'):
         srWindow::clicOuvrirDossier();
         break;
-      case 'Ajouter _Fichier':
+      case srUtils::getTranslation('Add f_ile', 'menu'):
         srWindow::clicOuvrirFichier();
         break;
-      case '_Supprimer Element':
+      case srUtils::getTranslation('_Delete Element', 'menu'):
         break;
-      case '_Quitter':
+      case srUtils::getTranslation('_Quit', 'menu'):
         Gtk::main_quit();
         break;
-      case '_Paramètres':
+      case srUtils::getTranslation('_Parameters', 'menu'):
         $p = srParametres::getInstance();
         $p->show_all();
         break;
-      case 'A propos':
+      case srUtils::getTranslation('_About', 'menu'):
         $dlg = new GtkAboutDialog();
         $dlg->set_name('phpserenamer');
         $dlg->set_version(srUtils::getVersion());
-        $dlg->set_comments('Nom de la série : %n
- Numéro de la saison : %s
- Numéro de la saison avec ajout d\'un zero devant si < 10 : %j
- Numéro de l\'episode : %e
- Numéro de l\'episode avec ajout d\'un zero devant si < 10 : %k
- Nom de l\'episode : %t"');
-        $dlg->set_license("GPL v2");//Button
+        $dlg->set_comments(
+        srUtils::getTranslation('TV show name', 'about') . ' : %n' . "\n"
+        . srUtils::getTranslation('Season number', 'about') . ' : %s' . "\n"
+        . srUtils::getTranslation('Season number with zero before if less than 10', 'about') . ' : %j' . "\n"
+        . srUtils::getTranslation('Episode number', 'about') . ' : %e' . "\n"
+        . srUtils::getTranslation('Episode number with zero before if less than 10', 'about') . ' : %k' . "\n"
+        . srUtils::getTranslation('Episode name') . ' : %t' . "\n"
+        );
+        $dlg->set_license("GPL v2");
         $dlg->set_website('http://code.google.com/p/phpserenamer/');
         $dlg->set_icon_from_file(sfConfig::get('sr_logo'));
+        $dlg->set_logo(GdkPixbuf::new_from_file(sfConfig::get('sr_logo')));
+        $dlg->set_authors(array('Adrien Gallou <adriengallou@gmail.com>'));
         $dlg->run();
         $dlg->destroy();
         break;
