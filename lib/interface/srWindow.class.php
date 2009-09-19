@@ -71,12 +71,12 @@ class srWindow extends GtkWindow
     $box = new GtkHButtonBox();
     //@see http://gtk.php.net/manual/en/gtk.enum.buttonboxstyle.php
     $box->set_layout(Gtk::BUTTONBOX_START);
-    $boutton1 = new GtkButton('Ajouter Dossier');
+    $boutton1 = new GtkButton(srUtils::getTranslation('Add folder'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_OPEN, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('released', array('srWindow', 'clicOuvrirDossier'));
     $box->pack_start($boutton1);
 
-    $boutton1 = new GtkButton('Ajouter Fichier');
+    $boutton1 = new GtkButton(srUtils::getTranslation('Add file'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_NEW, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('released', array('srWindow', 'clicOuvrirFichier'));
     $box->pack_start($boutton1);
@@ -86,14 +86,14 @@ class srWindow extends GtkWindow
     $box->pack_start($boutton1);
 
     //format
-    $lblFormat = new GtkLabel('Format : ');
+    $lblFormat = new GtkLabel(sprintf('%s : ', srUtils::getTranslation('Pattern')));
     $box->pack_start($lblFormat);
     $this->userFormat = new GtkEntry();
     $this->userFormat->set_text(srConfig::get('default_pattern'));
     $box->pack_start($this->userFormat);
 
     //site
-    $lblFormat = new GtkLabel('Site : ');
+    $lblFormat = new GtkLabel(sprintf('%s : ', srUtils::getTranslation('Website')));
     $box->pack_start($lblFormat);
     $this->comboboxProviders = new srComboBoxProviders();
     $this->comboboxProviders->setSelectedProvider(srConfig::get('default_provider'));
@@ -108,17 +108,17 @@ class srWindow extends GtkWindow
     //@see http://gtk.php.net/manual/en/gtk.enum.buttonboxstyle.php
     $box->set_layout(Gtk::BUTTONBOX_SPREAD);
     //$box->ajouter_boutton('vider',Gtk::STOCK_CLEAR);
-    $boutton1 = new GtkButton('Vider');
+    $boutton1 = new GtkButton(srUtils::getTranslation('Empty list'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_CLEAR, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('released', array('srWindow', 'clicVider'));
     $box->pack_start($boutton1);
 
-    $boutton1 = new GtkButton('Apercu');
+    $boutton1 = new GtkButton(srUtils::getTranslation('Preview'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_ZOOM_FIT, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('released', array('srWindow', 'clicApercu'));
     $box->pack_start($boutton1);
 
-    $boutton1 = new GtkButton('Renommer');
+    $boutton1 = new GtkButton(srUtils::getTranslation('Rename'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_APPLY, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('released', array('srWindow', 'clicRenommer'));
     $box->pack_start($boutton1);
@@ -175,14 +175,14 @@ class srWindow extends GtkWindow
 
   public function lancer_dialog($serie, $series)
   {
-    $dialog = new srDialog('Choix multiples de nom', null, Gtk::DIALOG_MODAL);
+    $dialog = new srDialog(srUtils::getTranslation('Multiple choices of name'), null, Gtk::DIALOG_MODAL);
     $dialog->setSerie($serie, $series);
     $dialog->run();
   }
 
   public static function clicOuvrirDossier()
   {
-    $dialog = new GtkFileChooserDialog("Choisir dossier", null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
+    $dialog = new GtkFileChooserDialog(srUtils::getTranslation('Choose folder'), null, Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER,
     array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
     if(is_dir($defaultFolder = srConfig::get('default_folder'))) $dialog->set_current_folder($defaultFolder);
     $dialog->show_all();
@@ -196,7 +196,7 @@ class srWindow extends GtkWindow
 
   public static function clicOuvrirFichier()
   {
-    $dialog = new GtkFileChooserDialog("Choisir fichier", null, Gtk::FILE_CHOOSER_ACTION_OPEN,
+    $dialog = new GtkFileChooserDialog(srUtils::getTranslation('Choose file'), null, Gtk::FILE_CHOOSER_ACTION_OPEN,
     array(Gtk::STOCK_OK, Gtk::RESPONSE_OK), null);
     if(is_dir($defaultFolder = srConfig::get('default_folder'))) $dialog->set_current_folder($defaultFolder);
     $dialog->show_all();

@@ -3,14 +3,6 @@ class srTreeView extends GtkTreeView
 {
   private static $treeView = null;
 
-  private static $colonnes = array(
-    'Serie',
-    'Saison',
-    'Episode',
-    'Ancien nom',
-    'Nouveau nom'
-  );
-
   public static function getInstance()
   {
     if(is_null(self::$treeView))
@@ -22,17 +14,29 @@ class srTreeView extends GtkTreeView
     return self::$treeView;
   }
 
+  private static function getColonnes()
+  {
+    return array(
+      srUtils::getTranslation('Tv show'),
+      srutils::getTranslation('Season'),
+      srUtils::getTranslation('Episode'),
+      srUtils::getTranslation('Old name'),
+      srUtils::getTranslation('New name')
+    );
+  }
+
   public function initialize()
   {
     //$this->set_fixed_height_mode(false);
     $this->connect('button-press-event', array('srTreeView','on_button'));
 
-    for($i=0;$i<count(self::$colonnes);$i++)
+    $colonnes = self::getColonnes();
+    for($i=0;$i<count($colonnes);$i++)
     {
       $renderer = new GtkCellRendererText();
       $renderer->set_property('editable',($i > 2) ? false : true);
       $renderer->connect('edited',  array('srTreeView','callback_text_cell_edited'), $i);
-      $column = new GtkTreeViewColumn(self::$colonnes[$i], $renderer, 'text', $i);
+      $column = new GtkTreeViewColumn($colonnes[$i], $renderer, 'text', $i);
       $column->set_cell_data_func($renderer, array('srTreeView','format_col'), $i);
       $this->append_column($column);
     }
@@ -92,54 +96,63 @@ class srTreeView extends GtkTreeView
 	 * Gestion du menu
 	 ****************************************************************************/
 
-  private static $menu_definition = array(
-    'Ajouter fichier',
-    'Ajouter dossier',
-    '<hr>',
-    'Definir Serie',
-    'Definir Saison',
-    'Definir Episode',
-    '<hr>',
-    'Supprimer',
-    'Vider la liste'
-  );
+  public static function getMenuDefinition()
+  {
+    return array(
+      srUtils::getTranslation('Add file'),
+      srUtils::getTranslation('Add folder'),
+      '<hr>',
+      srUtils::getTranslation('Define tv show'),
+      srUtils::getTranslation('Define season'),
+      srUtils::getTranslation('Define episode'),
+      '<hr>',
+      srUtils::getTranslation('Delete'),
+      srUtils::getTranslation('Empty list')
+    );
+  }
+
   private static $menu;
 
   private static function popup_menu($path, $col_titre, $event)
   {
     self::$menu = new GtkMenu();
-    foreach(self::$menu_definition as $menuitem_definition) {
-        if ($menuitem_definition=='<hr>') {
-            self::$menu->append(new GtkSeparatorMenuItem());
-        } else {
-            //$menu_item = new GtkImageMenuItem($menuitem_definition);
-            $menu_item = new GtkMenuItem($menuitem_definition);
-            self::$menu->append($menu_item);
-            $menu_item->connect('activate', array('srTreeView','on_popup_menu_select'), $path);
-        }
+    foreach(self::getMenuDefinition() as $menuitem_definition)
+    {
+      if($menuitem_definition == '<hr>')
+      {
+        self::$menu->append(new GtkSeparatorMenuItem());
+      }
+      else
+      {
+        //$menu_item = new GtkImageMenuItem($menuitem_definition);
+        $menu_item = new GtkMenuItem($menuitem_definition);
+        self::$menu->append($menu_item);
+        $menu_item->connect('activate', array('srTreeView','on_popup_menu_select'), $path);
+      }
     }
     self::$menu->show_all();
     self::$menu->popup();
   }
+
 	// process popup menu item selection
 	function on_popup_menu_select($menu_item, $path)
   {
     $item = $menu_item->child->get_label();
 	  switch($item)
 	  {
-      case 'Vider la liste':
+      case srUtils::getTranslation('Empty list'):
         srListeStore::getInstance()->clear();
 	      break;
-      case 'Supprimer':
+      case srUtils::getTranslation('Delete'):
         srListeStore::getInstance()->remove(srListeStore::getInstance()->get_iter($path));
         break;
-      case 'Ajouter dossier':
+      case srUtils::getTranslation('Add folder'):
       	srWindow::clicOuvrirDossier();
       	break;
-      case 'Ajouter fichier':
+      case srUtils::getTranslation('Add file'):
       	srWindow::clicOuvrirFichier();
       	break;
-      case 'Definir Serie':
+      case srUtils::getTranslation('Define tv show'):
         //var_dump(srTreeView::getInstance()->get_selection());
         //var_dump(srTreeView::getInstance()->get_dest_row_at_pos($path, 0));
         //srTreeView::getInstance()->get_column($path)->focus_cell(0);

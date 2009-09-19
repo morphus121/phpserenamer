@@ -71,8 +71,8 @@ class srParametres extends GtkDialog
   {
     $box = new GtkVButtonBox();
 
-    $frame = new GtkFrame('Dossier par défaut');
-    $this->defaultFolder = new GtkFileChooserButton('Choissiez le dossier par défaut', Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
+    $frame = new GtkFrame(srUtils::getTranslation('Default folder'));
+    $this->defaultFolder = new GtkFileChooserButton(srUtils::getTranslation('Choose the default folder'), Gtk::FILE_CHOOSER_ACTION_SELECT_FOLDER);
     if(is_dir(srConfig::get('default_folder'))) $this->defaultFolder->set_current_folder(srConfig::get('default_folder'));
     $this->defaultFolder->set_size_request(320, -1);
     $frame->add($this->defaultFolder);
@@ -90,7 +90,7 @@ class srParametres extends GtkDialog
   {
     $box = new GtkVButtonBox();
 
-    $frame = new GtkFrame('Provider par défaut');
+    $frame = new GtkFrame(srUtils::getTranslation('Default provider'));
     $this->defaultProvider = new srComboBoxProviders();
     $this->defaultProvider->setSelectedProvider(srConfig::get('default_provider'));
     $this->defaultProvider->set_size_request(320, -1);
@@ -109,7 +109,7 @@ class srParametres extends GtkDialog
   {
     $box = new GtkVButtonBox();
 
-    $frame = new GtkFrame('Pattern par défaut');
+    $frame = new GtkFrame(srUtils::getTranslation('Default pattern'));
 
     $this->defaultPattern = new GtkEntry();
     $this->defaultPattern->set_text(srConfig::get('default_pattern'));
