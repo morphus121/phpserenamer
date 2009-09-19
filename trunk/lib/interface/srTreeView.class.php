@@ -43,6 +43,12 @@ class srTreeView extends GtkTreeView
 
   }
 
+  public function getSelectedPath()
+  {
+    $tab = self::getInstance()->get_selection()->get_selected_rows();
+    return $tab[1][0][0];
+  }
+
   //alterne les couleurss
   function format_col($column, $cell, $model, $iter, $col_num)
   {
