@@ -98,6 +98,7 @@ class srMenu
         srWindow::clicOuvrirFichier();
         break;
       case srUtils::getTranslation('_Delete Element', 'menu'):
+        srListeStore::getInstance()->remove(srListeStore::getInstance()->get_iter(srTreeView::getSelectedPath()));
         break;
       case srUtils::getTranslation('_Quit', 'menu'):
         Gtk::main_quit();

@@ -83,6 +83,7 @@ class srWindow extends GtkWindow
 
     $boutton1 = new GtkButton();
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_DELETE, Gtk::ICON_SIZE_BUTTON));
+    $boutton1->connect_simple('released', array('srWindow', 'clicSupprimer'));
     $box->pack_start($boutton1);
 
     //format
@@ -206,6 +207,11 @@ class srWindow extends GtkWindow
       srListeStore::getInstance()->remplirFromFilePath($selected_file);
     }
     $dialog->destroy();
+  }
+
+  public static function clicSupprimer()
+  {
+    srListeStore::getInstance()->remove(srListeStore::getInstance()->get_iter(srTreeView::getSelectedPath()));
   }
 
   public static function getSelectedProvider()
