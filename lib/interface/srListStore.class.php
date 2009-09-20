@@ -42,9 +42,9 @@ class srListeStore extends GtkListStore
   {
     //this is used for windows OS, and the function_exists is to not to have to
     //install the php-xml extension.
-    if(function_exists('utf8_encode'))
+    if(function_exists('utf8_encode') && srUtils::isOsWindows())
     {
-  	 $filePath = utf8_encode($filePath);
+      $filePath = utf8_encode($filePath);
     }
     $oFichierSerie = new fichierSerie(pathinfo($filePath, PATHINFO_BASENAME));
     $ligne = array(
