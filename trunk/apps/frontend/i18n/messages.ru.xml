@@ -1,0 +1,99 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file original="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Add folder</source>
+        <target>Добавить папку</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Add file</source>
+        <target>Добавить файл</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Pattern</source>
+        <target>Шаблон</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Website</source>
+        <target>Веб-сайт</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Empty list</source>
+        <target>Список пуст</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Preview</source>
+        <target>Предварительный просмотр</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Rename</source>
+        <target>Переименовать</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Choose folder</source>
+        <target>Выберете папку</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Choose file</source>
+        <target>Выберете файл</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Tv show</source>
+        <target>Сериал</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Season</source>
+        <target>Сезон</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Episode</source>
+        <target>Эпизод</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Old name</source>
+        <target>Старое имя</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>New name</source>
+        <target>Новое имя</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Multiple choices of name</source>
+        <target>Множественный выбор имени</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Define tv show</source>
+        <target>Определить сериал</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Define season</source>
+        <target>Определить сезон</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Define episode</source>
+        <target>Определить эпизод</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Delete</source>
+        <target>Удалить</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Default folder</source>
+        <target>Папка по-умолчанию</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Choose the default folder</source>
+        <target>Выберете папку по-умолчанию</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Default provider</source>
+        <target>Источник по-умолчанию</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Default pattern</source>
+        <target>Шаблон по-умолчанию</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
