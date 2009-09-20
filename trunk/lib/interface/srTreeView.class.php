@@ -33,6 +33,7 @@ class srTreeView extends GtkTreeView
   {
     //$this->set_fixed_height_mode(false);
     $this->connect('button-press-event', array('srTreeView','on_button'));
+    $this->set_enable_search(false);
 
     $colonnes = self::getColonnes();
     for($i=0;$i<count($colonnes);$i++)
