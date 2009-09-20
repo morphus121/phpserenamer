@@ -3,6 +3,10 @@ class srTreeView extends GtkTreeView
 {
   private static $treeView = null;
 
+  /**
+   *
+   * @return srTreeView
+   */
   public static function getInstance()
   {
     if(is_null(self::$treeView))
@@ -159,13 +163,13 @@ class srTreeView extends GtkTreeView
       	srWindow::clicOuvrirFichier();
       	break;
       case srUtils::getTranslation('Define tv show'):
-        //var_dump(srTreeView::getInstance()->get_selection());
-        //var_dump(srTreeView::getInstance()->get_dest_row_at_pos($path, 0));
-        //srTreeView::getInstance()->get_column($path)->focus_cell(0);
-        //@see http://gtk.php.net/manual1/fr/html/gdk.enum.gdkeventtype.html (pour le -1)
-        //$renderers = srTreeView::getInstance()->get_column(0)->get_cell_renderers();
-        //$renderers[0]->activate(new GdkEvent(-1),$renderers[0], 0);
-        //var_dump(srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 0));
+        self::getInstance()->focusCell($path, 0);
+        break;
+      case srUtils::getTranslation('Define season'):
+        self::getInstance()->focusCell($path, 1);
+        break;
+      case srUtils::getTranslation('Define episode'):
+        self::getInstance()->focusCell($path, 2);
         break;
 	    default:
 	     echo "popup menu selected: $item\n";
@@ -173,5 +177,17 @@ class srTreeView extends GtkTreeView
 
 	}
 
+	/**
+	 *
+	 * @param  $path
+	 * @param  $numColonne
+	 * @return void
+	 */
+	public function focusCell($path, $numColonne)
+	{
+    $column = $this->get_columns();
+    $cellRenderers = $column[$numColonne]->get_cell_renderers();
+    $this->set_cursor_on_cell($path, $column[$numColonne], $cellRenderers[0], true);
+	}
 
 }
