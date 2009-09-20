@@ -40,7 +40,12 @@ class srListeStore extends GtkListStore
 
   public function remplirFromFilePath($filePath)
   {
-  	$filePath = utf8_encode($filePath);
+    //this is used for windows OS, and the function_exists is to not to have to
+    //install the php-xml extension.
+    if(function_exists('utf8_encode'))
+    {
+  	 $filePath = utf8_encode($filePath);
+    }
     $oFichierSerie = new fichierSerie(pathinfo($filePath, PATHINFO_BASENAME));
     $ligne = array(
     $oFichierSerie->getSerie(),
