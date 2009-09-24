@@ -37,6 +37,12 @@ class srParametres extends GtkDialog
 
   /**
    *
+   * @var GtkComboBox
+   */
+  public $defaultLanguage;
+
+  /**
+   *
    * @return void
    */
   public function __construct()
@@ -57,6 +63,7 @@ class srParametres extends GtkDialog
     $box->pack_start($this->getReglageDossierParDefaut(), 0, 0);
     $box->pack_start($this->getReglageProviderParDefaut(), 0, 0);
     $box->pack_start($this->getReglagePatternParDefaut(), 0, 0);
+    $box->pack_start($this->getReglageLangageParDefaut(), 0, 0);
 
     $this->connect_simple('destroy', array('srParametres', 'onDestroy'));
     $this->connect('close',array('srParametres','onDestroy'));
@@ -120,6 +127,36 @@ class srParametres extends GtkDialog
     return $box;
   }
 
+  public function getReglageLangageParDefaut()
+  {
+    $box = new GtkVButtonBox();
+
+    $frame = new GtkFrame(srUtils::getTranslation('Language'));
+
+    $this->defaultLanguage = new GtkComboBox(new GtkListStore());
+    $list  = array_values(srUtils::getLanguages());
+    sort($list);
+    $model = new GtkListStore(GObject::TYPE_STRING);
+    $this->defaultLanguage->set_model($model);
+    $cellRenderer = new GtkCellRendererText();
+    $this->defaultLanguage->pack_start($cellRenderer);
+    $this->defaultLanguage->set_size_request(320, -1);
+    $this->defaultLanguage->set_attributes($cellRenderer, 'text', 0);
+    $model->clear();
+    foreach($list as $choice)
+    {
+      $model->append(array(ucfirst($choice)));
+    }
+    $posDefaultLanguage = array_search(srUtils::getLanguageNameFromCode(srConfig::get('default_language')), $list);
+    $this->defaultLanguage->set_active_iter($model->get_iter($posDefaultLanguage));
+
+
+    $frame->add($this->defaultLanguage);
+    $box->pack_start($frame);
+
+    return $box;
+  }
+
   /**
    *
    * @return srParametres
@@ -159,6 +196,7 @@ class srParametres extends GtkDialog
       srConfig::set('default_provider', self::getInstance()->defaultProvider->getSelectedProvider());
       srConfig::set('default_pattern', self::getInstance()->defaultPattern->get_text());
       srWindow::getInstance()->setUserPattern(srConfig::get('default_pattern'));
+      srConfig::set('default_language', srUtils::getCodeFromLanguage(self::getInstance()->defaultLanguage->get_active_text()));
     }
     self::getInstance()->destroy();
   }
