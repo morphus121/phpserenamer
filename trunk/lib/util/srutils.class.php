@@ -104,4 +104,29 @@ class srUtils
   {
     return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
   }
+
+  public static function getLanguages()
+  {
+    return array(
+      'ru' => 'russian',
+      'fr' => 'french',
+      'en' => 'english',
+    );
+  }
+
+  public static function getLanguageNameFromCode($code)
+  {
+    $languages = self::getLanguages();
+    if(!array_key_exists($code, $languages))
+    {
+      throw new sfException('Code not found');
+    }
+    return $languages[$code];
+  }
+
+  public static function getCodeFromLanguage($language, $cs = false)
+  {
+    return array_search(($cs) ? $language : strtolower($language), self::getLanguages());
+  }
+
 }

@@ -8,7 +8,16 @@ class srConfig
   {
     $array = sfYaml::load(self::$fichier);
     $array = srUtils::flattenArray($array);
-    return $array['all_' . $clef];
+    $value = $array['all_' . $clef];
+
+    switch($clef)
+    {
+      case 'default_language':
+        if(!strlen($value)) $value = 'en';
+        break;
+    }
+
+    return $value;
   }
 
   /**
