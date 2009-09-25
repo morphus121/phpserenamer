@@ -117,6 +117,8 @@ class srTreeView extends GtkTreeView
       srUtils::getTranslation('Define season'),
       srUtils::getTranslation('Define episode'),
       '<hr>',
+      srUtils::getTranslation('Open file'),
+      '<hr>',
       srUtils::getTranslation('Delete'),
       srUtils::getTranslation('Empty list')
     );
@@ -171,6 +173,11 @@ class srTreeView extends GtkTreeView
         break;
       case srUtils::getTranslation('Define episode'):
         self::getInstance()->focusCell($path, 2);
+      case srUtils::getTranslation('Open file'):
+        $dossier = srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 5);
+        $fichier = srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 3);
+        $fs = new myFilesystem();
+        $fs->openFile($dossier . DIRECTORY_SEPARATOR . $fichier);
         break;
 	    default:
 	     echo "popup menu selected: $item\n";

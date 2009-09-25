@@ -100,11 +100,6 @@ class srUtils
     return sfContext::getInstance()->getI18N()->__($var, array(), $dictionary);
   }
 
-  public function isOsWindows()
-  {
-    return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
-  }
-
   public static function getLanguages()
   {
     return array(
