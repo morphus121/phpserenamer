@@ -14,6 +14,7 @@ class srConfig
     {
       case 'default_language':
         if(!strlen($value)) $value = 'en';
+        if(!in_array($value, srutils::getLanguages())) $value = 'en';
         break;
     }
 
