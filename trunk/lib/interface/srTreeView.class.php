@@ -86,26 +86,47 @@ class srTreeView extends GtkTreeView
 
   function on_button($view, $event)
   {
-    if ($event->button==1) return false; // note 2
-    if ($event->button==2) return true; // do nothing
-    if ($event->button==3) { // it's the right mouse button!
-        // get the row and column
-        $path_array = $view->get_path_at_pos($event->x, $event->y);
-        $path = $path_array[0][0];
-        $col = $path_array[1];
-        if(is_object($col)) //Seulement si l'on clique sur du texte
+    //get the row and column
+    $path_array = $view->get_path_at_pos($event->x, $event->y);
+    $path       = $path_array[0][0];
+    $col        = $path_array[1];
+
+    //Left mouse button
+    if ($event->button==1)
+    {
+      if($event->type == Gdk::_2BUTTON_PRESS)
+      {
+        if(is_object($col) && in_array($col->get_title(), array(
+          srUtils::getTranslation('Old name'),
+          srUtils::getTranslation('New name'),
+        )))
         {
-          $col_title = $col->get_title();
-          self::popup_menu($path, $col_title, $event); // displays the popup menu
+          self::openFileFromPath($path);
         }
-        return false;
+      }
+      return false;
+    }
+    //Middle mouse button
+    if ($event->button == 2)
+    {
+      return true;
+    }
+    //Right mouse button
+    if ($event->button == 3)
+    {
+      if(is_object($col)) //Seulement si l'on clique sur du texte
+      {
+        $col_title = $col->get_title();
+        self::popup_menu($path, $col_title, $event); // displays the popup menu
+      }
+      return false;
     }
 }
 
 
-	/*****************************************************************************
-	 * Gestion du menu
-	 ****************************************************************************/
+  /*****************************************************************************
+   * Gestion du menu
+   ****************************************************************************/
 
   public static function getMenuDefinition()
   {
@@ -147,15 +168,15 @@ class srTreeView extends GtkTreeView
     self::$menu->popup();
   }
 
-	// process popup menu item selection
-	function on_popup_menu_select($menu_item, $path)
+  // process popup menu item selection
+  function on_popup_menu_select($menu_item, $path)
   {
     $item = $menu_item->child->get_label();
-	  switch($item)
-	  {
+    switch($item)
+    {
       case srUtils::getTranslation('Empty list'):
         srListeStore::getInstance()->clear();
-	      break;
+        break;
       case srUtils::getTranslation('Delete'):
         srListeStore::getInstance()->remove(srListeStore::getInstance()->get_iter($path));
         break;
@@ -174,28 +195,39 @@ class srTreeView extends GtkTreeView
       case srUtils::getTranslation('Define episode'):
         self::getInstance()->focusCell($path, 2);
       case srUtils::getTranslation('Open file'):
-        $dossier = srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 5);
-        $fichier = srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 3);
-        $fs = new myFilesystem();
-        $fs->openFile($dossier . DIRECTORY_SEPARATOR . $fichier);
+        self::openFileFromPath($path);
         break;
-	    default:
-	     echo "popup menu selected: $item\n";
-	  }
+      default:
+       echo "popup menu selected: $item\n";
+    }
 
-	}
+  }
 
-	/**
-	 *
-	 * @param  $path
-	 * @param  $numColonne
-	 * @return void
-	 */
-	public function focusCell($path, $numColonne)
-	{
+  /**
+   *
+   * @param  $path
+   * @param  $numColonne
+   * @return void
+   */
+  public function focusCell($path, $numColonne)
+  {
     $column = $this->get_columns();
     $cellRenderers = $column[$numColonne]->get_cell_renderers();
     $this->set_cursor_on_cell($path, $column[$numColonne], $cellRenderers[0], true);
-	}
+  }
+
+  /**
+   * Open the the file from the gtk path
+   *
+   * @param  $path path gtk
+   * @return void
+   */
+  private static function openFileFromPath($path)
+  {
+    $dossier = srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 5);
+    $fichier = srListeStore::getInstance()->get_value(srListeStore::getInstance()->get_iter($path), 3);
+    $fs = new myFilesystem();
+    $fs->openFile($dossier . DIRECTORY_SEPARATOR . $fichier);
+  }
 
 }
