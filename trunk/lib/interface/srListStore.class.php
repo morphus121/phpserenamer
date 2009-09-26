@@ -87,6 +87,10 @@ class srListeStore extends GtkListStore
 	     ), $userPattern);
 
 	     $nouveau = srUtils::nameForFileSystem(sprintf('%s.%s', $nouveau, $oFichierSerie->getExtension()));
+	     if(srConfig::get('replaceSpaces'))
+	     {
+	       $nouveau = str_replace(' ', '.', $nouveau);
+	     }
     }
     catch(SerieNonFoundException $ex)
     {

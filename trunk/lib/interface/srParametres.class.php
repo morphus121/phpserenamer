@@ -43,6 +43,12 @@ class srParametres extends GtkDialog
 
   /**
    *
+   * @var GtkCheckButton
+   */
+  public $replaceSpaces;
+
+  /**
+   *
    * @return void
    */
   public function __construct()
@@ -64,6 +70,7 @@ class srParametres extends GtkDialog
     $box->pack_start($this->getReglageProviderParDefaut(), 0, 0);
     $box->pack_start($this->getReglagePatternParDefaut(), 0, 0);
     $box->pack_start($this->getReglageLangageParDefaut(), 0, 0);
+    $box->pack_start($this->getReglageRemplacementEspacesParPoints(), 0, 0);
 
     $this->connect_simple('destroy', array('srParametres', 'onDestroy'));
     $this->connect('close',array('srParametres','onDestroy'));
@@ -157,6 +164,19 @@ class srParametres extends GtkDialog
     return $box;
   }
 
+  public function getReglageRemplacementEspacesParPoints()
+  {
+    $box = new GtkVButtonBox();
+
+    $frame = new GtkFrame();
+
+    $this->replaceSpaces = new GtkCheckButton(srUtils::getTranslation('Replace spaces by points'));
+    if(srConfig::get('replaceSpaces')) $this->replaceSpaces->clicked();
+    $frame->add($this->replaceSpaces);
+    $frame->set_size_request(320, -1);
+    $box->pack_start($frame);
+    return $box;
+  }
   /**
    *
    * @return srParametres
@@ -197,6 +217,7 @@ class srParametres extends GtkDialog
       srConfig::set('default_pattern', self::getInstance()->defaultPattern->get_text());
       srWindow::getInstance()->setUserPattern(srConfig::get('default_pattern'));
       srConfig::set('default_language', srUtils::getCodeFromLanguage(self::getInstance()->defaultLanguage->get_active_text()));
+      srConfig::set('replaceSpaces', self::getInstance()->replaceSpaces->get_active());
     }
     self::getInstance()->destroy();
   }
