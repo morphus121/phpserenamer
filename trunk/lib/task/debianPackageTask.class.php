@@ -4,7 +4,7 @@
  * @author agallou
  *
  */
-class debianPackageTask extends sfBaseTask
+class debianPackageTask extends myBaseTask
 {
 
   protected function configure()
@@ -19,23 +19,44 @@ class debianPackageTask extends sfBaseTask
 
   protected function execute($arguments = array(), $options = array())
   {
-    sfFilesystem::mkdirs('tmp/');
-    exec('cp -r data/debianPackage/* tmp/');
+    $fs = $this->getFilesystem();
+    $fs->mkdirs('tmp/');
     $this->logSection('Export de la version', $arguments['version']);
     exec(sprintf(
       'svn export http://phpserenamer.googlecode.com/svn/tags/%s/%s tmp/usr/lib/phpserenamer',
       $this->majorFromVersion($arguments['version']),
       $arguments['version']
     ));
+    exec('cp -r tmp/usr/lib/phpserenamer/data/debianPackage/* tmp/');
+    file_put_contents('tmp/DEBIAN/control', $this->getDebianControlFile($arguments['version']));
     $this->logSection('deb+', sprintf('phpserenamer_%s_all.deb', $arguments['version']));
     exec('dpkg --build tmp ./');
-    $this->logSection('dir-', 'tmp/');
-    exec('rm -rf tmp/');
+    //$fs->removeRecusively('tmp/');
   }
 
   protected function majorFromVersion($version)
   {
     $tab = explode('.', $version);
     return $tab[0];
+  }
+
+  private function getDebianControlFile($version)
+  {
+    $var = '';
+    $var .= <<<EOF
+Package: phpserenamer
+
+EOF;
+    $var .= sprintf('Version: %s', $version) . "\n";
+    $var .= <<<EOF
+Section: base
+Priority: optional
+Architecture: all
+Depends: php5-gtk2
+Maintainer: adriengallou@gmail.com
+Description: Renommez vos séries.
+
+EOF;
+    return $var;
   }
 }
