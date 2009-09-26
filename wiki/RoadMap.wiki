@@ -20,4 +20,10 @@ _internationalisation_
   * système de gestion des langues
   * traduction en anglais
   * Possibilité de remplacer les espaces par des points
-  
+----
+
+= 0.4.0 =
+_ajout de fonctions diverses_
+  * définir toutes les saisons d'un coup
+  * définir tous les numéros d'épisode d'un coup
+  * raccourcis clavier
