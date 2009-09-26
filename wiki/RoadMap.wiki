@@ -27,3 +27,4 @@ _ajout de fonctions diverses_
   * définir toutes les saisons d'un coup
   * définir tous les numéros d'épisode d'un coup
   * raccourcis clavier
+  * ajout de providers
