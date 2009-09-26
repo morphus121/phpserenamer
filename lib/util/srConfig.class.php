@@ -8,7 +8,7 @@ class srConfig
   {
     $array = sfYaml::load(self::$fichier);
     $array = srUtils::flattenArray($array);
-    $value = $array['all_' . $clef];
+    $value = (array_key_exists('all_' . $clef, $array)) ? $array['all_' . $clef] : false;
 
     switch($clef)
     {

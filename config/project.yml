@@ -4,3 +4,4 @@ all:
     provider: 
     pattern: '%n - [%sx%k] - %t'
     language: en_EN
+  replaceSpaces: false
