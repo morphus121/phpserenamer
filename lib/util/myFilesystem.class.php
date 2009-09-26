@@ -55,4 +55,16 @@ class myFilesystem extends sfFilesystem
     return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
   }
 
+  /**
+   * Remove a folder recursively without asking any question
+   *
+   * @param  $folder
+   * @return void
+   */
+  public function removeRecusively($folder)
+  {
+    $this->logSection('dir-', $folder);
+    exec(sprintf('rm -rf %s', $folder));
+  }
+
 }
