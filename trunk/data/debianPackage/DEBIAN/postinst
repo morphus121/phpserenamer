@@ -3,5 +3,7 @@ chmod 755 /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer
 list=`echo /home/*`
 for file in $list
 do
-  ln -s -f /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer $file/.gnome2/nautilus-scripts/phpserenamer
+  if -d $file/.gnome2/nautilus-scripts/; then
+    ln -s -f /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer $file/.gnome2/nautilus-scripts/phpserenamer
+  fi
 done
