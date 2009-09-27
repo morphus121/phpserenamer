@@ -29,7 +29,8 @@ class srListeStore extends GtkListStore
 
   public function remplirFromChemin($chemin)
   {
-    $fichiers = myFinder::type('file')->ignore_version_control()->maxdepth(0)->follow_link()->relative()->in($chemin);
+    $maxdepth = (srConfig::get('openRecursively')) ? 1000000 : 0;
+    $fichiers = myFinder::type('file')->ignore_version_control()->maxdepth($maxdepth)->follow_link()->relative()->in($chemin);
     $compteur = 0;
     foreach($fichiers as $fichier)
     {
