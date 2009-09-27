@@ -49,6 +49,12 @@ class srParametres extends GtkDialog
 
   /**
    *
+   * @var GtkCheckButton
+   */
+  public $openRecursively;
+
+  /**
+   *
    * @return void
    */
   public function __construct()
@@ -71,6 +77,7 @@ class srParametres extends GtkDialog
     $box->pack_start($this->getReglagePatternParDefaut(), 0, 0);
     $box->pack_start($this->getReglageLangageParDefaut(), 0, 0);
     $box->pack_start($this->getReglageRemplacementEspacesParPoints(), 0, 0);
+    $box->pack_start($this->getReglageOpenFoldersRecursively(), 0, 0);
 
     $this->connect_simple('destroy', array('srParametres', 'onDestroy'));
     $this->connect('close',array('srParametres','onDestroy'));
@@ -177,6 +184,22 @@ class srParametres extends GtkDialog
     $box->pack_start($frame);
     return $box;
   }
+
+
+  public function getReglageOpenFoldersRecursively()
+  {
+    $box = new GtkVButtonBox();
+
+    $frame = new GtkFrame();
+
+    $this->openRecursively = new GtkCheckButton(srUtils::getTranslation('Open folders recursilevly'));
+    if(srConfig::get('openRecursively')) $this->openRecursively->clicked();
+    $frame->add($this->openRecursively);
+    $frame->set_size_request(320, -1);
+    $box->pack_start($frame);
+    return $box;
+  }
+
   /**
    *
    * @return srParametres
@@ -218,6 +241,7 @@ class srParametres extends GtkDialog
       srWindow::getInstance()->setUserPattern(srConfig::get('default_pattern'));
       srConfig::set('default_language', srUtils::getCodeFromLanguage(self::getInstance()->defaultLanguage->get_active_text()));
       srConfig::set('replaceSpaces', self::getInstance()->replaceSpaces->get_active());
+      srConfig::set('openRecursively', self::getInstance()->openRecursively->get_active());
     }
     self::getInstance()->destroy();
   }
