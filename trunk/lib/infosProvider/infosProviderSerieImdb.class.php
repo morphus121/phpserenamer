@@ -37,6 +37,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
       //On recherche quel est la position du tableau voulu
       if($pos = strpos($this->browser->getResponseText(),'Popular Titles'))
       {
+        $posTable[] = count(explode('<table>',substr($this->browser->getResponseText(),0,$pos)));
         $posTable[] = count(explode('<table>',substr($this->browser->getResponseText(),0,$pos))) + 1;
       }
 

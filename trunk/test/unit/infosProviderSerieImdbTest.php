@@ -38,3 +38,7 @@ $t->isa_ok($oInfos->getSeries('royal.pains'), 'array',
     'getSeries() retourne un tableau');
 $t->is($oInfos->getSeries('royal.pains'), array('Royal Pains'),
     '$oInfos->getSeries() retourne les bons résultats');
+
+$t->diag('getSeries()');
+$t->is($oInfos->getSeries('skins'), array('"Skins" (2007)', '"Shirts & Skins" (2008)', '"Shirts & Skins" (2009)'),
+    '$oInfos->getSeries() retourne les bons résultats');
