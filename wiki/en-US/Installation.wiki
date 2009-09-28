@@ -1,0 +1,18 @@
+#summary Installation instructions
+#labels Phase-Deploy
+
+*Debian package for Ubuntu 9.04*
+
+Running under php-gtk, and because it's not in the official repositories, download and install [http://phpserenamer.googlecode.com/files/php5-gtk2_2.0.1-1_i386.deb this] first.
+
+Then download [http://phpserenamer.googlecode.com/files/phpserenamer_0.1.0-rc1_all.deb this] to install phpserenamer.
+
+The 0.1.0 version does'nt check if the php-gtk extension is on or not on the php configuration file, so add the line
+{{{
+extension=php_gtk2.so
+}}}
+to the /etc/php5/cli.ini file, (the next version will check this)
+
+*Windows Installation*
+
+Download [http://phpserenamer.googlecode.com/files/phpserenamer-0.1.0-r37.exe this] then follow the installation instructions.

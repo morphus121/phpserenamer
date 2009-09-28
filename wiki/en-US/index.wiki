@@ -1,0 +1,7 @@
+== User documentation ==
+|| [http://code.google.com/p/phpserenamer/wiki/Installation Installation] || Installation instructions ||
+|| [http://code.google.com/p/phpserenamer/wiki/Screenshots Screenshots] || Screenshots ||
+|| [http://code.google.com/p/phpserenamer/wiki/Utilisation Utilisation] || Application usage ||
+|| [http://code.google.com/p/phpserenamer/wiki/changelog Changelog] || Changelog ||
+
+[http://code.google.com/p/phpserenamer/w/list Complete list]

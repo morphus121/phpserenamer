@@ -1,0 +1,45 @@
+#summary Liste des changements
+#labels Featured
+
+= 0.2.1 =
+
+ * Correction de la lenteur au démarrage
+ * Correction des images dans les boutons non affichées
+ * Correction des caractères accentués mal affichés dans les noms de fichiers
+ * Support des extensions en majuscule
+
+----
+= 0.2.0 =
+
+ * Ajout d'une interface de préférences
+ * Ajout du provider pour allociné
+ * Dossier par défaut 
+ * Provider par défaut
+ * Pattern par défaut
+ * Support des fichiers .mp4
+ * Correction pour les titres d'épisodes comportant une quote
+ * Séries avec accents mal découpées
+ * Modifications des items du menu action
+
+----
+= 0.1.3 = 
+
+ * Correction d'une "segmentation fault" apparaissant sur certaines configurations
+
+----
+= 0.1.2 =
+
+ * Correction pour les fichiers nommés de type serie.anne.SsaisonEepisode.nom
+
+----
+= 0.1.1 = 
+_Version Interne_
+
+----
+
+= 0.1.0 =
+_Première version fonctionnelle_
+
+
+
+ 

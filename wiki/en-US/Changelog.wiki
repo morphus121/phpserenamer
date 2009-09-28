@@ -1,0 +1,42 @@
+#summary list of changes
+#labels Featured
+
+= 0.2.1 =
+
+ * fixes slowness when the application launches
+ * fixes images wich are not displayed
+ * fixes accents bad displayed in filenames
+ * support for uppercase extensions
+
+----
+= 0.2.0 =
+
+ * adding of preferences interface
+ * adding of allocine provider
+ * default folder
+ * default provider
+ * default pattern
+ * support for .mp4 files
+ * fixes episode titles with a quote
+ * fixes tv show with accents name not found
+ * changes of items on the action menu
+
+----
+= 0.1.3 = 
+
+ * fixes a "segmentation fault" appearing on some configurations
+
+----
+= 0.1.2 =
+
+ * fixes files named like tvshow.year.Sseason.Eepisode.name
+
+----
+= 0.1.1 = 
+_Internal version_
+
+----
+
+= 0.1.0 =
+_First functional version_
+

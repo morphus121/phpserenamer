@@ -1,0 +1,24 @@
+#summary Usage
+
+== under Ubuntu/Mandriva (gnome) ==
+
+ * Right clic on a folder or a file
+ * Scripts
+ * phpserenamer
+ * the application launches itselfs
+
+== Sous Windows == 
+
+ * Right clic on a folder
+ * phpserenamer
+ * the application launches itselfs
+
+== Customisation of the output name ==
+
+ it's possible to customize the output filename. Do to thaht, just change the content of the "format" inputbox by using the following variables. Every other caracter such than "-" for exemple can be used to seperate the differents elements.
+
+ * Season number : *%s*
+ * Season number with a zero if < 10 : *%j*
+ * Episode number : *%e*
+ * Episode number with zero if < 10 : *%k*
+ * Episode name : *%t*
