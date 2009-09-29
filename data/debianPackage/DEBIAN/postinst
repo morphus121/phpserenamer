@@ -1,4 +1,6 @@
 #!/bin/sh
+
+##Ajout du script de lancement dans le dossier nautilus-scripts
 chmod 755 /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer
 list=`echo /home/*`
 for file in $list
@@ -7,3 +9,12 @@ do
     ln -s -f /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer $file/.gnome2/nautilus-scripts/phpserenamer
   fi
 done
+
+
+##Si l'extension php-gtk n'est pas activée, on l'active
+RECHERCHE=extension=php_gtk2.so
+FICHIER=/etc/php5/cli/php.ini
+if grep -q $RECHERCHE $FICHIER; then
+else
+  echo $RECHERCHE >> $FICHIER
+fi
