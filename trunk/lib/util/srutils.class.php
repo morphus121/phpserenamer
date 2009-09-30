@@ -103,15 +103,51 @@ class srUtils
   public static function getLanguages()
   {
     return array(
-      'ru'    => 'russian',
-      'fr'    => 'french',
-      'fra'   => 'french',
-      'fr_FR' => 'french',
-      'en'    => 'english',
-      'en_US' => 'english'
+      'ru' => array(
+        'name'       => 'russian',
+        'otherCodes' => array(),
+      ),
+      'fr' => array(
+        'name'       => 'french',
+        'otherCodes' => array('fra', 'fr_FR'),
+      ),
+      'en' => array(
+        'name' => 'english',
+        'otherCodes' => array('en_US')
+      ),
     );
   }
 
+  /**
+  * Returns a table with code => realCode
+  */
+  public static function getAllCodes()
+  {
+    $codes = array();
+    foreach(self::getLanguages() as $clef => $valeur)
+    {
+      $codes[$clef] = $clef;
+      foreach($valeur['otherCodes'] as $otherCode)
+      {
+        $codes[$otherCode] = $clef;
+      }
+    }
+    return $codes;
+  }
+  
+  /**
+  * Return real code from other code
+  */
+  public static function getRealCode($otherCode)
+  {
+    $codes = self::getAllCodes();
+    if(!array_key_exists($otherCode, $codes))
+    {
+      throw new sfException('Code not found');
+    }
+    return $codes[$otherCode];
+  }
+  
   public static function getLanguageNameFromCode($code)
   {
     $languages = self::getLanguages();
@@ -119,7 +155,7 @@ class srUtils
     {
       throw new sfException('Code not found');
     }
-    return $languages[$code];
+    return $languages[$code]['name'];
   }
 
   public static function getCodeFromLanguage($language, $cs = false)
