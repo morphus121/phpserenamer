@@ -1,5 +1,5 @@
 <?php
-include(dirname(__FILE__).'/myBaseTask.class.php');
+include_once(dirname(__FILE__).'/myBaseTask.class.php');
 /**
  *
  * @author agallou
