@@ -118,6 +118,16 @@ class srUtils
     );
   }
 
+  public static function getLanguagesNames($code)
+  {
+    $ret = array();
+    foreach(self::getLanguages() as $clef => $valeur)
+    {
+      $ret[$clef] = $valeur['name'];
+    }
+    return $ret;
+  }
+
   /**
   * Returns a table with code => realCode
   */
@@ -160,7 +170,7 @@ class srUtils
 
   public static function getCodeFromLanguage($language, $cs = false)
   {
-    return array_search(($cs) ? $language : strtolower($language), self::getLanguages());
+    return array_search(($cs) ? $language : strtolower($language), self::getLanguagesNames());
   }
 
   public static function getGoldenNumber()

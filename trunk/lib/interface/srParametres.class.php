@@ -148,7 +148,7 @@ class srParametres extends GtkDialog
     $frame = new GtkFrame(srUtils::getTranslation('Language'));
 
     $this->defaultLanguage = new GtkComboBox(new GtkListStore());
-    $list  = array_values(srUtils::getLanguages());
+    $list  = array_values(srUtils::getLanguagesNames());
     sort($list);
     $model = new GtkListStore(GObject::TYPE_STRING);
     $this->defaultLanguage->set_model($model);
