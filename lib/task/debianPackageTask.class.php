@@ -1,4 +1,5 @@
 <?php
+include(dirname(__FILE__).'/myBaseTask.class.php');
 /**
  *
  * @author agallou
