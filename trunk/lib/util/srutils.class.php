@@ -124,4 +124,9 @@ class srUtils
     return array_search(($cs) ? $language : strtolower($language), self::getLanguages());
   }
 
+  public static function getGoldenNumber()
+  {
+    return (1+sqrt(5))/2;
+  }
+
 }
