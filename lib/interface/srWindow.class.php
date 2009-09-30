@@ -7,7 +7,7 @@
 class srWindow extends GtkWindow
 {
 
-  const WIDTH  = 800;
+  const WIDTH  = 1160;
   const HEIGHT = 600;
   const TITRE  = 'PhpSeRenamer';
 
@@ -48,7 +48,7 @@ class srWindow extends GtkWindow
 
     $this->set_title(self::TITRE);
     $this->connect_simple('destroy', array('gtk', 'main_quit'));
-    $this->set_default_size(self::WIDTH, self::HEIGHT);
+    $this->set_default_size(self::WIDTH, $this->getHeightFromWidth(self::WIDTH));
     $this->set_border_width(0);
     $this->set_position(GTK::WIN_POS_CENTER);
     $this->set_icon_from_file(sfConfig::get('sr_logo'));
@@ -60,6 +60,14 @@ class srWindow extends GtkWindow
     $box->pack_start($this->getBouttonsBas(), 0);
 
     $this->add($box);
+  }
+
+  public function getHeightFromWidth($width)
+  {
+    var_dump(srUtils::getGoldenNumber());
+    $height =  $width / srUtils::getGoldenNumber();
+    var_dump($height);
+    return $height ;
   }
 
   /**
