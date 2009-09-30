@@ -18,15 +18,16 @@ class srConfig
         {
           $value = srI18n::determineUserLanguage();
         }
+        
         //if language not in accepted languages we use english
         //we also convert code to "real code"
         try
         {
-          $lang = srUtils::getRealCode($lang);
+          $value = srUtils::getRealCode($value);
         }
         catch(sfException $ex)
         {
-          $lang = 'en';
+          $value = 'en';
         }
         break;
     }
