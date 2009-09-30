@@ -124,6 +124,16 @@ class srMenu
         $dlg->set_icon_from_file(sfConfig::get('sr_logo'));
         $dlg->set_logo(GdkPixbuf::new_from_file(sfConfig::get('sr_logo')));
         $dlg->set_authors(array('Adrien Gallou <adriengallou@gmail.com>'));
+        $translators = array(
+          'Russian' => 'Khilo Max <hilomax@gmail.com>',
+          'French'  => 'Adrien Gallou <adriengallou@gmail.com>',
+        );
+        $str = '';
+        foreach($translators as $language => $translator)
+        {
+          $str .= sprintf("%s - %s\n", $language, $translator);
+        }
+        $dlg->set_translator_credits($str);
         $dlg->run();
         $dlg->destroy();
         break;
