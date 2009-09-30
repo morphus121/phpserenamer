@@ -16,6 +16,14 @@ class srI18n
       }
 
       $lang = strtolower(trim(array_pop(explode('REG_SZ', $output[4]))));
+      try
+      {
+        $lang = srUtils::getRealCode($lang);
+      }
+      catch(sfException $ex)
+      {
+        var_dump($lang);
+      }
     }
     else
     {

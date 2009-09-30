@@ -19,10 +19,9 @@ class srConfig
           $value = srI18n::determineUserLanguage();
         }
         //if language not in accepted languages,
-        if(!in_array($value, array_keys(srutils::getLanguages())))
+        if(!in_array($value, array_keys(srUtils::getLanguages())))
         {
           $value = 'en';
-
         }
         break;
     }
