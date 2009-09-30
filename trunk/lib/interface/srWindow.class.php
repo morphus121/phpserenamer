@@ -64,9 +64,7 @@ class srWindow extends GtkWindow
 
   public function getHeightFromWidth($width)
   {
-    var_dump(srUtils::getGoldenNumber());
     $height =  $width / srUtils::getGoldenNumber();
-    var_dump($height);
     return $height ;
   }
 
