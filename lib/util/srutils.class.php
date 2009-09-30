@@ -134,7 +134,7 @@ class srUtils
     }
     return $codes;
   }
-  
+
   /**
   * Return real code from other code
   */
@@ -147,7 +147,7 @@ class srUtils
     }
     return $codes[$otherCode];
   }
-  
+
   public static function getLanguageNameFromCode($code)
   {
     $languages = self::getLanguages();
