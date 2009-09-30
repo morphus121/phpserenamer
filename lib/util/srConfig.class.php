@@ -13,8 +13,17 @@ class srConfig
     switch($clef)
     {
       case 'default_language':
-        if(!strlen($value)) $value = 'en';
-        if(!in_array($value, array_keys(srutils::getLanguages()))) $value = 'en';
+        //If language not defined, try to determine it
+        if(!strlen($value))
+        {
+          $value = srI18n::determineUserLanguage();
+        }
+        //if language not in accepted languages,
+        if(!in_array($value, array_keys(srutils::getLanguages())))
+        {
+          $value = 'en';
+
+        }
         break;
     }
 
