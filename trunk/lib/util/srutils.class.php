@@ -103,9 +103,12 @@ class srUtils
   public static function getLanguages()
   {
     return array(
-      'ru' => 'russian',
-      'fr' => 'french',
-      'en' => 'english',
+      'ru'    => 'russian',
+      'fr'    => 'french',
+      'fra'   => 'french',
+      'fr_FR' => 'french',
+      'en'    => 'english',
+      'en_US' => 'english'
     );
   }
 
