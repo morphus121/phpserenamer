@@ -108,6 +108,12 @@ class srListeStore extends GtkListStore
     $new    = $store->get_value($iter, 5) . DIRECTORY_SEPARATOR . $store->get_value($iter, 4);
     $etat   = $store->get_value($iter, 7);
 
+    if((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'))
+    {
+      $origin = utf8_decode($origin);
+      $new    = utf8_decode($origin);
+    }
+
     if($origin != $new && $etat != self::STATUS_ERROR)
     {
       if(!rename($origin, $new))
