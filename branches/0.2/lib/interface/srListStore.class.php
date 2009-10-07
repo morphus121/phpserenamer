@@ -111,7 +111,7 @@ class srListeStore extends GtkListStore
     if((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'))
     {
       $origin = utf8_decode($origin);
-      $new    = utf8_decode($origin);
+      $new    = utf8_decode($new);
     }
 
     if($origin != $new && $etat != self::STATUS_ERROR)
