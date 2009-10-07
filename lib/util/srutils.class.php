@@ -105,7 +105,7 @@ class srUtils
     return array(
       'ru' => array(
         'name'       => 'russian',
-        'otherCodes' => array(),
+        'otherCodes' => array('rus'),
       ),
       'fr' => array(
         'name'       => 'french',
