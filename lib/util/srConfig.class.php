@@ -7,7 +7,10 @@ class srConfig
   public function get($clef)
   {
     $array = sfYaml::load(self::$fichier);
-    $array = srUtils::flattenArray($array);
+    if(!is_null($array))
+    {
+      $array = srUtils::flattenArray($array);
+    }
     $value = (array_key_exists('all_' . $clef, $array)) ? $array['all_' . $clef] : false;
 
     switch($clef)
@@ -18,7 +21,7 @@ class srConfig
         {
           $value = srI18n::determineUserLanguage();
         }
-        
+
         //if language not in accepted languages we use english
         //we also convert code to "real code"
         try
