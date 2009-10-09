@@ -38,7 +38,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     $id = null;
     foreach($tableau as $tab)
     {
-      if($tab['nomTrouve'] == $serie)
+      if(strtolower($tab['nomTrouve']) == strtolower($serie))
       {
         $id = $tab['idTrouve'];
       }
@@ -105,17 +105,14 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
 //TODO lien saison en cours ?
   private function getLienSaison($numeroAllocineSerie, $numSaison)
   {
-    $this->browser->get(sprintf('http://www.allocine.fr/series/episodes_gen_cserie=%s.html', $numeroAllocineSerie));
+  	$url = sprintf('http://www.allocine.fr/series/episodes_gen_cserie=%s.html', $numeroAllocineSerie);
+    $this->browser->get($url);
 
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
 
     $query = '//a';
     $oDomNodeList = $xpath->query($query);
-    if($oDomNodeList->length == 0)
-    {
-      throw new SerieNonFoundException();
-    }
 
     for($i=0; $i <= $oDomNodeList->length;$i++)
     {
@@ -126,6 +123,21 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         return sprintf('http://www.allocine.fr%s', $oDomNode->attributes->getNamedItem('href')->nodeValue);
       }
     }
+
+    //pour l'éventuelle dernière saison
+    $query = '//span';
+    $oDomNodeList = $xpath->query($query);
+
+    for($i=0; $i <= $oDomNodeList->length;$i++)
+    {
+      $oDomNode = $oDomNodeList->item($i);
+
+      if($oDomNode->nodeValue == sprintf('Saison %s', $numSaison))
+      {
+        return $url;
+      }
+    }
+
     throw new SerieNonFoundException();
   }
 
