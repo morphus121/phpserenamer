@@ -2,12 +2,12 @@
 #labels Featured
 
 = 0.2.2 =
-
+_2009-10-07_ (r152)
  * Correction problème d'encodage lors du renommage sous windows xp
 
 ----
 = 0.2.1 =
-
+_2009-09_17_ (r112)
  * Correction de la lenteur au démarrage
  * Correction des images dans les boutons non affichées
  * Correction des caractères accentués mal affichés dans les noms de fichiers
@@ -15,7 +15,7 @@
 
 ----
 = 0.2.0 =
-
+_2009-09-13_ (r102)
  * Ajout d'une interface de préférences
  * Ajout du provider pour allociné
  * Dossier par défaut 
@@ -25,26 +25,23 @@
  * Correction pour les titres d'épisodes comportant une quote
  * Séries avec accents mal découpées
  * Modifications des items du menu action
-
-----
-= 0.1.3 = 
-
  * Correction d'une "segmentation fault" apparaissant sur certaines configurations
 
 ----
 = 0.1.2 =
+_2009-09-02_ (r67)
 
  * Correction pour les fichiers nommés de type serie.anne.SsaisonEepisode.nom
 
 ----
 = 0.1.1 = 
-_Version Interne_
+_2009-09-02_ (r66)
+
+ * Version Interne
 
 ----
 
 = 0.1.0 =
-_Première version fonctionnelle_
+_2009-07-11_ (r53)
 
-
-
- 
+ * Première version fonctionnelle
