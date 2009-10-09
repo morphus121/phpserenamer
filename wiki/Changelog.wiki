@@ -3,35 +3,35 @@
 
 = 0.2.2 =
 _2009-10-07_ (r152)
- * Correction problème d'encodage lors du renommage sous windows xp
+ * Correction problème d'encodage lors du renommage sous windows xp (issue 86)
 
 ----
 = 0.2.1 =
 _2009-09_17_ (r112)
- * Correction de la lenteur au démarrage
- * Correction des images dans les boutons non affichées
- * Correction des caractères accentués mal affichés dans les noms de fichiers
- * Support des extensions en majuscule
+ * Correction de la lenteur au démarrage (issue 33)
+ * Correction des images dans les boutons non affichées (issue 33)
+ * Correction des caractères accentués mal affichés dans les noms de fichiers (issue 65)
+ * Support des extensions en majuscule (issue 66)
 
 ----
 = 0.2.0 =
 _2009-09-13_ (r102)
- * Ajout d'une interface de préférences
- * Ajout du provider pour allociné
- * Dossier par défaut 
- * Provider par défaut
- * Pattern par défaut
- * Support des fichiers .mp4
- * Correction pour les titres d'épisodes comportant une quote
- * Séries avec accents mal découpées
- * Modifications des items du menu action
- * Correction d'une "segmentation fault" apparaissant sur certaines configurations
+ * Ajout d'une interface de préférences (issue 39)
+ * Ajout du provider pour allociné (issue 34)
+ * Dossier par défaut (issue 12)
+ * Provider par défaut (issue 53)
+ * Pattern par défaut (issue 54)
+ * Support des fichiers .mp4 (issue 38)
+ * Correction pour les titres d'épisodes comportant une quote (issue 49)
+ * Séries avec accents mal découpées (issue 50)
+ * Modifications des items du menu action (issue 61)
+ * Correction d'une "segmentation fault" apparaissant sur certaines configurations (issue 45)
 
 ----
 = 0.1.2 =
 _2009-09-02_ (r67)
 
- * Correction pour les fichiers nommés de type serie.anne.SsaisonEepisode.nom
+ * Correction pour les fichiers nommés de type serie.anne.SsaisonEepisode.nom (issue 64)
 
 ----
 = 0.1.1 = 
