@@ -15,14 +15,14 @@ class fichierSerie
     //(attention, la série peut avoir un nom avec un point !)
 
     //fichiers de type serie.1x03.episode.HDTV.XviD-team
-    if(preg_match('/^([\w|.|\'|éèàê]*)\.(\d*)x(\d*)\..*$/',$fichier,$matches))
+    if(preg_match('/^([\w|.|\'|éèàê&]*)\.(\d*)x(\d*)\..*$/',$fichier,$matches))
     {
       $this->setSerie(strtolower($matches[1]));
       $this->setSaison((int)$matches[2]);
       $this->setEpisode((int)$matches[3]);
     }
     //serie.annee.S01E04.nomepisode
-    elseif(preg_match('/^([\w|.|\'|éèàê]*)\.(\d{4})\.[S|s](\d*)[E|e](\d*)\..*$/', $fichier, $matches))
+    elseif(preg_match('/^([\w|.|\'|éèàê&]*)\.(\d{4})\.[S|s](\d*)[E|e](\d*)\..*$/', $fichier, $matches))
     {
     	$this->setSerie(strtolower($matches[1]));
     	$this->setSaison((int)$matches[3]);
@@ -30,7 +30,7 @@ class fichierSerie
     }
 
     //serie.103.hdtv-team
-    elseif(preg_match('/^([\w|.|\'|éèàê]*)\.(\d*)\..*$/', $fichier, $matches))
+    elseif(preg_match('/^([\w|.|\'|éèàê&]*)\.(\d*)\..*$/', $fichier, $matches))
     {
       $this->setSerie(strtolower($matches[1]));
       //il peu parfois y avoir 10 saisons donc 4 caractères
@@ -48,7 +48,7 @@ class fichierSerie
       $this->setEpisode((int)$episode);
     }
     //serie.s01e05.720p.hdtv.x264-ctu
-    elseif(preg_match('/^([\w|.|\'|éèàê]*)\.[s|S](\d*)[e|E](\d*).*$/', $fichier, $matches))
+    elseif(preg_match('/^([\w|.|\'|éèàê&]*)\.[s|S](\d*)[e|E](\d*).*$/', $fichier, $matches))
     {
       $this->setSerie(strtolower($matches[1]));
       $this->setSaison((int)$matches[2]);
@@ -56,7 +56,7 @@ class fichierSerie
     }
     //série déjà passée dans serenamer
     //The Philanthropist - [1x01] - Pilot
-    elseif(preg_match('/^([\w|éèàê|.[\s|\']*)\s-\s\[(\d*)x(\d*)\].*$/', $fichier, $matches))
+    elseif(preg_match('/^([\w|éèàê&|.[\s|\']*)\s-\s\[(\d*)x(\d*)\].*$/', $fichier, $matches))
     {
       $this->setSerie(strtolower($matches[1]));
       $this->setSaison((int)$matches[2]);
