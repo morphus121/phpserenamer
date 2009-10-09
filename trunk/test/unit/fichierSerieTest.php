@@ -44,6 +44,12 @@ testerFichierSerie($t,
   'les chemins de l\'étrange', 1, 3, 'avi'
 );
 
+//test nom de série avec esperluette
+testerFichierSerie($t,
+  'Law & Order Criminal Intent - [1x22] - Tuxedo Hill.avi',
+  'law & order criminal intent', 1, 22, 'avi'
+);
+
 function testerFichierSerie(lime_test $t, $fichier, $serie, $saison, $episode, $extension)
 {
 	$t->info($fichier);
