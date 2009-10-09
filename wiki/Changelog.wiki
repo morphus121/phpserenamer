@@ -1,6 +1,11 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.2.2 =
+
+ * Correction problème d'encodage lors du renommage sous windows xp
+
+----
 = 0.2.1 =
 
  * Correction de la lenteur au démarrage
