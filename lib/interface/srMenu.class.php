@@ -117,7 +117,7 @@ class srMenu
         . srUtils::getTranslation('Season number with zero before if less than 10', 'about') . ' : %j' . "\n"
         . srUtils::getTranslation('Episode number', 'about') . ' : %e' . "\n"
         . srUtils::getTranslation('Episode number with zero before if less than 10', 'about') . ' : %k' . "\n"
-        . srUtils::getTranslation('Episode name') . ' : %t' . "\n"
+        . srUtils::getTranslation('Episode name', 'about') . ' : %t' . "\n"
         );
         $dlg->set_license("GPL v2");
         $dlg->set_website('http://code.google.com/p/phpserenamer/');

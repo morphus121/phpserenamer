@@ -40,7 +40,7 @@ class srDialog extends GtkDialog
 
   public function setSerie($serie, array $series)
   {
-    $this->ajoutElement(new GtkLabel('Pour la série :'), true);
+    $this->ajoutElement(new GtkLabel(sprintf('%s :', srUtils::getTranslation('For the tv show'))), true);
     $this->ajoutElement(new GtkLabel($serie), true);
 
     $this->combobox = self::getComboBoxSeries($series);

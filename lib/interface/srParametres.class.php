@@ -192,7 +192,7 @@ class srParametres extends GtkDialog
 
     $frame = new GtkFrame();
 
-    $this->openRecursively = new GtkCheckButton(srUtils::getTranslation('Open folders recursilevly'));
+    $this->openRecursively = new GtkCheckButton(srUtils::getTranslation('Open folders recursively'));
     if(srConfig::get('openRecursively')) $this->openRecursively->clicked();
     $frame->add($this->openRecursively);
     $frame->set_size_request(320, -1);
