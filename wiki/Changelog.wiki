@@ -1,6 +1,12 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.2.3 =
+_2009-10-10_ (r164)
+ * Correction dernière saison non trouvé pour le provider allociné (issue 91)
+ * Correction séries avec une esperluette (issue 93)
+
+----
 = 0.2.2 =
 _2009-10-07_ (r152)
  * Correction problème d'encodage lors du renommage sous windows xp (issue 86)
@@ -30,18 +36,15 @@ _2009-09-13_ (r102)
 ----
 = 0.1.2 =
 _2009-09-02_ (r67)
-
  * Correction pour les fichiers nommés de type serie.anne.SsaisonEepisode.nom (issue 64)
 
 ----
 = 0.1.1 = 
 _2009-09-02_ (r66)
-
  * Version Interne
 
 ----
 
 = 0.1.0 =
 _2009-07-11_ (r53)
-
  * Première version fonctionnelle
