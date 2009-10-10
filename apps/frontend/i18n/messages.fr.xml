@@ -94,6 +94,22 @@
         <source>Default pattern</source>
         <target>Pattern par défaut</target>
       </trans-unit>
+      <trans-unit id="24">
+        <source>Language</source>
+        <target>Langage</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Replace spaces by points</source>
+        <target>Remplacer les espaces par des points</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Open folders recursively</source>
+        <target>Ouvrir les dossiers récursivement</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>For the tv show</source>
+        <target>Pour la série</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
