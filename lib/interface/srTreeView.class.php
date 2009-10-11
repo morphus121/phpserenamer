@@ -194,6 +194,7 @@ class srTreeView extends GtkTreeView
         break;
       case srUtils::getTranslation('Define episode'):
         self::getInstance()->focusCell($path, 2);
+        break;
       case srUtils::getTranslation('Open file'):
         self::openFileFromPath($path);
         break;
