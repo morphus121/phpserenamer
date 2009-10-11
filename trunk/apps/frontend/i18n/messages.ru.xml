@@ -114,6 +114,10 @@
         <source>Parameters</source>
         <target>Настройки</target>
       </trans-unit>
+     <trans-unit id="29">
+        <source>Open file</source>
+        <target>Открыть файл</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
