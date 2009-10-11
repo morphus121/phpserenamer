@@ -20,7 +20,7 @@ class myFilesystem extends sfFilesystem
     }
     if(self::isOsWindows())
     {
-      pclose(popen('"' . $filename . '"', 'r'));
+      pclose(popen(sprintf('"%s"', self::dealWithEncoding($filename)), 'r'));
     }
     elseif(!is_null($opener = self::getLinuxFileOpener()))
     {
@@ -53,6 +53,25 @@ class myFilesystem extends sfFilesystem
   public static function isOsWindows()
   {
     return (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
+  }
+
+  /**
+   * Returns the good string path for the filesystem without
+   * taking care of the encoding passed in parameter
+   *
+   * @param  string $filename
+   * @return string
+   */
+  private static function dealWithEncoding($filename)
+  {
+    if(self::isOsWindows())
+    {
+      if(!file_exists($filename) && file_exists(utf8_decode($filename)))
+      {
+        return utf8_decode($filename);
+      }
+    }
+    return $filename;
   }
 
   /**
