@@ -118,15 +118,10 @@ class srListeStore extends GtkListStore
     $new    = $store->get_value($iter, 5) . DIRECTORY_SEPARATOR . $store->get_value($iter, 4);
     $etat   = $store->get_value($iter, 7);
 
-    if(myFilesystem::isOsWindows())
-    {
-      $origin = utf8_decode($origin);
-      $new    = utf8_decode($new);
-    }
-
     if($origin != $new && $etat != self::STATUS_ERROR)
     {
-      if(!rename($origin, $new))
+      $fs = new myFilesystem();
+      if(!$fs->rename($origin, $new))
       {
         srLog::add(sprintf('Erreur lors du rennomage de "%s" en "%s"', $origin, $new));
       }
