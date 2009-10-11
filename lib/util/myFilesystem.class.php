@@ -14,7 +14,7 @@ class myFilesystem extends sfFilesystem
    */
   public function openFile($filename)
   {
-    if(!file_exists($filename))
+    if(!file_exists(self::dealWithEncoding($filename)))
     {
       throw new sfException('File not found');
     }
