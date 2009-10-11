@@ -86,4 +86,19 @@ class myFilesystem extends sfFilesystem
     exec(sprintf('rm -rf %s', $folder));
   }
 
+  /**
+   * Renames a file.
+   *
+   * @param string $origin  The origin filename
+   * @param string $target  The new filename
+   */
+  public function rename($origin, $target)
+  {
+    $origin = self::dealWithEncoding($origin);
+    $target = self::dealWithEncoding($target);
+
+    $this->logSection('rename', $origin.' > '.$target);
+    return rename($origin, $target);
+  }
+
 }
