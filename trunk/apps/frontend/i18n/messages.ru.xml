@@ -20,7 +20,7 @@
       </trans-unit>
       <trans-unit id="5">
         <source>Empty list</source>
-        <target>Список пуст</target>
+        <target>Очистить список</target>
       </trans-unit>
       <trans-unit id="6">
         <source>Preview</source>
@@ -64,15 +64,15 @@
       </trans-unit>
       <trans-unit id="16">
         <source>Define tv show</source>
-        <target>Определить сериал</target>
+        <target>Указать сериал</target>
       </trans-unit>
       <trans-unit id="17">
         <source>Define season</source>
-        <target>Определить сезон</target>
+        <target>Указать сезон</target>
       </trans-unit>
       <trans-unit id="18">
         <source>Define episode</source>
-        <target>Определить эпизод</target>
+        <target>Указать эпизод</target>
       </trans-unit>
       <trans-unit id="19">
         <source>Delete</source>
@@ -93,6 +93,22 @@
       <trans-unit id="23">
         <source>Default pattern</source>
         <target>Шаблон по-умолчанию</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Language</source>
+        <target>Язык</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Replace spaces by points</source>
+        <target>Заменять пробелы точками</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Open folders recursively</source>
+        <target>Открывать папку рекурсивно</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>For the tv show</source>
+        <target>Для сериала</target>
       </trans-unit>
     </body>
   </file>
