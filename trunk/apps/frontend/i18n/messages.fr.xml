@@ -110,6 +110,10 @@
         <source>For the tv show</source>
         <target>Pour la série</target>
       </trans-unit>
+      <trans-unit id="28">
+        <source>Parameters</source>
+        <target>Paramètres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

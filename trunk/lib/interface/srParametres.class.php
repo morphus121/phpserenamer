@@ -9,7 +9,6 @@ class srParametres extends GtkDialog
 
   const WIDTH  = 350;
   const HEIGHT = 200;
-  const TITRE  = 'Paramètres';
 
   /**
    *
@@ -61,7 +60,7 @@ class srParametres extends GtkDialog
   {
     parent::__construct();
 
-    $this->set_title(self::TITRE);
+    $this->set_title(srUtils::getTranslation('Parameters'));
     $this->set_default_size(self::WIDTH, self::HEIGHT);
     $this->set_border_width(0);
     $this->set_position(GTK::WIN_POS_CENTER);
