@@ -1,6 +1,11 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.2.4 =
+_2009_10_18_ (r183)
+ * Corrections suite au passage du site allociné en version beta (issue 113)
+
+----
 = 0.2.3 =
 _2009-10-10_ (r164)
  * Correction dernière saison non trouvé pour le provider allociné (issue 91)
