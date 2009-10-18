@@ -1,0 +1,8 @@
+Package: phpserenamer
+Version: 0.2.4
+Section: base
+Priority: optional
+Architecture: all
+Depends: php5-gtk2
+Maintainer: adriengallou@gmail.com
+Description: Renommez vos séries.
