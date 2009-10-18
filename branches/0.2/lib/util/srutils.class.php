@@ -7,7 +7,7 @@
 class srUtils
 {
 
-  const VERSION = '0.2.3';
+  const VERSION = '0.2.4';
 
   /**
    * Retourne le numéro de version de l'application
