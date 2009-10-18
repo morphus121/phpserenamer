@@ -14,7 +14,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
   public function getSeries($serie)
   {
     $serie = str_replace('.', ' ', $serie);
-    $serie = preg_replace('/(^the\s)|(\sthe\s)|(\sthe$)/', '', $serie);
+    $serie = preg_replace('/(^[t|T]he\s)|(\s[t|T]he\s)|(\s[t|T]he$)/', '', $serie);
 
     if(!count($tab = $this->getTableauIdSerie($serie)))
     {
