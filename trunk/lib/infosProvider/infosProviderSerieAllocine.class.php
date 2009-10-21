@@ -14,6 +14,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
   public function getSeries($serie)
   {
     $serie = str_replace('.', ' ', $serie);
+    $serie = preg_replace('/(^the\s)|(\sthe\s)|(\sthe$)/', '', $serie);
 
     if(!count($tab = $this->getTableauIdSerie($serie)))
     {
@@ -48,13 +49,14 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     {
       throw new SerieNonFoundException();
     }
+    $lienSaison = $this->getLienSaison($id, $saison);
 
-    $this->browser->get($this->getLienSaison($id, $saison));
+    $this->browser->get($lienSaison);
 
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
 
-    $query = '//h4';
+    $query = '//a';
     $oDomNodeList = $xpath->query($query);
 
     if($oDomNodeList->length == 0)
@@ -77,19 +79,20 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         }
         if($countAttributes)
         {
-          if(in_array($oDomNode->attributes->getNamedItem('style')->nodeValue, array('color:#000000', 'color:gray')))
+          if(preg_match('/Episode.*/',trim($oDomNode->nodeValue)))
           {
-            $tab[] = $oDomNode->nodeValue;
+            $tab[] = utf8_decode(trim($oDomNode->nodeValue));
           }
         }
       }
     }
 
     $episodes = array();
-    for($i=0;$i<count($tab);$i = $i + 2)
+    for($i=0;$i<count($tab);$i++)
     {
-      $num = trim(substr($tab[$i], 8));
-      $unEpisode = trim($tab[$i + 1]);
+      $temp  = explode(':', $tab[$i]);
+      $num = trim(substr($temp[0], 8));
+      $unEpisode = trim($temp[1]);
       $episodes[$num] = $unEpisode;
     }
 
@@ -105,39 +108,30 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
 //TODO lien saison en cours ?
   private function getLienSaison($numeroAllocineSerie, $numSaison)
   {
-  	$url = sprintf('http://www.allocine.fr/series/episodes_gen_cserie=%s.html', $numeroAllocineSerie);
+    $url = sprintf('http://www.allocine.fr/seriespage_seasonepisodes_last?cseries=%s', $numeroAllocineSerie);
+
     $this->browser->get($url);
 
     $oDomDocument = $this->browser->getResponseDom();
+    if(is_null($oDomDocument))
+    {
+      throw new SerieNonFoundException();
+    }
     $xpath = new DOMXPath($oDomDocument);
 
-    $query = '//a';
+    $query = '//div[@class="filterseasonszone"]/ul/li/a';
     $oDomNodeList = $xpath->query($query);
 
     for($i=0; $i <= $oDomNodeList->length;$i++)
     {
       $oDomNode = $oDomNodeList->item($i);
-
-      if($oDomNode->nodeValue == sprintf('Saison %s', $numSaison))
+      if(trim($oDomNode->nodeValue) == $numSaison)
       {
         return sprintf('http://www.allocine.fr%s', $oDomNode->attributes->getNamedItem('href')->nodeValue);
       }
     }
-
-    //pour l'éventuelle dernière saison
-    $query = '//span';
-    $oDomNodeList = $xpath->query($query);
-
-    for($i=0; $i <= $oDomNodeList->length;$i++)
-    {
-      $oDomNode = $oDomNodeList->item($i);
-
-      if($oDomNode->nodeValue == sprintf('Saison %s', $numSaison))
-      {
-        return $url;
-      }
-    }
-
+    var_dump($url);
+//echo $this->browser->getResponseBody();
     throw new SerieNonFoundException();
   }
 
@@ -160,7 +154,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
 
-    $query = '//h4/a';
+    $query = '//div/a';
     $oDomNodeList = $xpath->query($query);
     if($oDomNodeList->length == 0)
     {
@@ -178,7 +172,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         {
           $liste[] = array(
             'nomCherche' => $serie,
-            'nomTrouve'  => $oDomNode->nodeValue,
+            'nomTrouve'  => trim(utf8_decode($oDomNode->nodeValue)),
             'idTrouve'   => $matches[1]
           );
         }
@@ -198,6 +192,6 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
    */
   private function rechercheParTitre($titre)
   {
-    return sprintf('http://www.allocine.fr/recherche/?motcle=%s&x=0&y=0&rub=6', urlencode($titre));
+    return sprintf('http://www.allocine.fr/recherche/6/?q=%s', urlencode($titre));
   }
 }
