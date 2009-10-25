@@ -1,18 +1,47 @@
 #summary Installation instructions
 #labels Phase-Deploy
 
-*Debian package for Ubuntu 9.04*
+=Ubuntu=
+
+_Installation of php-gtk_
 
 Running under php-gtk, and because it's not in the official repositories, download and install [http://phpserenamer.googlecode.com/files/php5-gtk2_2.0.1-1_i386.deb this] first.
 
+_Two installations systems_
+
+You can either install directly from the debian package or configure your sources to use the PPA (Personal Package Archives), this will allow you to have automatic updates.
+
+==From debian packages==
+
 Then download [http://phpserenamer.googlecode.com/files/phpserenamer_0.1.0-rc1_all.deb this] to install phpserenamer.
 
-The 0.1.0 version does'nt check if the php-gtk extension is on or not on the php configuration file, so add the line
-{{{
-extension=php_gtk2.so
-}}}
-to the /etc/php5/cli.ini file, (the next version will check this)
+==From PPA==
 
-*Windows Installation*
+Add to lignes to the sources.list 
+(or system -> admninistration -> sources -> third party softwares -> add):
+{{{
+deb http://ppa.launchpad.net/adriengallou/ppa-phpserenamer/ubuntu jaunty main
+deb-src http://ppa.launchpad.net/adriengallou/ppa-phpserenamer/ubuntu jaunty main
+}}}
+
+Add the key to the list of acceptables keys :
+{{{
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 46B20A27
+}}}
+
+Update list of availlable packages :
+{{{
+sudo apt-get update
+}}}
+
+phpserenamer will be available with :
+{{{
+sudo apt-get install phpserenamer
+}}}
+and the updates will be proposed automaticly.
+
+=Windows=
+
+You don't need to install php-gtk, it will be automaticly install with phpserenamer.
 
 Download [http://phpserenamer.googlecode.com/files/phpserenamer-0.1.0-r37.exe this] then follow the installation instructions.
