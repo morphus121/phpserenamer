@@ -96,6 +96,13 @@ class srListeStore extends GtkListStore
     catch(SerieNonFoundException $ex)
     {
       $nouveau = '';
+      $this->set($iter, 6, self::STATUS_ERROR);
+    }
+    catch(EpisodeNonFoundException $ex)
+    {
+      $nouveau = '';
+
+      $this->set($iter, 6, self::STATUS_ERROR);
     }
 
     $this->set($iter, 4, $nouveau);
