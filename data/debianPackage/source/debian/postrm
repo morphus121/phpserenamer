@@ -1,6 +1,6 @@
 #!/bin/sh
 
-##Ajout du script de lancement dans le dossier nautilus-scripts
+##Suppression du script de lancement dans le dossier nautilus-scripts
 list=`echo /home/*`
 for file in $list
 do
@@ -9,3 +9,6 @@ do
     rm $file/.gnome2/nautilus-scripts/phpserenamer 
   fi
 done
+
+##Suppression de phpserenamer du dossier /usr/bin
+rm -f /usr/bin/phpserenamer
