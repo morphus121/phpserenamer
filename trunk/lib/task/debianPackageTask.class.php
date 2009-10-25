@@ -20,7 +20,9 @@ class debianPackageTask extends myBaseTask
     $this->name                = 'debian-package';
     $this->briefDescription    = 'Création du debian package';
     $this->detailedDescription = 'Création du debian package';
-    $this->addOption('to-ppa', null, sfCommandOption::PARAMETER_NONE, 'Envoi le paquet sur le ppa');
+
+    $this->addOption('to-ppa'   , null, sfCommandOption::PARAMETER_NONE, 'Envoi le paquet sur le ppa');
+    $this->addOption('no-delete', null, sfCommandOption::PARAMETER_NONE, 'Ne pas supprimer les fichiers temporaires');
   }
 
   /**
@@ -41,7 +43,7 @@ class debianPackageTask extends myBaseTask
     //exec('cp -r tmp/usr/lib/phpserenamer/data/debianPackage/source/* tmp/');
     exec('cp -r data/debianPackage/source/* tmp/');
     file_put_contents('tmp/debian/control', $this->getDebianControlFile($arguments['version']));
-    
+
     $cwdir = getcwd();
     chdir('tmp/');
     $cmd = 'dpkg-buildpackage -rfakeroot';
@@ -57,16 +59,18 @@ class debianPackageTask extends myBaseTask
     exec(sprintf('export DEBEMAIL=ecrire@adrien-gallou.fr;export DEBFULLNAME="Adrien Gallou"; dch --create -v %1$s -D jaunty -u low --package phpserenamer version %1$s', $arguments['version']));
     passthru($cmd);
     chdir($cwdir);
-    
+
     if($options['to-ppa'])
     {
       $this->logSection('deb+', 'Envoi vers le ppa');
       passthru(sprintf('dput ppa:adriengallou/ppa-phpserenamer phpserenamer_%s_source.changes', $arguments['version']));
     }
-    //exec('dpkg --build tmp ./');
-    //TODO
-    //$fs->removeRecusively('tmp/');
-    //exec('rm -f *.dsc *.tar.gz *.changes *.upload');
+
+    if(!$options['no-delete'])
+    {
+      $fs->removeRecusively('tmp/');
+      exec('rm -f *.dsc *.tar.gz *.changes *.upload');
+    }
   }
 
   /**
