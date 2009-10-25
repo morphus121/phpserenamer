@@ -1,0 +1,11 @@
+#!/bin/sh
+
+##Ajout du script de lancement dans le dossier nautilus-scripts
+list=`echo /home/*`
+for file in $list
+do
+  if [ -d "$file"/.gnome2/nautilus-scripts/ ]
+  then
+    rm $file/.gnome2/nautilus-scripts/phpserenamer 
+  fi
+done
