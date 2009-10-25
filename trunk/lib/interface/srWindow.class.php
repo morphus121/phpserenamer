@@ -79,17 +79,17 @@ class srWindow extends GtkWindow
     $box->set_layout(Gtk::BUTTONBOX_START);
     $boutton1 = new GtkButton(srUtils::getTranslation('Add folder'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_OPEN, Gtk::ICON_SIZE_BUTTON));
-    $boutton1->connect_simple('released', array('srWindow', 'clicOuvrirDossier'));
+    $boutton1->connect_simple('clicked', array('srWindow', 'clicOuvrirDossier'));
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton(srUtils::getTranslation('Add file'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_NEW, Gtk::ICON_SIZE_BUTTON));
-    $boutton1->connect_simple('released', array('srWindow', 'clicOuvrirFichier'));
+    $boutton1->connect_simple('clicked', array('srWindow', 'clicOuvrirFichier'));
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton();
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_DELETE, Gtk::ICON_SIZE_BUTTON));
-    $boutton1->connect_simple('released', array('srWindow', 'clicSupprimer'));
+    $boutton1->connect_simple('clicked', array('srWindow', 'clicSupprimer'));
     $box->pack_start($boutton1);
 
     //format
@@ -117,17 +117,17 @@ class srWindow extends GtkWindow
     //$box->ajouter_boutton('vider',Gtk::STOCK_CLEAR);
     $boutton1 = new GtkButton(srUtils::getTranslation('Empty list'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_CLEAR, Gtk::ICON_SIZE_BUTTON));
-    $boutton1->connect_simple('released', array('srWindow', 'clicVider'));
+    $boutton1->connect_simple('clicked', array('srWindow', 'clicVider'));
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton(srUtils::getTranslation('Preview'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_ZOOM_FIT, Gtk::ICON_SIZE_BUTTON));
-    $boutton1->connect_simple('released', array('srWindow', 'clicApercu'));
+    $boutton1->connect_simple('clicked', array('srWindow', 'clicApercu'));
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton(srUtils::getTranslation('Rename'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_APPLY, Gtk::ICON_SIZE_BUTTON));
-    $boutton1->connect_simple('released', array('srWindow', 'clicRenommer'));
+    $boutton1->connect_simple('clicked', array('srWindow', 'clicRenommer'));
     $box->pack_start($boutton1);
 
     return $box;
