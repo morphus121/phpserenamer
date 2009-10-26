@@ -21,8 +21,9 @@ class debianPackageTask extends myBaseTask
     $this->briefDescription    = 'Création du debian package';
     $this->detailedDescription = 'Création du debian package';
 
-    $this->addOption('to-ppa'   , null, sfCommandOption::PARAMETER_NONE, 'Envoi le paquet sur le ppa');
-    $this->addOption('no-delete', null, sfCommandOption::PARAMETER_NONE, 'Ne pas supprimer les fichiers temporaires');
+    $this->addOption('to-ppa'     , null, sfCommandOption::PARAMETER_NONE, 'Envoi le paquet sur le ppa');
+    $this->addOption('no-delete'  , null, sfCommandOption::PARAMETER_NONE, 'Ne pas supprimer les fichiers temporaires');
+    $this->addOption('use-current', null, sfCommandOption::PARAMETER_NONE, 'Utiliser les fichiers data du project en cours et non ceux chekoutés');
   }
 
   /**
@@ -39,9 +40,9 @@ class debianPackageTask extends myBaseTask
       $this->majorFromVersion($arguments['version']),
       $arguments['version']
     ));
-    //TODO utiliser celui de la version exportée
-    //exec('cp -r tmp/usr/lib/phpserenamer/data/debianPackage/source/* tmp/');
-    exec('cp -r data/debianPackage/source/* tmp/');
+
+    $dataFolderPrefix = ($options['use-current']) ? '' : 'tmp/usr/lib/phpserenamer/';
+    exec(sprintf('cp -r %sdata/debianPackage/source/* tmp/', $dataFolderPrefix));
     file_put_contents('tmp/debian/control', $this->getDebianControlFile($arguments['version']));
 
     $cwdir = getcwd();
