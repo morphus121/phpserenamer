@@ -152,6 +152,22 @@ class rpmPackageTask extends myBaseTask
     return $_ENV['HOME'] . '/rpmbuild/SRPMS/';
   }
 
+  public function getPostScript()
+  {
+    //TODO permettre d'utiliser les scripts du tag
+    return file_get_contents('data/rpm/post');
+  }
+
+  public function getPreUnScript()
+  {
+    return file_get_contents('data/rpm/preun');
+  }
+
+  public function getPostUnScript()
+  {
+    return file_get_contents('data/rpm/postun');
+  }
+
   /**
    *
    * @param  string $version
@@ -164,8 +180,10 @@ class rpmPackageTask extends myBaseTask
     $license     = $this->getLicense();
     $description = $this->getDescription();
     $url         = $this->getUrl();
-    //TODO
-//    $maintainer = $this->getMaintainer();
+    $post        = $this->getPostScript();
+    $preun       = $this->getPreUnScript();
+    $postun      = $this->getPostUnScript();
+
     $var = '';
     $var .= <<<EOF
 Summary: $summary
@@ -197,7 +215,16 @@ if( [ \$RPM_BUILD_ROOT != '/' ] ); then rm -rf \$RPM_BUILD_ROOT; fi;
 %files
 /.
 
+%pre
+
 %post
+$post
+
+%preun
+$preun
+
+%postun
+$postun
 
 EOF;
     return $var;
