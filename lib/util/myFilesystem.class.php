@@ -101,4 +101,18 @@ class myFilesystem extends sfFilesystem
     return rename($origin, $target);
   }
 
+  /**
+   * Put content into a file
+   *
+   * @param  string $filename
+   * @param  string $content
+   * @return void
+   */
+  public function filePutContent($filename, $content)
+  {
+    $this->logSection('file+', $filename);
+    file_put_contents($filename, $content);
+  }
+
+
 }
