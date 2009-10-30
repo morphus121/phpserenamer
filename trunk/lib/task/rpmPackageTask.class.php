@@ -58,6 +58,10 @@ class rpmPackageTask extends myBaseTask
       $sourcesDir
     ));
 
+    //On copie les fichiers de data/mandriva
+    $fs->sh(sprintf('cp -R data/mandriva/* %s', $sourcesDir));
+    $fs->removeRecusively($sourcesDir . '/_scripts/');
+
     //TODO suppression des fichiers inutiles
 
     //On crée le tar.gz
@@ -155,17 +159,17 @@ class rpmPackageTask extends myBaseTask
   public function getPostScript()
   {
     //TODO permettre d'utiliser les scripts du tag
-    return file_get_contents('data/rpm/post');
+    return file_get_contents('data/mandriva/_scripts/post');
   }
 
   public function getPreUnScript()
   {
-    return file_get_contents('data/rpm/preun');
+    return file_get_contents('data/mandriva/_scripts/preun');
   }
 
   public function getPostUnScript()
   {
-    return file_get_contents('data/rpm/postun');
+    return file_get_contents('data/mandriva/_scripts/postun');
   }
 
   /**
