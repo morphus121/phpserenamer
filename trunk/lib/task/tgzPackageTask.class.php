@@ -61,12 +61,19 @@ class tgzPackageTask extends myBaseTask
     //Si on à passé l'option on copie le répertoire
     if($options['add-folder'])
     {
+      $addPath  = $dataDir . $options['add-folder'];
+      $makeFile = $sourcesDir . 'Makefile';
+
       //On ignore les fichiers commendant par un _
-      $fs->sh(sprintf('cp -R %s/%s/[^_*]* %s', $dataDir, $options['add-folder'], $sourcesDir));
+      $fs->sh(sprintf('cp -R %s/[^_*]* %s', $addPath, $sourcesDir));
+
+      //On ajoute à la partie uninstall du makefile les nouveaux fichiers
+      $this->addFilesToUninstallMakefile($addPath, $makeFile);
     }
 
     //On supprimes les éventuels fichiers .svn
     $fs->sh(sprintf('rm -rf `find %s -type d -name .svn`', $sourcesDir));
+
 
     //On crée le tar.gz
     $this->logSection('tar.gz+', $sourcesDir . $versionName . '.tag.gz');
@@ -95,6 +102,20 @@ class tgzPackageTask extends myBaseTask
   {
     $tab = explode('.', $version);
     return $tab[0];
+  }
+
+  protected function addFilesToUninstallMakefile($addPath, $makeFile)
+  {
+    $cont   = file_get_contents($makeFile);
+    $files  = sfFinder::type('file')->ignore_version_control()->prune('_scripts')->in($addPath);
+    $str    = '';
+    $start  = strlen(realpath($addPath));
+    foreach($files as $file)
+    {
+      $str .= "\t" . sprintf('rm -f %s', substr($file, $start)) . "\n";
+    }
+    $cont .= $str;
+    file_put_contents($makeFile, $cont);
   }
 
 }
