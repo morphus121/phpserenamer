@@ -64,6 +64,9 @@ class rpmPackageTask extends myBaseTask
 
     //TODO suppression des fichiers inutiles
 
+    //On supprimes les éventuels fichiers .svn
+    $fs->sh(sprintf('rm -rf `find %s -type d -name .svn`', $sourcesDir));
+
     //On crée le tar.gz
     $this->logSection('tar.gz+', self::getRpmSourcesDir() . $versionName . '.tag.gz');
     $cwdir = getcwd();
