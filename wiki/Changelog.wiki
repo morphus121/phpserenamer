@@ -11,13 +11,13 @@ _2009_11_03_ (r207)
  * Correction du bouton "supprimer" ne fonctionnant pas (issue 62)
  * Ajout de l'ouverture du fichier au double clic (issue 64)
  * Correction sur le provider imdb (issue 80)
- * Ajout de la traduction en russe (issue 97)
+ * Ajout de la traduction en Russe (issue 97)
  * Correction des boutons ne fonctionnant pas au clavier (issue 112)
  * Application disponible via un ppa (issue 117)
  * Application disponible en rpm (issue 126)
  * Application disponible en tgz (issue 127)
- * Meilleur intégration à ubuntu avec xdg (issue 130)
- * Meilleur intégration à mandriva avec xdg (issue 129)
+ * Meilleure intégration à ubuntu avec xdg (issue 130)
+ * Meilleure intégration à mandriva avec xdg (issue 129)
 
 ----
 = 0.2.4 =
