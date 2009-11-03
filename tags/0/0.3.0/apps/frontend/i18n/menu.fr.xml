@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file original="global" source-language="en_US" datatype="plaintext">
+    <!-- 
+    This is the menu definiton translation file,
+    so this translation file is a bit special because of the shortcuts caracters,
+    indeed, those type of caracters are prefixed by an underscore ("_"),
+    so if you want to use a shortcut on a menu definition, just prefix the letter
+    you want to use with the ALT key by a _ caracter and it will be done.
+    The indentation is also special it corresponds to the menu level.
+     -->
+    <body>
+      <!-- Actions -->
+      <trans-unit id="1">
+        <source>_Actions</source>
+        <target>_Actions</target>
+      </trans-unit>
+	      <trans-unit id="2">
+	        <source>Add _folder</source>
+	        <target>Ajouter _Dossier</target>
+	      </trans-unit>
+        <trans-unit id="3">
+          <source>Add f_ile</source>
+          <target>Ajouter _Fichier</target>
+        </trans-unit>
+        <trans-unit id="4">
+          <source>_Delete Element</source>
+          <target>_Supprimer Element</target>
+        </trans-unit>
+        <trans-unit id="5">
+          <source>_Quit</source>
+          <target>_Quitter</target>
+        </trans-unit>
+      <!-- Edit -->
+      <trans-unit id="6">
+        <source>_Edit</source>
+        <target>_Edition</target>
+      </trans-unit>
+        <trans-unit id="6">
+          <source>_Parameters</source>
+          <target>_Paramètres</target>
+        </trans-unit>
+      <!-- help -->
+      <trans-unit id="7">
+        <source>_Help</source>
+        <target>_Aide</target>
+      </trans-unit>
+        <trans-unit id="6">
+          <source>_About</source>
+          <target>_A propos</target>
+        </trans-unit>
+      <!-- about? -->
+    </body>
+  </file>
+</xliff>
