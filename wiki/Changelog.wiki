@@ -1,6 +1,25 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.3.0 =
+_2009_11_03_ (r207)
+ * Activation de l'extension php-gtk sur ubuntu si non activée (issue 40)
+ * Ajout d'un système multi-langues et traduction en anglais (issue 52)
+ * Ajout de la possibilité de remplacer les espaces par des points (issue 55)
+ * Ajout d'une option pour ouvrir les répertoires en récursif (issue 57)
+ * Correction des items "définir" du clic droit (issue 60)
+ * Correction du bouton "supprimer" ne fonctionnant pas (issue 62)
+ * Ajout de l'ouverture du fichier au double clic (issue 64)
+ * Correction sur le provider imdb (issue 80)
+ * Ajout de la traduction en russe (issue 97)
+ * Correction des boutons ne fonctionnant pas au clavier (issue 112)
+ * Application disponible via un ppa (issue 117)
+ * Application disponible en rpm (issue 126)
+ * Application disponible en tgz (issue 127)
+ * Meilleur intégration à ubuntu avec xdg (issue 130)
+ * Meilleur intégration à mandriva avec xdg (issue 129)
+
+----
 = 0.2.4 =
 _2009_10_18_ (r183)
  * Corrections suite au passage du site allociné en version beta (issue 113)
