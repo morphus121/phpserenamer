@@ -36,13 +36,22 @@ class debianPackageTask extends myBaseTask
     $fs->mkdirs('tmp/');
     $this->logSection('Export de la version', $arguments['version']);
     exec(sprintf(
-      'svn export http://phpserenamer.googlecode.com/svn/tags/%s/%s tmp/phpserenamer',
+      'svn export http://phpserenamer.googlecode.com/svn/tags/%s/%s tmp/usr/lib/phpserenamer',
       $this->majorFromVersion($arguments['version']),
       $arguments['version']
     ));
 
     $dataFolderPrefix = ($options['use-current']) ? '' : 'tmp/usr/lib/phpserenamer/';
-    exec(sprintf('cp -r %sdata/debianPackage/source/* tmp/', $dataFolderPrefix));
+    //On ignore les fichiers commendant par un _
+    $fs->sh(sprintf('cp -R %sdata/ubuntu/* tmp/', $dataFolderPrefix));
+    $fs->sh(sprintf('rm -rf tmp/_*'));
+    
+    //On ignore les fichiers commendant par un _
+    $fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
+    //$fs->sh(sprintf('cp -R %sdata/%s/[^_*]* %s', $addPath, $sourcesDir));
+    
+    
+    //$fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
     file_put_contents('tmp/debian/control', $this->getDebianControlFile($arguments['version']));
 
     $cwdir = getcwd();
@@ -60,7 +69,7 @@ class debianPackageTask extends myBaseTask
     exec(sprintf('export DEBEMAIL=ecrire@adrien-gallou.fr;export DEBFULLNAME="Adrien Gallou"; dch --create -v %1$s -D jaunty -u low --package phpserenamer version %1$s', $arguments['version']));
     passthru($cmd);
     chdir($cwdir);
-
+    
     if($options['to-ppa'])
     {
       $this->logSection('deb+', 'Envoi vers le ppa');
@@ -114,4 +123,5 @@ Description: Renommez vos séries.
 EOF;
     return $var;
   }
+
 }
