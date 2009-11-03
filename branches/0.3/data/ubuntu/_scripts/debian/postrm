@@ -1,0 +1,4 @@
+#!/bin/sh
+
+##Suppression de phpserenamer du dossier /usr/bin
+rm -f /usr/bin/phpserenamer
