@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file original="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>Add folder</source>
+        <target>Ajouter dossier</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Add file</source>
+        <target>Ajouter fichier</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Pattern</source>
+        <target>Format</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Website</source>
+        <target>Site</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Empty list</source>
+        <target>Vider</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Preview</source>
+        <target>Apercu</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Rename</source>
+        <target>Renommer</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Choose folder</source>
+        <target>Choisir dossier</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Choose file</source>
+        <target>Choisir fichier</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Tv show</source>
+        <target>Série</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Season</source>
+        <target>Saison</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Episode</source>
+        <target>Episode</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Old name</source>
+        <target>Ancien nom</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>New name</source>
+        <target>Nouveau nom</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>Multiple choices of name</source>
+        <target>Choix multiples de nom</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>Define tv show</source>
+        <target>Définir série</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Define season</source>
+        <target>Définir saison</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Define episode</source>
+        <target>Définir épisode</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Default folder</source>
+        <target>Dossier par défaut</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Choose the default folder</source>
+        <target>Choissiez le dossier par défaut</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Default provider</source>
+        <target>Provider par défaut</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Default pattern</source>
+        <target>Pattern par défaut</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Language</source>
+        <target>Langage</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Replace spaces by points</source>
+        <target>Remplacer les espaces par des points</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Open folders recursively</source>
+        <target>Ouvrir les dossiers récursivement</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>For the tv show</source>
+        <target>Pour la série</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Parameters</source>
+        <target>Paramètres</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Open file</source>
+        <target>Ouvrir fichier</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

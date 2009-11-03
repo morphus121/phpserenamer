@@ -1,0 +1,8 @@
+all:
+  default:
+    folder: 
+    provider: 
+    pattern: '%n - [%sx%k] - %t'
+    language:
+  replaceSpaces: false
+  openRecursively: false
