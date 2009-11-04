@@ -45,3 +45,13 @@ et les mises à jour seront alors proposées automatiquement.
 Pas besoin d'installer php-gtk, celui-ci ce sera automatiquement installé en même temps que phpserenamer.
 
 Téléchargez [http://phpserenamer.googlecode.com/files/phpserenamer-0.2.3.exe ceci] puis suivez les instructions d'installation.
+
+=Linux=
+
+Téléchargez le tarball, puis effectuez cette série de commandes :
+{{{
+mkdir phpserenamer
+tar -zxf phpserenamer-0.3.0.tar.gz --directory=phpserenamer
+cd phpserenamer
+make install
+}}}
