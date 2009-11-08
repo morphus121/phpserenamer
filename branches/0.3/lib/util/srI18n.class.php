@@ -23,7 +23,14 @@ class srI18n
     }
     else
     {
-      $lang = array_shift(explode('.',$_ENV["LANGUAGE"]));
+      if(array_key_exists('LANGUAGE', $_ENV))
+      {
+        $lang = array_shift(explode('.',$_ENV['LANGUAGE']));
+      }
+      elseif(array_key_exists('LANG', $_ENV))
+      {
+        $lang = array_shift(explode('.',$_ENV['LANG']));
+      }
     }
     return $lang;
   }
