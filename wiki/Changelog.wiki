@@ -1,6 +1,13 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.3.1 =
+_2009_11_01_ (r218)
+ * Correction du renommage sous vista (issue 134)
+ * Correction de l'affichage des caractères spéciaux sous vista (issue 136)
+ * Correction de la language par défaut sous ubuntu et vista (issue 135)
+
+----
 = 0.3.0 =
 _2009_11_03_ (r207)
  * Activation de l'extension php-gtk sur ubuntu si non activée (issue 40)
