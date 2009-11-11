@@ -28,3 +28,8 @@ _ajout de fonctions diverses_
   * définir tous les numéros d'épisode d'un coup
   * raccourcis clavier
   * ajout de providers
+  * nettoyage du code de l'interface
+
+= 0.5.0 =
+_formats_
+  * Interface de gestion des formats
