@@ -1,14 +1,15 @@
-#summary Oh une jolie page wikiki !
+#summary Patterns utilisés par les différents Media Centers
+#labels Phase-Support
 
 =Introduction=
 
-Cette page à pour objectif de réunir les PATTERNS utilisaient par différents Media Center.
+Cette page à pour objectif de réunir les PATTERNS utilisés par différents Media Center.
 
 =XBMC Media Center=
 
-`\NomSerie\Season 1\1x01.Pilot.avi` correspondant à l'épisode 1 de la saison 1 de la série " NomSerie "
+`\NomSerie\Season 1\1x01.Pilot.avi` correspondant à l'épisode 1 de la saison 1 de la série " !NomSerie "
 
-=MediaPortal=
+=!MediaPortal=
 
 à complèter
 
