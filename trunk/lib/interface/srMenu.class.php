@@ -14,37 +14,41 @@ class srMenu
   public static function getMenuDefinition()
   {
     return array(
-	    srUtils::getTranslation('_Actions', 'menu') => array(
-	      array(
-	        'nom'   => srUtils::getTranslation('Add _folder', 'menu'),
-	        'image' => Gtk::STOCK_OPEN
-	      ),
-	      array(
-	        'nom'   => srUtils::getTranslation('Add f_ile', 'menu'),
-	        'image' => Gtk::STOCK_NEW
-	      ),
-	      array(
-	        'nom'   => srUtils::getTranslation('_Delete Element', 'menu'),
-	        'image' => Gtk::STOCK_CLOSE
-	      ),
-	      array(
-	        'nom'   => srUtils::getTranslation('_Quit', 'menu'),
-	        'image' => Gtk::STOCK_QUIT
-	      )
-	    ),
-	    srUtils::getTranslation('_Edit', 'menu')    => array(
-	      array(
-	        'nom'   => srUtils::getTranslation('_Parameters', 'menu'),
-	        'image' => Gtk::STOCK_PROPERTIES
-	      )
-	    ),
-	    srUtils::getTranslation('_Help', 'menu')    => array(
-	      array(
-	        'nom'   => srUtils::getTranslation('_About', 'menu'),
-	        'image' => Gtk::STOCK_DIALOG_QUESTION,
-	      )
-	    ),
-	  );
+      srUtils::getTranslation('_Actions', 'menu') => array(
+        array(
+          'nom'   => srUtils::getTranslation('Add _folder', 'menu'),
+          'image' => Gtk::STOCK_OPEN
+        ),
+        array(
+          'nom'   => srUtils::getTranslation('Add f_ile', 'menu'),
+          'image' => Gtk::STOCK_NEW
+        ),
+        array(
+          'nom'   => srUtils::getTranslation('_Delete Element', 'menu'),
+          'image' => Gtk::STOCK_CLOSE
+        ),
+        array(
+          'nom'   => srUtils::getTranslation('_Quit', 'menu'),
+          'image' => Gtk::STOCK_QUIT
+        )
+      ),
+      srUtils::getTranslation('_Edit', 'menu')    => array(
+        array(
+          'nom' => srUtils::getTranslation('_Change all seasons', 'menu'),
+          //'image' => Gtk
+        ),
+        array(
+          'nom'   => srUtils::getTranslation('_Parameters', 'menu'),
+          'image' => Gtk::STOCK_PROPERTIES
+        )
+      ),
+      srUtils::getTranslation('_Help', 'menu')    => array(
+        array(
+          'nom'   => srUtils::getTranslation('_About', 'menu'),
+          'image' => Gtk::STOCK_DIALOG_QUESTION,
+        )
+      ),
+    );
   }
 
   public static function getInstance()
@@ -106,6 +110,10 @@ class srMenu
       case srUtils::getTranslation('_Parameters', 'menu'):
         $p = srParametres::getInstance();
         $p->show_all();
+        break;
+      case srUtils::getTranslation('_Change all seasons', 'menu'):
+        $d = srChangeAllSeasonsDialog::getInstance();
+        $d->run();
         break;
       case srUtils::getTranslation('_About', 'menu'):
         $dlg = new GtkAboutDialog();

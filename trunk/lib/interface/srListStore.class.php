@@ -148,4 +148,27 @@ class srListeStore extends GtkListStore
     }
   }
 
+  /**
+   *
+   * @param  $store
+   * @param  $path
+   * @param  $iter
+   * @param  int $season
+   * @return void
+   */
+  public function changeOneSeason($store, $path, $iter, $season)
+  {
+    $store->set($iter, 1, $season);
+  }
+
+  /**
+   *
+   * @param $season
+   * @return void
+   */
+  public function changeAllSeasons($season)
+  {
+    $this->foreach(array('srListeStore', 'changeOneSeason'), $season);
+  }
+
 }
