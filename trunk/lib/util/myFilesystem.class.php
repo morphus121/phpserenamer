@@ -66,7 +66,7 @@ class myFilesystem extends sfFilesystem
   {
     if(self::isOsWindows())
     {
-      if(!file_exists($filename) && file_exists(utf8_decode($filename)))
+      if(sfToolkit::isUTF8($filename))
       {
         return utf8_decode($filename);
       }
