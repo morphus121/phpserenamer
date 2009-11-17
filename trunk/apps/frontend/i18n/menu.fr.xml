@@ -36,10 +36,14 @@
         <source>_Edit</source>
         <target>_Edition</target>
       </trans-unit>
-        <trans-unit id="6">
-          <source>_Parameters</source>
-          <target>_Paramètres</target>
-        </trans-unit>
+      <trans-unit id="6">
+        <source>_Parameters</source>
+        <target>_Paramètres</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>_Change all seasons</source>
+        <target>Changer toutes les saisons</target>
+      </trans-unit>
       <!-- help -->
       <trans-unit id="7">
         <source>_Help</source>

@@ -118,6 +118,10 @@
         <source>Open file</source>
         <target>Ouvrir fichier</target>
       </trans-unit>
+      <trans-unit id="30">
+        <source>Change all seasons</source>
+        <target>Changer toutes les saisons</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
