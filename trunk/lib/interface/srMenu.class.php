@@ -8,7 +8,8 @@ class srMenu
 {
 
   /**
-   * @see http://gtk.php.net/manual/en/gtk.enum.stockitems.php
+   * @see http://gtk.php.net/manual/en/gtk.enum.stockitems.php (images)
+   * @see http://gtk.php.net/manual/en/appendix.keysyms.php (shortcuts)
    * @return array
    */
   public static function getMenuDefinition()
@@ -17,24 +18,29 @@ class srMenu
       srUtils::getTranslation('_Actions', 'menu') => array(
         array(
           'nom'   => srUtils::getTranslation('Add _folder', 'menu'),
-          'image' => Gtk::STOCK_OPEN
+          'image' => Gtk::STOCK_OPEN,
+          'accel' => array('activate', Gdk::KEY_d, Gdk::CONTROL_MASK, 7),
         ),
         array(
           'nom'   => srUtils::getTranslation('Add f_ile', 'menu'),
-          'image' => Gtk::STOCK_NEW
+          'image' => Gtk::STOCK_NEW,
+          'accel' => array('activate', Gdk::KEY_f, Gdk::CONTROL_MASK, 7),
         ),
         array(
           'nom'   => srUtils::getTranslation('_Delete Element', 'menu'),
-          'image' => Gtk::STOCK_CLOSE
+          'image' => Gtk::STOCK_CLOSE,
+          'accel' => array('activate', Gdk::KEY_e, Gdk::CONTROL_MASK, 7),
         ),
         array(
           'nom'   => srUtils::getTranslation('_Quit', 'menu'),
-          'image' => Gtk::STOCK_QUIT
+          'image' => Gtk::STOCK_QUIT,
+          'accel' => array('activate', Gdk::KEY_q, Gdk::CONTROL_MASK, 7),
         )
       ),
       srUtils::getTranslation('_Edit', 'menu')    => array(
         array(
           'nom' => srUtils::getTranslation('_Change all seasons', 'menu'),
+          'accel' => array('activate', Gdk::KEY_c, Gdk::CONTROL_MASK, 7),
           //'image' => Gtk
         ),
         array(
@@ -46,6 +52,7 @@ class srMenu
         array(
           'nom'   => srUtils::getTranslation('_About', 'menu'),
           'image' => Gtk::STOCK_DIALOG_QUESTION,
+          'accel' => array('activate', Gdk::KEY_F1, 0, 7),
         )
       ),
     );
@@ -80,6 +87,10 @@ class srMenu
           else
           {
             $menu_item = new GtkMenuItem($submenu);
+          }
+          if(array_key_exists('accel', $submenu) && count($submenu['accel']) == 4)
+          {
+            $menu_item->add_accelerator($submenu['accel'][0], srAccelGroup::getInstance(), $submenu['accel'][1], $submenu['accel'][2], $submenu['accel'][3]);
           }
           $menu->append($menu_item);
           $menu_item->connect('activate', array('srMenu','on_menu_select'));
