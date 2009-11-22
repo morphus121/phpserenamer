@@ -1,3 +1,0 @@
-#! /bin/bash
-REP=$(readlink -f ./)
-/usr/lib/phpserenamer/symfony main "$REP"
