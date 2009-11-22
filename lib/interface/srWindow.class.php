@@ -52,6 +52,8 @@ class srWindow extends GtkWindow
     $this->set_border_width(0);
     $this->set_position(GTK::WIN_POS_CENTER);
     $this->set_icon_from_file(sfConfig::get('sr_logo'));
+    $this->accelGroup = new GtkAccelGroup();
+    $this->add_accel_group(srAccelGroup::getInstance());
 
     $box = new GtkVBox();
     $box->pack_start(srMenu::getInstance(), 0, 0);
@@ -118,16 +120,19 @@ class srWindow extends GtkWindow
     $boutton1 = new GtkButton(srUtils::getTranslation('Empty list'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_CLEAR, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('clicked', array('srWindow', 'clicVider'));
+    $boutton1->add_accelerator('clicked', srAccelGroup::getInstance(), Gdk::KEY_z, Gdk::CONTROL_MASK, 0);
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton(srUtils::getTranslation('Preview'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_ZOOM_FIT, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('clicked', array('srWindow', 'clicApercu'));
+    $boutton1->add_accelerator('clicked', srAccelGroup::getInstance(), Gdk::KEY_a, Gdk::CONTROL_MASK, 0);
     $box->pack_start($boutton1);
 
     $boutton1 = new GtkButton(srUtils::getTranslation('Rename'));
     $boutton1->set_image(GtkImage::new_from_stock(Gtk::STOCK_APPLY, Gtk::ICON_SIZE_BUTTON));
     $boutton1->connect_simple('clicked', array('srWindow', 'clicRenommer'));
+    $boutton1->add_accelerator('clicked', srAccelGroup::getInstance(), Gdk::KEY_r, Gdk::CONTROL_MASK, 0);
     $box->pack_start($boutton1);
 
     return $box;
