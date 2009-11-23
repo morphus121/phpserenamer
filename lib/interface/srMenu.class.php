@@ -39,9 +39,12 @@ class srMenu
       ),
       srUtils::getTranslation('_Edit', 'menu')    => array(
         array(
-          'nom' => srUtils::getTranslation('_Change all seasons', 'menu'),
+          'nom'   => srUtils::getTranslation('_Change all seasons', 'menu'),
           'accel' => array('activate', Gdk::KEY_c, Gdk::CONTROL_MASK, 7),
-          //'image' => Gtk
+        ),
+        array(
+          'nom'   => srUtils::getTranslation('_Change all episodes', 'menu'),
+          'accel' => array('activate', Gdk::KEY_v, Gdk::CONTROL_MASK, 7),
         ),
         array(
           'nom'   => srUtils::getTranslation('_Parameters', 'menu'),
@@ -124,6 +127,10 @@ class srMenu
         break;
       case srUtils::getTranslation('_Change all seasons', 'menu'):
         $d = srChangeAllSeasonsDialog::getInstance();
+        $d->run();
+        break;
+      case srUtils::getTranslation('_Change all episodes', 'menu'):
+        $d = srChangeAllEpisodesDialog::getInstance();
         $d->run();
         break;
       case srUtils::getTranslation('_About', 'menu'):
