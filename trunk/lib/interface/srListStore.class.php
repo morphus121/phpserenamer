@@ -166,6 +166,21 @@ class srListeStore extends GtkListStore
 
   /**
    *
+   * @param  $store
+   * @param  $path
+   * @param  $iter
+   * @param  int  $start
+   * @param  int  $pas
+   * @return void
+   */
+  public function changeOneEpisode($store, $path, $iter, $start, $pas)
+  {
+    $episode = $start + ($path[0] * $pas);
+    $store->set($iter, 2, $episode);
+  }
+
+  /**
+   *
    * @param $season
    * @return void
    */
@@ -173,5 +188,17 @@ class srListeStore extends GtkListStore
   {
     $this->foreach(array('srListeStore', 'changeOneSeason'), $season);
   }
+
+/**
+   *
+   * @param  int  $start
+   * @param  int  $pas
+   * @return void
+   */
+  public function changeAllEpisodes($start, $pas)
+  {
+    $this->foreach(array('srListeStore', 'changeOneEpisode'), $start, $pas);
+  }
+
 
 }
