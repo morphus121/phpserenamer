@@ -10,7 +10,7 @@ class srTestUnitTask extends sfBaseTask
     $this->addOptions(array(
       new sfCommandOption('xml', null, sfCommandArgument::OPTIONAL, 'fichier xml')
     ));
-    $this->namespace           = 'test';
+    $this->namespace           = 'sr-test';
     $this->name                = 'unit';
     $this->briefDescription    = 'Launches unit tests';
     $this->detailedDescription = 'Launches unit tests';
