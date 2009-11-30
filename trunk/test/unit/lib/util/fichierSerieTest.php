@@ -1,7 +1,7 @@
 <?php
-include(dirname(__FILE__).'/../bootstrap/unit.php');
+include(dirname(__FILE__).'/../../../bootstrap/unit.php');
 
-include(dirname(__FILE__).'/../../lib/util/fichierSerie.class.php');
+include(dirname(__FILE__).'/../../../../lib/util/fichierSerie.class.php');
 
 $t = new lime_test(null, new lime_output_color());
 
