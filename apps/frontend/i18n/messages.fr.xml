@@ -122,6 +122,18 @@
         <source>Change all seasons</source>
         <target>Changer toutes les saisons</target>
       </trans-unit>
+      <trans-unit id="31">
+        <source>Change all episodes</source>
+        <target>Changer toutes les episodes</target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>Start</source>
+        <target>Debut</target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Increment</source>
+        <target>Pas</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
