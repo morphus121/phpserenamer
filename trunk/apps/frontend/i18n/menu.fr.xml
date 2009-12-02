@@ -42,7 +42,11 @@
       </trans-unit>
       <trans-unit id="8">
         <source>_Change all seasons</source>
-        <target>Changer toutes les saisons</target>
+        <target>Changer toutes les _saisons</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Change all _episodes</source>
+        <target>Changer toutes les _episodes</target>
       </trans-unit>
       <!-- help -->
       <trans-unit id="7">
