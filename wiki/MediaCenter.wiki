@@ -3,28 +3,24 @@
 
 =Introduction=
 
-Cette page à pour objectif de réunir les PATTERNS utilisés par différents Media Center.
+Cette page à pour objectif de réunir les PATTERNS utilisés par XBMC. (dans un premier temps)
 
-=XBMC Media Center=
+=XBMC=
 
-`\NomSerie\Season 1\1x01.Pilot.avi` correspondant à l'épisode 1 de la saison 1 de la série " !NomSerie "
+`\NomSerie\Season 1\[1x01] - NomEpisode.ext`
 
-=!MediaPortal=
+est la forme la plus simple pour utiliser le scraper d'XBMC !
+Il est important de noter "Season x" plutôt que "Saison x" par exemple.
 
-à complèter
+Il est optionnel de noter le nom de l'épisode à la suite du "[1x01]"... le scraper n'utilise que la combinaison de chiffre 1x01.
 
-=MeediOS=
+D'autres variante compatible avec XBMC :
 
-à complèter
+'\chemin\1x01.ext'
+'\chemin\[1x01] NomEpisode.ext'
 
-=xLobby=
+Note : il est parfois important de noter l'année de production de la première saison d'une série, selon cet exemple :
 
-à complèter
+'\V (2009)\Season 1\...'
 
-=SageTV Media Center=
-
-à complèter
-
-=GeeXboX=
-
-à complèter
+Car il existe plusieurs séries portant le nom "V" ... et le scraper pourrait confondre. (Toutefois cela peut-être corriger en appuyant sur i dans XBMC)
