@@ -59,6 +59,7 @@ class srWindow extends GtkWindow
     $box->pack_start(srMenu::getInstance(), 0, 0);
     $box->pack_start($this->getBouttons(), 0);
     $box->pack_start(srListeEpisodes::getInstance());
+    $box->pack_start(srProgressBar::getInstance(), 0);
     $box->pack_start($this->getBouttonsBas(), 0);
 
     $this->add($box);
@@ -149,8 +150,10 @@ class srWindow extends GtkWindow
     // srWindow::getInstance()->setup_app();
     //ON CHANGE TEMPORAIREMENT LA FONCTION DE L'APRECU
     //
+    srProgressBar::start();
     srListeStore::getInstance()->foreach(array('srWindow','toto'));
     srListeStore::getInstance()->chercherNouveauxTitres();
+    srProgressBar::stop();
     //self::$seriesTrouves = array();
   }
 
@@ -164,6 +167,8 @@ class srWindow extends GtkWindow
     try
     {
       $serie = $store->get_value($iter, 0);
+      $text  = srUtils::getTranslation('Search for TV shows matching', 'progressbar');
+      srProgressBar::progress(sprintf('%s "%s"', $text, $serie));
       if(!correspondanceNoms::getInstance()->hasKey(self::getInstance()->getSelectedProvider(), $serie))
       {
         $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie', self::getInstance()->getSelectedProvider());
@@ -238,6 +243,12 @@ class srWindow extends GtkWindow
   public static function setUserPattern($pattern)
   {
     return self::getInstance()->userFormat->set_text($pattern);
+  }
+
+  public function show_all()
+  {
+    parent::show_all();
+    srProgressBar::stop();
   }
 
 }
