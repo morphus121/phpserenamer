@@ -75,7 +75,10 @@ class srProgressBar extends GtkProgressBar
   {
     self::getInstance()->pulse();
     self::getInstance()->set_text($message);
-    Gtk::main_iteration();
+    while (Gtk::events_pending())
+    {
+      Gtk::main_iteration();
+    }
   }
 
   /**
