@@ -133,7 +133,6 @@ class srListeStore extends GtkListStore
       $oFichierSerie       = new fichierSerie($store->get_value($iter, 3));
       $text = srUtils::getTranslation('Preview of new filename for file', 'progressbar');
       srProgressBar::progress(sprintf('%s "%s"', $text, $store->get_value($iter, 3)));
-      Gtk::main_iteration();
       $oInfosProviderSerie = infosProviderFactory::createInfosProvider('serie',
         $selectedProvider);
       $nomSerie            = $correspondanceNoms->getNom($selectedProvider,
