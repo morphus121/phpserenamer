@@ -16,9 +16,9 @@ $oInfos = new infosProviderSerieAllocine();
 $t->diag('getSeries(\'Urgences\')');
 $t->is($oInfos->getSeries('Urgences'), array(
   'Urgences',
+  'Urgence Disparitions',
   'Équipe médicale d\'urgence',
   'Golden Hour : urgences extrêmes',
-  'Urgence Disparitions',
 ),
 '$oInfos->getSeries() retourne les bons résultats');
 
@@ -31,11 +31,11 @@ $t->is($oInfos->getEpisode('Urgences', 1, 3), 'Jour J', '$oInfos->getEpisode() r
 
 
 $t->diag('getSeries(\'Mysterious Ways\')');
-$t->is($oInfos->getSeries('Mysterious Ways'), array('Les Chemins de l\'étrange','Mysterious Island', 'The Way We Live Now', 'Caitlin Montana'),
+$t->is($oInfos->getSeries('Mysterious Ways'), array('Les Chemins de l\'étrange'),
 '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getSeries(\'mysterious.ways\')');
-$t->is($oInfos->getSeries('mysterious.ways'), array('Les Chemins de l\'étrange','Mysterious Island', 'The Way We Live Now', 'Caitlin Montana'),
+$t->is($oInfos->getSeries('mysterious.ways'), array('Les Chemins de l\'étrange'),
 '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getEpisode(\'Les Chemins de l\'étrange\', 1, 1)');
