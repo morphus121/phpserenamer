@@ -48,6 +48,7 @@ class srUtils
     ->prune('skeleton')
     ->prune('default')
     ->name('infosProviderSerie*\.class\.php')
+    ->not_name('infosProviderSerie*\Base.class\.php')
     ->in(sfConfig::get('sf_lib_dir'))
     ;
     $providers = array();
