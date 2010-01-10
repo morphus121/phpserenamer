@@ -18,6 +18,7 @@
  Il est possible de personnaliser le format de sortie du fichier. Pour se faire, modifiez le contenu de la case format en utilisant les variables suivantes. Tout autre caractères tels que les tirets par exemples peuvent être utilisés pour séparer les différents éléments.
 
 _Caractères pour créer le format_ :
+ * Nom de la série : *%n*
  * Numéro de la saison : *%s*
  * Numéro de la saison avec ajout d\'un zero devant si < 10 : *%j*
  * Numéro de l\'episode : *%e*
