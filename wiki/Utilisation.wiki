@@ -18,7 +18,7 @@
 _Caractères pour créer le format_ :
  * Nom de la série : *%n*
  * Numéro de la saison : *%s*
- * Numéro de la saison avec ajout d\'un zéro devant si < 10 : *%j*
- * Numéro de l\'épisode : *%e*
- * Numéro de l\'épisode avec ajout d\'un zéro devant si < 10 : *%k*
- * Nom de l\'épisode : *%t*
+ * Numéro de la saison avec ajout d'un zéro devant si < 10 : *%j*
+ * Numéro de l'épisode : *%e*
+ * Numéro de l'épisode avec ajout d'un zéro devant si < 10 : *%k*
+ * Nom de l'épisode : *%t*
