@@ -6,7 +6,7 @@
  * Scripts
  * phpserenamer
 
-== Sous Xindows == 
+== Sous Windows == 
 
  * Clic droit sur un dossier
  * phpserenamer
