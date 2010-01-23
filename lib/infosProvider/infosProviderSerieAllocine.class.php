@@ -90,9 +90,9 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     $episodes = array();
     for($i=0;$i<count($tab);$i++)
     {
-      $temp  = explode(':', $tab[$i]);
-      $num = trim(substr($temp[0], 9));
-      $unEpisode = trim($temp[1]);
+      $pos       = strpos($tab[$i], ':');
+      $num       = trim(substr($tab[$i], 9, $pos-9));
+      $unEpisode = trim(substr($tab[$i], $pos+1));
       $episodes[$num] = $unEpisode;
     }
 
