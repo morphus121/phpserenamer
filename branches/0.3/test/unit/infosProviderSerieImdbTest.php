@@ -12,7 +12,7 @@ $t->is($oInfos->getSeries('24'), array('"24" (2001)'),
 $t->diag('getSeries()');
 $t->isa_ok($oInfos->getSeries('rommates'), 'array',
     'getSeries() retourne un tableau');
-$t->is($oInfos->getSeries('rommates'), array('"Roommates" (2007)','"Roommates" (2009)'),
+$t->is($oInfos->getSeries('rommates'), array('"Roommates" (2009)','"Roommates" (2007)'),
     '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getEpisode()');
@@ -40,5 +40,5 @@ $t->is($oInfos->getSeries('royal.pains'), array('Royal Pains'),
     '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getSeries()');
-$t->is($oInfos->getSeries('skins'), array('"Skins" (2007)', '"Shirts & Skins" (2008)', '"Shirts & Skins" (2009)'),
+$t->is($oInfos->getSeries('skins'), array('"Skins" (2007)'),
     '$oInfos->getSeries() retourne les bons résultats');

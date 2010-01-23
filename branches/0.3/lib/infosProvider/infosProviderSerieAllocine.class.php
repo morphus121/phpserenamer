@@ -81,7 +81,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         {
           if(preg_match('/Episode.*/',trim($oDomNode->nodeValue)))
           {
-            $tab[] = utf8_decode(trim($oDomNode->nodeValue));
+            $tab[] = trim($oDomNode->nodeValue);
           }
         }
       }
@@ -91,7 +91,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     for($i=0;$i<count($tab);$i++)
     {
       $temp  = explode(':', $tab[$i]);
-      $num = trim(substr($temp[0], 8));
+      $num = trim(substr($temp[0], 9));
       $unEpisode = trim($temp[1]);
       $episodes[$num] = $unEpisode;
     }
@@ -130,7 +130,6 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         return sprintf('http://www.allocine.fr%s', $oDomNode->attributes->getNamedItem('href')->nodeValue);
       }
     }
-    var_dump($url);
 //echo $this->browser->getResponseBody();
     throw new SerieNonFoundException();
   }
@@ -172,7 +171,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         {
           $liste[] = array(
             'nomCherche' => $serie,
-            'nomTrouve'  => trim(utf8_decode($oDomNode->nodeValue)),
+            'nomTrouve'  => trim(($oDomNode->nodeValue)),
             'idTrouve'   => $matches[1]
           );
         }
