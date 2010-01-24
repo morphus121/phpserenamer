@@ -1,0 +1,4 @@
+#!/bin/sh
+
+##Suppression du contenu du dossier cache
+rm -rf /usr/lib/phpserenamer/cache/*
