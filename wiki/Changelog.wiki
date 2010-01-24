@@ -3,7 +3,7 @@
 
 = 0.3.2 =
 _2010_12_24_ (r266)
- * Support des fichiers .vob (issue
+ * Support des fichiers .vob (issue 159)
  * Correction problème encodage suite modifications sur allociné (issue 161)
  * Correction nom de série mal récupéré sur allociné si celui-ci contient deux points (:) (issue 160)
 
