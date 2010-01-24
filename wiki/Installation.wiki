@@ -1,5 +1,5 @@
 #summary Instructions d'installation
-#labels Phase-Deploy
+#labels Phase-Deploy,Featured
 
 =Ubuntu=
 
@@ -13,7 +13,7 @@ Vous pouvez soit installer directement depuis le paquet deb, ou configurer vous 
 
 ==Depuis debian package==
 
-Téléchargez ensuite [http://phpserenamer.googlecode.com/files/phpserenamer_0.2.3_all.deb ceci] pour installer phpserenamer.
+Téléchargez ensuite la dernière version pour ubuntu [http://code.google.com/p/phpserenamer/downloads/list ici] pour installer phpserenamer.
 
 ==Depuis PPA==
 
@@ -44,14 +44,14 @@ et les mises à jour seront alors proposées automatiquement.
 
 Pas besoin d'installer php-gtk, celui-ci ce sera automatiquement installé en même temps que phpserenamer.
 
-Téléchargez [http://phpserenamer.googlecode.com/files/phpserenamer-0.2.3.exe ceci] puis suivez les instructions d'installation.
+Téléchargez la dernière version pour windows ici [http://code.google.com/p/phpserenamer/downloads/list ici] puis suivez les instructions d'installation.
 
 =Linux=
 
 Téléchargez le tarball, puis effectuez cette série de commandes :
 {{{
 mkdir phpserenamer
-tar -zxf phpserenamer-0.3.0.tar.gz --directory=phpserenamer
+tar -zxf phpserenamer-0.3.2.tar.gz --directory=phpserenamer
 cd phpserenamer
 make install
 }}}
