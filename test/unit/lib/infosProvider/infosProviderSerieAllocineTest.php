@@ -13,6 +13,11 @@ $t = new lime_test(null, new lime_output_color());
 
 $oInfos = new infosProviderSerieAllocine();
 
+$t->diag('getSeries(\'cold case\')');
+$t->is($oInfos->getSeries('cold case'), array(
+  'Cold Case : affaires classées',
+), '$oInfos->getSeries() retourne les bons résultats');
+
 $t->diag('getSeries(\'Urgences\')');
 $t->is($oInfos->getSeries('Urgences'), array(
   'Urgences',
