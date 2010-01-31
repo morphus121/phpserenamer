@@ -42,8 +42,8 @@ class srCoverageReportTask extends sfBaseTask
     $srcfiles = $dom->createElement('srcfiles');
 
     $packages->setAttribute('value', 2);
-    $classes->setAttribute('value', 0);
-    $methods->setAttribute('value', 0);
+    $classes->setAttribute('value', 2);
+    $methods->setAttribute('value', 2);
 
     $stats->appendChild($packages);
     $stats->appendChild($classes);
@@ -81,7 +81,7 @@ class srCoverageReportTask extends sfBaseTask
     $dirs = array();
     foreach (array_keys($coverageByFile) as $file)
     {
-      $dirs[] = pathinfo($file, PATHINFO_DIRNAME);
+      $dirs[] = str_replace('/', '_', pathinfo($file, PATHINFO_DIRNAME));
     }
     $dirs = array_unique($dirs);
 
@@ -119,7 +119,7 @@ class srCoverageReportTask extends sfBaseTask
     $totalLinesPackage  = array();
     foreach ($coverageByFile as $file => $coveragePercent)
     {
-      $key = pathinfo($file, PATHINFO_DIRNAME);
+      $key = str_replace('/', '_', pathinfo($file, PATHINFO_DIRNAME));
       $srcfile = $dom->createElement('srcfile');
       $srcfile->setAttribute('name', $file);
       $numberOfLines = $this->getNumberOfLinesFile(sfConfig::get('sf_root_dir') . $file);
@@ -149,6 +149,30 @@ class srCoverageReportTask extends sfBaseTask
       $coverageLine->setAttribute('type', 'line, %');
       $coverageLine->setAttribute('value', $coverageString);
       $srcfile->appendChild($coverageLine);
+
+      $class = $dom->createElement('class');
+      $class->setAttribute('name', $file);
+      $coverageClass2 = clone $coverageClass;
+      $coverageMethod2 = clone $coverageMethod;
+      $coverageBlock2 = clone $coverageBlock;
+      $coverageLine2 = clone $coverageLine;
+      $class->appendChild($coverageClass2);
+      $class->appendChild($coverageMethod2);
+      $class->appendChild($coverageBlock2);
+      $class->appendChild($coverageLine2);
+
+      $method = $dom->createElement('method');
+      $method->setAttribute('name', $file);
+      $coverageMethod3 = clone $coverageMethod;
+      $coverageBlock3 = clone $coverageBlock;
+      $coverageLine3 = clone $coverageLine;
+      $method->appendChild($coverageMethod3);
+      $method->appendChild($coverageBlock3);
+      $method->appendChild($coverageLine3);
+
+      $class->appendChild($method);
+
+      $srcfile->appendChild($class);
 
       $packagesTab[$key]->appendChild($srcfile);
     }
