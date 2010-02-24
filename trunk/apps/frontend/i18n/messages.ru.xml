@@ -64,15 +64,15 @@
       </trans-unit>
       <trans-unit id="16">
         <source>Define tv show</source>
-        <target>Указать сериал</target>
+        <target>Изменить название сериала</target>
       </trans-unit>
       <trans-unit id="17">
         <source>Define season</source>
-        <target>Указать сезон</target>
+        <target>Изменить номер сезона</target>
       </trans-unit>
       <trans-unit id="18">
         <source>Define episode</source>
-        <target>Указать эпизод</target>
+        <target>Изменить номер эпизода</target>
       </trans-unit>
       <trans-unit id="19">
         <source>Delete</source>
@@ -117,6 +117,22 @@
      <trans-unit id="29">
         <source>Open file</source>
         <target>Открыть файл</target>
+      </trans-unit>
+            <trans-unit id="30">
+        <source>Change all seasons</source>
+        <target>Изменить номер сезона во всех файлах</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Change all episodes</source>
+        <target>Изменить номер эпизода во всех файлах</target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>Start</source>
+        <target>Начать с:</target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Increment</source>
+        <target>Увеличить на:</target>
       </trans-unit>
     </body>
   </file>
