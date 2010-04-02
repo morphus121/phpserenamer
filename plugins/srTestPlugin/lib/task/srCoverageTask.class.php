@@ -7,8 +7,8 @@ class srCoverageReportTask extends sfBaseTask
    */
   protected function configure()
   {
-    $this->namespace           = 'sr-test';
-    $this->name                = 'coverage-report';
+    $this->namespace           = 'emma-coverage';
+    $this->name                = 'report';
     $this->briefDescription    = 'Crée un rapport du coverage des tests unitaires pour emma';
     $this->detailedDescription = 'Crée un rapport du coverage des tests unitaires pour emma';
 
@@ -121,7 +121,7 @@ class srCoverageReportTask extends sfBaseTask
     {
       $key = str_replace('/', '_', pathinfo($file, PATHINFO_DIRNAME));
       $srcfile = $dom->createElement('srcfile');
-      $srcfile->setAttribute('name', $file);
+      $srcfile->setAttribute('name', $key);
       $numberOfLines = $this->getNumberOfLinesFile(sfConfig::get('sf_root_dir') . $file);
       $testedLines = round(substr($coveragePercent, 0, -1) / 100 * $numberOfLines);
       $totalLines += $numberOfLines;
@@ -151,7 +151,7 @@ class srCoverageReportTask extends sfBaseTask
       $srcfile->appendChild($coverageLine);
 
       $class = $dom->createElement('class');
-      $class->setAttribute('name', $file);
+      $class->setAttribute('name', $key);
       $coverageClass2 = clone $coverageClass;
       $coverageMethod2 = clone $coverageMethod;
       $coverageBlock2 = clone $coverageBlock;
@@ -162,7 +162,7 @@ class srCoverageReportTask extends sfBaseTask
       $class->appendChild($coverageLine2);
 
       $method = $dom->createElement('method');
-      $method->setAttribute('name', $file);
+      $method->setAttribute('name', $key);
       $coverageMethod3 = clone $coverageMethod;
       $coverageBlock3 = clone $coverageBlock;
       $coverageLine3 = clone $coverageLine;
