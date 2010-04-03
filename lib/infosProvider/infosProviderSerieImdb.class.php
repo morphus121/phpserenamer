@@ -144,7 +144,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
     {
       $a = $oDomNodeList->item($i);
       $value = $a->nodeValue;
-      if($value == 'full episode list')
+      if(strtolower($value) == 'full episode list')
       {
         $lien = $a->getAttributeNode('href')->value;
       }
