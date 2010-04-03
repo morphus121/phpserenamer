@@ -78,7 +78,7 @@ class infosProviderSerieImdb extends infosProviderSerieBase
       throw new SerieNonFoundException();
     }
 
-    return $liste;
+    return $this->sortByRelevance($liste, $serie);
   }
 
   /**

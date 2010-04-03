@@ -52,7 +52,7 @@ abstract class infosProviderSerieThetvdbBase extends infosProviderSerieBase
     {
       $series[] = $val['nomTrouve'];
     }
-    return $series;
+    return $this->sortByRelevance($series, $serie);
   }
 
   /**
