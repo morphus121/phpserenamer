@@ -21,9 +21,9 @@ $t->is($oInfos->getSeries('cold case'), array(
 $t->diag('getSeries(\'Urgences\')');
 $t->is($oInfos->getSeries('Urgences'), array(
   'Urgences',
+  'Golden Hour : urgences extrêmes',
   'Urgence Disparitions',
   'Équipe médicale d\'urgence',
-  'Golden Hour : urgences extrêmes',
 ),
 '$oInfos->getSeries() retourne les bons résultats');
 

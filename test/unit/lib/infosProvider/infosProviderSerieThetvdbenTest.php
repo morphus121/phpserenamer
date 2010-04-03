@@ -15,13 +15,13 @@ $t->diag('getSeries(\'24\')');
 $t->is($oInfos->getSeries('24'), array (
   '24',
   '24 Hour Design',
+  '24 Hour Quiz',
   '24 h Berlin - Ein Tag im Leben',
   'BBC News 24',
-  'Truth in 24',
+  'BBC News 24: Click',
   'Final 24',
   'Pure 24',
-  '24 Hour Quiz',
-  'BBC News 24: Click',
+  'Truth in 24',
 ), '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getSeries(\'Roommates\')');

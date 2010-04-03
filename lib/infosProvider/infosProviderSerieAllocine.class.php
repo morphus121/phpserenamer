@@ -25,7 +25,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     {
       $series[] = $val['nomTrouve'];
     }
-    return $series;
+    return $this->sortByRelevance($series, $serie);
   }
 
   /**
