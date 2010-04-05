@@ -81,10 +81,10 @@ class windowsDeployTask extends sfBaseTask
     $fs->sh($cmd);
     
     //suppression du script
-    //$fs->remove('script.iss');
+    $fs->remove('script.iss');
     
     //Suppresion du répertoire temporaire
-//    $fs->sh('rmdir /S /Q tmp');
+    $fs->sh('rmdir /S /Q tmp');
     
     //On déplace l'executable à la racine
     $outputExe = sprintf('phpserenamer-%s.exe', $arguments['version']);
