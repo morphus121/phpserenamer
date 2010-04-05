@@ -81,10 +81,10 @@ class windowsDeployTask extends sfBaseTask
     $fs->sh($cmd);
     
     //suppression du script
-    $fs->remove('script.iss');
+    //$fs->remove('script.iss');
     
     //Suppresion du répertoire temporaire
-    $fs->sh('rmdir /S /Q tmp');
+//    $fs->sh('rmdir /S /Q tmp');
     
     //On déplace l'executable à la racine
     $outputExe = sprintf('phpserenamer-%s.exe', $arguments['version']);
@@ -135,11 +135,11 @@ EOF;
     ) . "\n";
     $var .= <<<EOF
 [Icons]
-Name: "{group}\phpserenamer"; Filename: "{app}\lib\vendor\php-gtk2\php-win.exe {app}\symfony main"
+Name: "{group}\phpserenamer"; Filename: "{app}\lib\vendor\php-gtk2\php-win.exe"; Parameters: "{app}\symfony main"; IconFilename: "{app}\data\logo\favicon.ico"
 
 [Registry]
 Root: HKCR; Subkey: "Directory\shell\phpserenamer"; ValueType: string; ValueName: ""; ValueData: "phpserenamer"; Flags: createvalueifdoesntexist
-Root: HKCR; Subkey: "Directory\shell\phpserenamer\command"; ValueType: string; ValueName: ""; ValueData: """{app}\lib\vendor\php-gtk2\php-win.exe"" ""{app}\symfony"" main ""%1"""; Flags: createvalueifdoesntexist
+Root: HKCR; Subkey: "Directory\shell\phpserenamer\command"; ValueType: string; ValueName: ""; ValueData: """{app}\lib\\vendor\php-gtk2\php-win.exe"" ""{app}\symfony"" main ""%1"""; Flags: createvalueifdoesntexist
 EOF;
 return $var;
   }
