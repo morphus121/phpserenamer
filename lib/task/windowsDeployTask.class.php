@@ -114,6 +114,7 @@ AppPublisherURL=http://code.google.com/p/phpserenamer/
 AppSupportURL=http://code.google.com/p/phpserenamer/
 AppUpdatesURL=http://code.google.com/p/phpserenamer/
 DefaultDirName={pf}\phpserenamer
+UninstallDisplayIcon={app}\data\logo\\favicon.ico
 DefaultGroupName=phpserenamer
 
 EOF;
@@ -125,6 +126,12 @@ SolidCompression=yes
 [Languages]
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 
+[Code]
+function getAppDir(Param: String): String;
+begin
+  Result := GetShortName(ExpandConstant('{app}'));
+end;
+
 [Files]
 
 EOF;
@@ -134,7 +141,7 @@ EOF;
     ) . "\n";
     $var .= <<<EOF
 [Icons]
-Name: "{group}\phpserenamer"; Filename: "{app}\lib\\vendor\php-gtk2\php-win.exe"; Parameters: "{app}\symfony main"; IconFilename: "{app}\data\logo\favicon.ico"
+Name: "{group}\phpserenamer"; Filename: "{app}\lib\\vendor\php-gtk2\php-win.exe"; Parameters: "{code:getAppDir}\symfony main"; IconFilename: "{app}\data\logo\\favicon.ico"
 
 [Registry]
 Root: HKCR; Subkey: "Directory\shell\phpserenamer"; ValueType: string; ValueName: ""; ValueData: "phpserenamer"; Flags: createvalueifdoesntexist
