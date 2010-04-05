@@ -99,7 +99,6 @@ class windowsDeployTask extends sfBaseTask
     return $tab[0];
   }
 
-
   protected function getInnoSetupScript($version)
   {
     $var = '';
