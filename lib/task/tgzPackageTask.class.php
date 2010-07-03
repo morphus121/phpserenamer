@@ -39,6 +39,7 @@ class tgzPackageTask extends myBaseTask
     $this->addOption('no-delete', null, sfCommandOption::PARAMETER_NONE, 'Ne pas supprimer les fichiers temporaires');
     $this->addOption('add-folder', null, sfCommandOption::PARAMETER_OPTIONAL, 'Dossier dans data contenant les fichiers à ajouter');
     $this->addOption('use-current', null, sfCommandOption::PARAMETER_NONE, 'Utiliser les fichiers data du project en cours et non ceux chekoutés');
+    $this->addOption('to-google-code', null, sfCommandOption::PARAMETER_NONE, 'Envoyer le fichier vers google code');
   }
 
   /**
@@ -105,11 +106,19 @@ class tgzPackageTask extends myBaseTask
 
     //Copie du tgz dans le repertoire builds du project
     $fs->mkdirs('builds/');
-    $fs->copy($sourcesDir . $versionName . '.tar.gz', sprintf('builds/%s.tar.gz', $versionName));
+    $filePath =  sprintf('builds/%s.tar.gz', $versionName);
+    $fs->copy($sourcesDir . $versionName . '.tar.gz', $filePath);
 
     if (!$options['no-delete'])
     {
       $fs->removeRecusively($sourcesDir);
+    }
+    if ($options['to-google-code'])
+    {
+      $task      = new uploadGoogleCodeTask($this->dispatcher, $this->formatter);
+      $taskArguments = array('file' => $filePath, 'project' => 'phpserenamer');
+      $taskOptions   = array(sprintf('--summary="v %s - tarball"', $arguments['version']));
+      $task->run($taskArguments, $taskOptions);
     }
   }
 
