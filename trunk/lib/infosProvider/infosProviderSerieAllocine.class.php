@@ -56,9 +56,8 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     $oDomDocument = $this->browser->getResponseDom();
     $xpath = new DOMXPath($oDomDocument);
 
-    $query = '//a';
+    $query = '//div[@class="serie_itemopener"]';
     $oDomNodeList = $xpath->query($query);
-
     if($oDomNodeList->length == 0)
     {
       throw new EpisodeNonFoundException();
@@ -72,17 +71,9 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
 
       if(!is_null($oDomNode->attributes) )
       {
-        $countAttributes = 0;
-        foreach ($oDomNode->attributes as $attrName => $attrNode)
+        if(preg_match('/Episode.*/',trim($oDomNode->nodeValue)))
         {
-          $countAttributes++;
-        }
-        if($countAttributes)
-        {
-          if(preg_match('/Episode.*/',trim($oDomNode->nodeValue)))
-          {
-            $tab[] = trim($oDomNode->nodeValue);
-          }
+          $tab[] = trim($oDomNode->nodeValue);
         }
       }
     }
@@ -117,9 +108,23 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     {
       throw new SerieNonFoundException();
     }
-    $xpath = new DOMXPath($oDomDocument);
 
-    $query = '//div[@class="filterseasonszone"]/ul/li/a';
+    //Current Season
+    $xpath = new DOMXPath($oDomDocument);
+    $query = '//li[@class="navcenterdata"]/em';
+    $oDomNodeList = $xpath->query($query);
+    if ($oDomNodeList->length == 1)
+    {
+      $node = $oDomNodeList->item(0);
+      if (trim($node->nodeValue) == $numSaison)
+      {
+        return $url;
+      }
+    }
+
+    //Other seasons
+    $xpath = new DOMXPath($oDomDocument);
+    $query = '//div[@class="navbar"]/ul/li/a';
     $oDomNodeList = $xpath->query($query);
 
     for($i=0; $i <= $oDomNodeList->length;$i++)
@@ -130,7 +135,7 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
         return sprintf('http://www.allocine.fr%s', $oDomNode->attributes->getNamedItem('href')->nodeValue);
       }
     }
-//echo $this->browser->getResponseBody();
+
     throw new SerieNonFoundException();
   }
 
@@ -163,17 +168,19 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
     for($i=0; $i <= $oDomNodeList->length;$i++)
     {
       $oDomNode = $oDomNodeList->item($i);
-
       if(!is_null($oDomNode->nodeValue) && $oDomNode->nodeValue != 'Et la réponse est...')
       {
         $matches = array();
         if(preg_match('/\/series\/ficheserie_gen_cserie=(.*)\.html/',$oDomNode->attributes->getNamedItem('href')->nodeValue, $matches))
         {
-          $liste[] = array(
-            'nomCherche' => $serie,
-            'nomTrouve'  => trim(($oDomNode->nodeValue)),
-            'idTrouve'   => $matches[1]
-          );
+          if (strlen(trim(($oDomNode->nodeValue))))
+          {
+            $liste[] = array(
+              'nomCherche' => $serie,
+              'nomTrouve'  => trim(($oDomNode->nodeValue)),
+              'idTrouve'   => $matches[1]
+            );
+          }
         }
       }
     }

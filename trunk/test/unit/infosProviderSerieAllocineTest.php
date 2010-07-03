@@ -27,7 +27,6 @@ $t->is($oInfos->getSeries('Urgences'), array(
 ),
 '$oInfos->getSeries() retourne les bons résultats');
 
-
 $t->diag('getEpisode(\'Urgences\', 1, 1)');
 $t->is($oInfos->getEpisode('Urgences', 1, 1), 'Pilote - 1ère partie', '$oInfos->getEpisode() retourne les bons résultats');
 
@@ -67,8 +66,8 @@ $t->is($oInfos->getEpisode('The Shield', 7, 13), 'Retour au bercail', '$oInfos->
 
 $t->diag('getSeries(\'gossip\')');
 $t->is($oInfos->getSeries('gossip'), array(
-  'Gossip Girl',
   'Lily (Pilote)',
+  'Gossip Girl',
 ), '$oInfos->getSeries() retourne les bons résultats');
 
-$t->is($oInfos->getEpisode('Gossip Girl', 1, 2), 'N& B : Un pas en avant, deux pas en arrière', '$oInfos->getEpisode() retourne les bons résultats');
+$t->is($oInfos->getEpisode('Gossip Girl', 1, 2), 'N & B : Un pas en avant, deux pas en arrière', '$oInfos->getEpisode() retourne les bons résultats');
