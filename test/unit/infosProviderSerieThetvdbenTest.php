@@ -1,11 +1,11 @@
 <?php
-include(dirname(__FILE__).'/../../../bootstrap/unit.php');
+include(dirname(__FILE__).'/../bootstrap/unit.php');
 
-include(dirname(__FILE__).'/../../../../lib/infosProvider/infosProviderBase.class.php');
-include(dirname(__FILE__).'/../../../../lib/infosProvider/infosProviderSerieBase.class.php');
-include(dirname(__FILE__).'/../../../../lib/infosProvider/infosProviderSerieThetvdben.class.php');
+include(dirname(__FILE__).'/../../lib/infosProvider/infosProviderBase.class.php');
+include(dirname(__FILE__).'/../../lib/infosProvider/infosProviderSerieBase.class.php');
+include(dirname(__FILE__).'/../../lib/infosProvider/infosProviderSerieThetvdben.class.php');
 
-include(dirname(__FILE__).'/../../../../lib/util/myWebBrowser.class.php');
+include(dirname(__FILE__).'/../../lib/util/myWebBrowser.class.php');
 
 $t = new lime_test(null, new lime_output_color());
 
