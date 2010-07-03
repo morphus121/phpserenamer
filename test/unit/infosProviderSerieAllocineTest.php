@@ -64,3 +64,11 @@ $t->is($oInfos->getEpisode('The Shield', 6, 1), 'Rien de personnel', '$oInfos->g
 $t->is($oInfos->getEpisode('The Shield', 6, 10), 'Enfer à Farmington', '$oInfos->getEpisode() retourne les bons résultats');
 $t->is($oInfos->getEpisode('The Shield', 7, 1), 'Poids mort', '$oInfos->getEpisode() retourne les bons résultats');
 $t->is($oInfos->getEpisode('The Shield', 7, 13), 'Retour au bercail', '$oInfos->getEpisode() retourne les bons résultats');
+
+$t->diag('getSeries(\'gossip\')');
+$t->is($oInfos->getSeries('gossip'), array(
+  'Gossip Girl',
+  'Lily (Pilote)',
+), '$oInfos->getSeries() retourne les bons résultats');
+
+$t->is($oInfos->getEpisode('Gossip Girl', 1, 2), 'N& B : Un pas en avant, deux pas en arrière', '$oInfos->getEpisode() retourne les bons résultats');
