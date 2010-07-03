@@ -1,20 +1,35 @@
 <?php
-include_once(dirname(__FILE__).'/myBaseTask.class.php');
 /**
+ * tgzPackageTask
  *
- * @author adriengallou
+ * PHP version 5
  *
+ * @package Tasks
+ * @author  Adrien Gallou <adriengallou@gmail.com>
+ * @version SVN: <svn_id>
+ */
+
+require_once(dirname(__FILE__).'/myBaseTask.class.php');
+
+/**
+ * tgzPackageTask
+ *
+ * @package Interface
+ * @author  Adrien Gallou <adriengallou@gmail.com>
+ * @version Release: <package_version>
  */
 class tgzPackageTask extends myBaseTask
 {
 
   /**
    * (non-PHPdoc)
+   *
    * @see lib/vendor/symfony/task/sfTask#configure()
+   * @return void
    */
   protected function configure()
   {
-    $this->addArgument('version',sfCommandArgument::REQUIRED, 'Tag à utiliser');
+    $this->addArgument('version', sfCommandArgument::REQUIRED, 'Tag à utiliser');
 
     $this->namespace           = 'sr';
     $this->name                = 'tgz-package';
@@ -28,7 +43,12 @@ class tgzPackageTask extends myBaseTask
 
   /**
    * (non-PHPdoc)
+   *
+   * @param string[] $arguments arguments
+   * @param string[] $options   options
+   *
    * @see lib/vendor/symfony/task/sfTask#execute()
+   * @return int
    */
   protected function execute($arguments = array(), $options = array())
   {
@@ -53,13 +73,11 @@ class tgzPackageTask extends myBaseTask
       'tmp/'
     ));
 
-    //TODO suppression des fichiers inutiles
-
     //On ajoute les fichiers nécéssaires au tgz
     $fs->sh(sprintf('cp -R %s/tgz/* %s', $dataDir, $sourcesDir));
 
     //Si on à passé l'option on copie le répertoire
-    if($options['add-folder'])
+    if ($options['add-folder'])
     {
       $addPath  = $dataDir . $options['add-folder'];
       $makeFile = $sourcesDir . 'Makefile';
@@ -74,6 +92,8 @@ class tgzPackageTask extends myBaseTask
     //On supprimes les éventuels fichiers .svn
     $fs->sh(sprintf('rm -rf `find %s -type d -name .svn`', $sourcesDir));
 
+    //Suppression des fichiers inutiles
+    $this->deleteUnusedFilesAndFolders($sourcesDir . DIRECTORY_SEPARATOR . 'usr/lib/phpserenamer/');
 
     //On crée le tar.gz
     $this->logSection('tar.gz+', $sourcesDir . $versionName . '.tag.gz');
@@ -87,15 +107,17 @@ class tgzPackageTask extends myBaseTask
     $fs->mkdirs('builds/');
     $fs->copy($sourcesDir . $versionName . '.tar.gz', sprintf('builds/%s.tar.gz', $versionName));
 
-    if(!$options['no-delete'])
+    if (!$options['no-delete'])
     {
       $fs->removeRecusively($sourcesDir);
     }
   }
 
   /**
+   * Retourne la version majeure d'après un numéro de version
    *
-   * @param  string $version
+   * @param  string $version version
+   *
    * @return string
    */
   protected function majorFromVersion($version)
@@ -104,18 +126,53 @@ class tgzPackageTask extends myBaseTask
     return $tab[0];
   }
 
+  /**
+   *
+   *
+   * @param string $addPath
+   * @param string $makeFile
+   *
+   * @return void
+   */
   protected function addFilesToUninstallMakefile($addPath, $makeFile)
   {
-    $cont   = file_get_contents($makeFile);
-    $files  = sfFinder::type('file')->ignore_version_control()->prune('_scripts')->in($addPath);
-    $str    = '';
-    $start  = strlen(realpath($addPath));
-    foreach($files as $file)
+    $cont  = file_get_contents($makeFile);
+    $files = sfFinder::type('file')->ignore_version_control()
+                                   ->prune('_scripts')->in($addPath);
+    $str   = '';
+    $start = strlen(realpath($addPath));
+    foreach ($files as $file)
     {
       $str .= "\t" . sprintf('rm -f %s', substr($file, $start)) . "\n";
     }
     $cont .= $str;
     file_put_contents($makeFile, $cont);
+  }
+
+  /**
+   * Supprime tous les fichiers n'ayant pas d'intérêt
+   *
+   * @param string $path chemin de base de suppression
+   *
+   * @return void
+   */
+  protected function deleteUnusedFilesAndFolders($path)
+  {
+    $list = $this->getFilesAndFoldersToDelete();
+    foreach ($list as $toDelete)
+    {
+      $this->getFilesystem()->removeRecusively($path . $toDelete);
+    }
+  }
+
+  /**
+   * Retourne la liste des fichiers et dossiers à supprimer
+   *
+   * @return string[]
+   */
+  protected function getFilesAndFoldersToDelete()
+  {
+    return array_map('trim', file(sfConfig::get('sf_root_dir') . '/config/filesToDelete.txt'));
   }
 
 }
