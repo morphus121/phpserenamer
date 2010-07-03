@@ -62,7 +62,7 @@ $t->is($oInfos->getSeries('royal.pains'), array('Royal Pains'),
     '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getSeries()');
-$t->is($oInfos->getSeries('skins'), array('Skins'),
+$t->is($oInfos->getSeries('skins'), array('Skins',  'Shirts & Skins',),
     '$oInfos->getSeries() retourne les bons résultats');
 
 $t->diag('getSeries(\'the shield\')');
