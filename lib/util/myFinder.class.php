@@ -8,6 +8,7 @@ class myFinder extends sfFinder
     'ogm',
     'srt',
     'mp4',
+    'vob',
   );
 
   private static function initialize(myFinder $finder)
