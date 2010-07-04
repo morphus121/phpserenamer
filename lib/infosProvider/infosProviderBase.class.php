@@ -25,4 +25,9 @@ abstract class infosProviderBase
     return $this->browser->get($url);
   }
 
+  /**
+   *
+   * @return string
+   */
+  abstract public function getName();
 }

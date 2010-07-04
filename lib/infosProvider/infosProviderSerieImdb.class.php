@@ -190,4 +190,14 @@ class infosProviderSerieImdb extends infosProviderSerieBase
   {
     return sprintf('http://www.imdb.com/find?s=tt&q=%s&x=24&y=13', urlencode($titre));
   }
+
+  /**
+   * (non-PHPdoc)
+   * @see lib/infosProvider/infosProviderSerieBase#getName()
+   */
+  public function getName()
+  {
+    return 'Imdb';
+  }
+
 }

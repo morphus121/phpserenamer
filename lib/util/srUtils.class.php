@@ -59,7 +59,12 @@ class srUtils
       {
         if(($name = $matches[1]) != 'Base')
         {
-          $providers[] = strtolower($name);
+          $className = substr(pathinfo($filePath, PATHINFO_FILENAME), 0, -6);
+          if (class_exists($className))
+          {
+            $class = new $className();
+            $providers[strtolower($name)] = $class->getName();
+          }
         }
       }
     }

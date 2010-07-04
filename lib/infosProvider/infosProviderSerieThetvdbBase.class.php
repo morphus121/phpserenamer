@@ -174,4 +174,13 @@ abstract class infosProviderSerieThetvdbBase extends infosProviderSerieBase
     }
     return $liste;
   }
+
+  /**
+   * (non-PHPdoc)
+   * @see lib/infosProvider/infosProviderSerieBase#getName()
+   */
+  public function getName()
+  {
+    return 'TheTvDB - ' . strtoupper($this->getLanguage());
+  }
 }

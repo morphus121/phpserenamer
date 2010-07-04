@@ -71,4 +71,13 @@ abstract class infosProviderSerieBase extends infosProviderBase
     }
     return $series;
   }
+
+  /**
+   * (non-PHPdoc)
+   * @see lib/infosProvider/infosProviderBase#getName()
+   */
+  public function getName()
+  {
+    return substr(get_class($this), 18);
+  }
 }
