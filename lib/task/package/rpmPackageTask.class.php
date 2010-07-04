@@ -1,11 +1,12 @@
 <?php
-include_once(dirname(__FILE__).'/myBaseTask.class.php');
+include_once(dirname(__FILE__).'/../myBaseTask.class.php');
+include_once(dirname(__FILE__).'/basePackageTask.class.php');
 /**
  *
  * @author adriengallou
  *
  */
-class rpmPackageTask extends myBaseTask
+class rpmPackageTask extends basePackageTask
 {
 
   /**
@@ -63,7 +64,8 @@ class rpmPackageTask extends myBaseTask
     $fs->sh(sprintf('cp -R data/mandriva/* %s', $sourcesDir));
     $fs->removeRecusively($sourcesDir . '/_scripts/');
 
-    //TODO suppression des fichiers inutiles
+    //Suppression des fichiers inutiles
+    $this->deleteUnusedFilesAndFolders($sourcesDir . DIRECTORY_SEPARATOR . 'usr/lib/phpserenamer/');
 
     //On supprimes les éventuels fichiers .svn
     $fs->sh(sprintf('rm -rf `find %s -type d -name .svn`', $sourcesDir));

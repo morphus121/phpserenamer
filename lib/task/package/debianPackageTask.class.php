@@ -1,11 +1,12 @@
 <?php
-include_once(dirname(__FILE__).'/myBaseTask.class.php');
+include_once(dirname(__FILE__).'/../myBaseTask.class.php');
+include_once(dirname(__FILE__).'/basePackageTask.class.php');
 /**
  *
  * @author agallou
  *
  */
-class debianPackageTask extends myBaseTask
+class debianPackageTask extends basePackageTask
 {
 
   /**
@@ -46,6 +47,9 @@ class debianPackageTask extends myBaseTask
     //On ignore les fichiers commendant par un _
     $fs->sh(sprintf('cp -R %sdata/ubuntu/* tmp/', $dataFolderPrefix));
     $fs->sh(sprintf('rm -rf tmp/_*'));
+
+    //Suppression des fichiers inutiles
+    $this->deleteUnusedFilesAndFolders($dataFolderPrefix);
 
     //On ignore les fichiers commendant par un _
     $fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
