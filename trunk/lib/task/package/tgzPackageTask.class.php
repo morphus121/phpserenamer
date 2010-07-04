@@ -9,7 +9,8 @@
  * @version SVN: <svn_id>
  */
 
-require_once(dirname(__FILE__).'/myBaseTask.class.php');
+require_once(dirname(__FILE__).'/../myBaseTask.class.php');
+include_once(dirname(__FILE__).'/basePackageTask.class.php');
 
 /**
  * tgzPackageTask
@@ -18,7 +19,7 @@ require_once(dirname(__FILE__).'/myBaseTask.class.php');
  * @author  Adrien Gallou <adriengallou@gmail.com>
  * @version Release: <package_version>
  */
-class tgzPackageTask extends myBaseTask
+class tgzPackageTask extends basePackageTask
 {
 
   /**
@@ -156,32 +157,6 @@ class tgzPackageTask extends myBaseTask
     }
     $cont .= $str;
     file_put_contents($makeFile, $cont);
-  }
-
-  /**
-   * Supprime tous les fichiers n'ayant pas d'intérêt
-   *
-   * @param string $path chemin de base de suppression
-   *
-   * @return void
-   */
-  protected function deleteUnusedFilesAndFolders($path)
-  {
-    $list = $this->getFilesAndFoldersToDelete();
-    foreach ($list as $toDelete)
-    {
-      $this->getFilesystem()->removeRecusively($path . $toDelete);
-    }
-  }
-
-  /**
-   * Retourne la liste des fichiers et dossiers à supprimer
-   *
-   * @return string[]
-   */
-  protected function getFilesAndFoldersToDelete()
-  {
-    return array_map('trim', file(sfConfig::get('sf_root_dir') . '/config/filesToDelete.txt'));
   }
 
 }

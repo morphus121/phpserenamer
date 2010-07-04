@@ -1,10 +1,12 @@
 <?php
+require_once(dirname(__FILE__).'/../myBaseTask.class.php');
+include_once(dirname(__FILE__).'/basePackageTask.class.php');
 /**
  *
  * @author agallou
  *
  */
-class windowsDeployTask extends sfBaseTask
+class windowsDeployTask extends basePackageTask
 {
 
   protected function configure()
@@ -57,6 +59,9 @@ class windowsDeployTask extends sfBaseTask
     );
 
     passthru($cmd);
+
+    //Suppression des fichiers inutiles
+    $this->deleteUnusedFilesAndFolders($pathOfExport);
 
     //Récupération de php-gtk
     $this->logSection('Récupération de phpgtk-2', $fileOnGtkPhpNet);
