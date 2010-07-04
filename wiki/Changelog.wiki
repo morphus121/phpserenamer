@@ -9,6 +9,8 @@ _2010_07_04_ (r313)
  * Ajout d'une barre de progression lors de la recherche des titres (issue 70)
  * Ajout du site TheTvDB pour la recherche de titres (issue 154) 
  * Ajout de raccourcis clavier (issue 76)
+ * Affichage du nom des sites plutôt que de leur code (issue 158)
+ * Si plusieurs séries trouvées, ordre d'affichage plus pertinent (issue 168)
  * Diminution de la taille du projet (issue 111)
  * Optimisations (issue 108, issue 109)
 
