@@ -48,16 +48,15 @@ class debianPackageTask extends basePackageTask
     $fs->sh(sprintf('cp -R %sdata/ubuntu/* tmp/', $dataFolderPrefix));
     $fs->sh(sprintf('rm -rf tmp/_*'));
 
-    //Suppression des fichiers inutiles
-    $this->deleteUnusedFilesAndFolders($dataFolderPrefix);
-
     //On ignore les fichiers commendant par un _
     $fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
     //$fs->sh(sprintf('cp -R %sdata/%s/[^_*]* %s', $addPath, $sourcesDir));
 
-
     //$fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
     file_put_contents('tmp/debian/control', $this->getDebianControlFile($arguments['version']));
+
+    //Suppression des fichiers inutiles
+    $this->deleteUnusedFilesAndFolders($dataFolderPrefix);
 
     $cwdir = getcwd();
     chdir('tmp/');
