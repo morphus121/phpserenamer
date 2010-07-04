@@ -22,7 +22,7 @@ class infosProviderFactory
     }
 
     //TODO adapter le sr_providers aux types ?
-    if(!in_array($provider, sfConfig::get('sr_providers')))
+    if(!in_array($provider, array_keys(sfConfig::get('sr_providers'))))
     {
       throw new sfException(sprintf('Le provider %s n\'est pas un provider acceptable', $provider));
     }

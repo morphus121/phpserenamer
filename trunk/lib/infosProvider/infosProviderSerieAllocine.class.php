@@ -200,4 +200,13 @@ class infosProviderSerieAllocine extends infosProviderSerieBase
   {
     return sprintf('http://www.allocine.fr/recherche/6/?q=%s', urlencode($titre));
   }
+
+  /**
+   * (non-PHPdoc)
+   * @see lib/infosProvider/infosProviderSerieBase#getName()
+   */
+  public function getName()
+  {
+    return 'Allociné';
+  }
 }
