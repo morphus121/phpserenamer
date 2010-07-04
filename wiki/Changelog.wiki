@@ -1,6 +1,18 @@
 #summary Liste des changements
 #labels Featured
 
+= 0.4.0 = 
+_2010_07_04_ (r313)
+ * Corrections suite à des changements sur allociné (issue 174)
+ * Ajout d'une entrée dans le menu pour définir toutes les saisons d'un coup (issue 67)
+ * Ajout d'une entrée dans le menu pour définit tous les numéros d'épisode d'un coup (issue 68)
+ * Ajout d'une barre de progression lors de la recherche des titres (issue 70)
+ * Ajout du site TheTvDB pour la recherche de titres (issue 154) 
+ * Ajout de raccourcis clavier (issue 76)
+ * Diminution de la taille du projet (issue 111)
+ * Optimisations (issue 108, issue 109)
+
+----
 = 0.3.2 =
 _2010_01_24_ (r266)
  * Support des fichiers .vob (issue 159)
