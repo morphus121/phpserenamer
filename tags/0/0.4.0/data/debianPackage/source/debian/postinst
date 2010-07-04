@@ -1,0 +1,31 @@
+#!/bin/sh
+
+##Ajout du script de lancement dans le dossier nautilus-scripts
+chmod 755 /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer
+list=`echo /home/*`
+for file in $list
+do
+  if [ -d "$file"/.gnome2/nautilus-scripts/ ]
+  then
+     ln -s -f /usr/lib/phpserenamer/data/nautilus-scripts/phpserenamer $file/.gnome2/nautilus-scripts/phpserenamer
+  fi
+done
+
+
+##Si l'extension php-gtk n'est pas activée, on l'active
+RECHERCHE=extension=php_gtk2.so
+FICHIER=/etc/php5/cli/php.ini
+if grep -q $RECHERCHE $FICHIER; then
+  echo '' > /dev/null
+else
+  echo $RECHERCHE >> $FICHIER
+fi
+
+##Chmod sur le dossier cache
+chmod -R 777 /usr/lib/phpserenamer/cache
+
+##Chmod sur le fichier de lancement
+chmod +x /usr/lib/phpserenamer/data/phpserenamer
+
+##Ajout du lien symbolique dans le dossier bin
+ln -s -f /usr/lib/phpserenamer/data/phpserenamer /usr/bin/phpserenamer

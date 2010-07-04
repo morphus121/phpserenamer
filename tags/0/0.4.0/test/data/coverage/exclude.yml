@@ -1,0 +1,4 @@
+- apps/frontend/lib/myUser.class.php
+- plugins/agEmmaCoverageReportPlugin/*
+- plugins/sfWebBrowserPlugin/*
+- plugins/srTestPlugin/* 
