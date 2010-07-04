@@ -83,7 +83,21 @@ class myFilesystem extends sfFilesystem
   public function removeRecusively($folder)
   {
     $this->logSection('dir-', $folder);
-    exec(sprintf('rm -rf %s', $folder));
+    if (self::isOsWindows())
+    {
+      if (!is_file($folder))
+      {
+        exec(sprintf('rmdir /S /Q %s', $folder));
+      }
+      else
+      {
+        exec(sprintf('del /Q %s', $folder));
+      }
+    }
+    else
+    {
+      exec(sprintf('rm -rf %s', $folder));
+    }
   }
 
   /**
