@@ -87,11 +87,11 @@ class myFilesystem extends sfFilesystem
     {
       if (!is_file($folder))
       {
-        exec(sprintf('rmdir /S /Q %s', $folder));
+        exec(sprintf('rmdir /S /Q "%s"', $folder));
       }
       else
       {
-        exec(sprintf('del /Q %s', $folder));
+        exec(sprintf('del /Q "%s"', $folder));
       }
     }
     else
