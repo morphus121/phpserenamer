@@ -1,0 +1,13 @@
+Source: phpserenamer
+Section: misc
+Priority: extra
+Maintainer: Adrien GALLOU <ecrire@adrien-gallou.fr>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.0
+Homepage: http://phpserenamer.googlecode.com
+
+Package: phpserenamer
+Architecture: all
+Depends:
+Description: rennommez vos séries
+ toto
