@@ -24,6 +24,7 @@ class debianPackageTask extends myBaseTask
     $this->addOption('to-ppa'     , null, sfCommandOption::PARAMETER_NONE, 'Envoi le paquet sur le ppa');
     $this->addOption('no-delete'  , null, sfCommandOption::PARAMETER_NONE, 'Ne pas supprimer les fichiers temporaires');
     $this->addOption('use-current', null, sfCommandOption::PARAMETER_NONE, 'Utiliser les fichiers data du project en cours et non ceux chekoutés');
+    $this->addOption('to-google-code', null, sfCommandOption::PARAMETER_NONE, 'Envoyer le fichier vers google code');
   }
 
   /**
@@ -45,12 +46,12 @@ class debianPackageTask extends myBaseTask
     //On ignore les fichiers commendant par un _
     $fs->sh(sprintf('cp -R %sdata/ubuntu/* tmp/', $dataFolderPrefix));
     $fs->sh(sprintf('rm -rf tmp/_*'));
-    
+
     //On ignore les fichiers commendant par un _
     $fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
     //$fs->sh(sprintf('cp -R %sdata/%s/[^_*]* %s', $addPath, $sourcesDir));
-    
-    
+
+
     //$fs->sh(sprintf('cp -R %sdata/ubuntu/_scripts/* tmp/', $dataFolderPrefix));
     file_put_contents('tmp/debian/control', $this->getDebianControlFile($arguments['version']));
 
@@ -69,7 +70,7 @@ class debianPackageTask extends myBaseTask
     exec(sprintf('export DEBEMAIL=ecrire@adrien-gallou.fr;export DEBFULLNAME="Adrien Gallou"; dch --create -v %1$s -D jaunty -u low --package phpserenamer version %1$s', $arguments['version']));
     passthru($cmd);
     chdir($cwdir);
-    
+
     if($options['to-ppa'])
     {
       $this->logSection('deb+', 'Envoi vers le ppa');
@@ -80,6 +81,14 @@ class debianPackageTask extends myBaseTask
     {
       $fs->removeRecusively('tmp/');
       exec('rm -f *.dsc *.tar.gz *.changes *.upload');
+    }
+    if ($options['to-google-code'])
+    {
+      $filePath  = sprintf('phpserenamer_%s_all.deb', $arguments['version']);
+      $task      = new uploadGoogleCodeTask($this->dispatcher, $this->formatter);
+      $taskArguments = array('file' => $filePath, 'project' => 'phpserenamer');
+      $taskOptions   = array(sprintf('--summary="v %s - ubuntu"', $arguments['version']));
+      $task->run($taskArguments, $taskOptions);
     }
   }
 
