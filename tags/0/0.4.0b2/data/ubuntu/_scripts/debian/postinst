@@ -1,0 +1,22 @@
+#!/bin/sh
+
+##Si l'extension php-gtk n'est pas activée, on l'active
+RECHERCHE=extension=php_gtk2.so
+FICHIER=/etc/php5/cli/php.ini
+if grep -q $RECHERCHE $FICHIER; then
+  echo '' > /dev/null
+else
+  echo $RECHERCHE >> $FICHIER
+fi
+
+##Chmod sur le dossier cache
+chmod -R 777 /usr/lib/phpserenamer/cache
+
+##Chmod sur le dossier config
+chmod -R 777 /usr/lib/phpserenamer/config
+
+##Chmod sur le fichier de lancement
+chmod +x /usr/lib/phpserenamer/data/phpserenamer
+
+##Ajout du lien symbolique dans le dossier bin
+ln -s -f /usr/lib/phpserenamer/data/phpserenamer /usr/bin/phpserenamer
