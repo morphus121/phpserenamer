@@ -23,6 +23,7 @@ class rpmPackageTask extends myBaseTask
     $this->detailedDescription = 'Création du rpm';
 
     $this->addOption('no-delete', null, sfCommandOption::PARAMETER_NONE, 'Ne pas supprimer les fichiers temporaires');
+    $this->addOption('to-google-code', null, sfCommandOption::PARAMETER_NONE, 'Envoyer le fichier vers google code');
   }
 
   /**
@@ -83,7 +84,8 @@ class rpmPackageTask extends myBaseTask
 
     //Copie des sources et du "binaire" dans le repertoire builds du project
     $fs->mkdirs('builds/');
-    $fs->copy($rpm, sprintf('builds/%s.i586.rpm', $versionName));
+    $filePath = sprintf('builds/%s.i586.rpm', $versionName);
+    $fs->copy($rpm, $filePath);
     $fs->copy($srpm, sprintf('builds/%s.src.rpm', $versionName));
 
     if(!$options['no-delete'])
@@ -94,6 +96,13 @@ class rpmPackageTask extends myBaseTask
       $fs->remove(self::getRpmSourcesDir() . $versionName . '.tar.gz');
       $fs->remove($specFile);
       $fs->removeRecusively($buildDir);
+    }
+    if ($options['to-google-code'])
+    {
+      $task      = new uploadGoogleCodeTask($this->dispatcher, $this->formatter);
+      $taskArguments = array('file' => $filePath, 'project' => 'phpserenamer');
+      $taskOptions   = array(sprintf('--summary="v %s - mandriva"', $arguments['version']));
+      $task->run($taskArguments, $taskOptions);
     }
   }
 
