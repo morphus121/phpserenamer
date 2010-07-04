@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+  <file original="global" source-language="en_US" datatype="plaintext">
+    <body>
+      <trans-unit id="1">
+        <source>TV show name</source>
+        <target>Название сериала</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Season number</source>
+        <target>Номер сезона</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Season number with zero before if less than 10</source>
+        <target>Номер сезона с нулём, если сезон меньше 10 (01, 02 и т.д.)</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Episode number</source>
+        <target>Номер эпизода</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Episode number with zero before if less than 10</source>
+        <target>Номер эпизода с нулём, если эпизод меньше 10 (01, 02 и т.д.)</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Episode name</source>
+        <target>Название эпизода</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
