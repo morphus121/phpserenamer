@@ -15,6 +15,10 @@ class ProjectConfiguration extends sfProjectConfiguration
     //$this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin', 'sfPropelPlugin'));
 
     $this->plugins = array('sfWebBrowserPlugin');
+    if (sfConfig::get('sf_environnment') == 'test')
+    {
+      $this->plugins = array_merge($this->plugins, 'srTestPlugin');
+    }
     ini_set("php-gtk.codepage", "UTF-8");
     $this->loadProjectConfig();
   }
