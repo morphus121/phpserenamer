@@ -15,9 +15,9 @@ class ProjectConfiguration extends sfProjectConfiguration
     //$this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin', 'sfPropelPlugin'));
 
     $this->plugins = array('sfWebBrowserPlugin');
-    if (sfConfig::get('sf_environnment') == 'test')
+    //if (sfConfig::get('sf_environnment') == 'test')
     {
-      $this->plugins = array_merge($this->plugins, 'srTestPlugin');
+      $this->plugins = array_merge($this->plugins, array('srTestPlugin'));
     }
     ini_set("php-gtk.codepage", "UTF-8");
     $this->loadProjectConfig();
@@ -37,6 +37,7 @@ class ProjectConfiguration extends sfProjectConfiguration
   {
     $tab = array(
       'sfWebBrowserPlugin' => sfConfig::get('sf_plugins_dir') . DIRECTORY_SEPARATOR . 'sfWebBrowserPlugin',
+      'srTestPlugin'       => sfConfig::get('sf_plugins_dir') . DIRECTORY_SEPARATOR . 'srTestPlugin',
     );
     return $tab;
   }
